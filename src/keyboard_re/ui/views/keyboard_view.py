@@ -83,9 +83,9 @@ class KeyboardView(ctk.CTkFrame):
     """Interactive visual representation of the 75% Type 84 keyboard layout."""
 
     # Visual configuration constants
-    U_SIZE = 48.0        # Pixels per standard 1u key
-    KEY_PADDING = 3.0    # Gap between key caps
-    CANVAS_MARGIN = 12.0 # Margin around keyboard plate
+    U_SIZE = 40.0        # Default pixels per standard 1u key
+    KEY_PADDING = 2.5    # Gap between key caps
+    CANVAS_MARGIN = 10.0 # Margin around keyboard plate
 
     def __init__(
         self,
@@ -95,17 +95,18 @@ class KeyboardView(ctk.CTkFrame):
     ) -> None:
         super().__init__(master, fg_color=("#f4f4f5", "#18181b"), corner_radius=8, **kwargs)
         self.controller = controller
+        self.u_size: float = float(self.U_SIZE)
 
         # Calculate canvas dimensions based on layout bounds
-        max_u_x = max(k.x + k.width for k in TYPE84_LAYOUT)
-        max_u_y = max(k.y + k.height for k in TYPE84_LAYOUT)
-        self.canvas_width = int(max_u_x * self.U_SIZE + 2 * self.CANVAS_MARGIN)
-        self.canvas_height = int(max_u_y * self.U_SIZE + 2 * self.CANVAS_MARGIN)
+        self.max_u_x = max(k.x + k.width for k in TYPE84_LAYOUT)
+        self.max_u_y = max(k.y + k.height for k in TYPE84_LAYOUT)
+        self.canvas_width = int(self.max_u_x * self.u_size + 2 * self.CANVAS_MARGIN)
+        self.canvas_height = int(self.max_u_y * self.u_size + 2 * self.CANVAS_MARGIN)
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        # Tkinter Canvas for lightweight, fast rendering
+        # Tkinter Canvas for lightweight, fast rendering (centered)
         self.canvas = tk.Canvas(
             self,
             width=self.canvas_width,
@@ -114,7 +115,7 @@ class KeyboardView(ctk.CTkFrame):
             highlightthickness=1,
             highlightbackground="#27272a",
         )
-        self.canvas.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
+        self.canvas.grid(row=0, column=0, padx=10, pady=(6, 2))
 
         # Info bar container for selected key details and Deselect All button
         self.info_bar = ctk.CTkFrame(self, fg_color="transparent")
@@ -157,6 +158,22 @@ class KeyboardView(ctk.CTkFrame):
         self.canvas.bind("<ButtonRelease-1>", self._on_canvas_release)
         self.render_layout()
 
+    def set_u_size(self, new_u_size: float) -> bool:
+        """
+        Dynamically scale keyboard canvas size.
+        Returns True if size changed and canvas was re-rendered.
+        """
+        clamped = max(26.0, min(48.0, float(new_u_size)))
+        if abs(self.u_size - clamped) < 0.5:
+            return False
+
+        self.u_size = clamped
+        self.canvas_width = int(self.max_u_x * self.u_size + 2 * self.CANVAS_MARGIN)
+        self.canvas_height = int(self.max_u_y * self.u_size + 2 * self.CANVAS_MARGIN)
+        self.canvas.configure(width=self.canvas_width, height=self.canvas_height)
+        self.render_layout()
+        return True
+
     def render_layout(self) -> None:
         """Render all 84 physical keys on the canvas with Per-Key RGB support."""
         self.canvas.delete("all")
@@ -173,10 +190,10 @@ class KeyboardView(ctk.CTkFrame):
         )
 
         for k in TYPE84_LAYOUT:
-            x1 = self.CANVAS_MARGIN + k.x * self.U_SIZE + self.KEY_PADDING
-            y1 = self.CANVAS_MARGIN + k.y * self.U_SIZE + self.KEY_PADDING
-            x2 = x1 + k.width * self.U_SIZE - 2 * self.KEY_PADDING
-            y2 = y1 + k.height * self.U_SIZE - 2 * self.KEY_PADDING
+            x1 = self.CANVAS_MARGIN + k.x * self.u_size + self.KEY_PADDING
+            y1 = self.CANVAS_MARGIN + k.y * self.u_size + self.KEY_PADDING
+            x2 = x1 + k.width * self.u_size - 2 * self.KEY_PADDING
+            y2 = y1 + k.height * self.u_size - 2 * self.KEY_PADDING
 
             self._key_boxes[k] = (x1, y1, x2, y2)
 
@@ -349,7 +366,8 @@ class KeyboardView(ctk.CTkFrame):
                 cy += 2.5
 
             # Draw physical key label (never changed)
-            font_size = 8 if len(k.label) > 4 else 9
+            base_font = 7 if len(k.label) > 4 else 8
+            font_size = max(6, int(round(base_font * (self.u_size / 40.0))))
             self.canvas.create_text(
                 cx, cy,
                 text=k.label,

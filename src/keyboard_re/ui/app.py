@@ -28,7 +28,7 @@ class KeyboardApp(ctk.CTk):
 
         self.title("IO Type 84 Configurator (Reverse-Engineered Safe GUI)")
         self.geometry("980x760")
-        self.minsize(920, 720)
+        self.minsize(760, 520)
 
         # Controller & View
         self.controller = controller or AppController()
@@ -39,8 +39,18 @@ class KeyboardApp(ctk.CTk):
         self.main_window = MainWindow(self, controller=self.controller)
         self.main_window.grid(row=0, column=0, sticky="nsew")
 
+        self.protocol("WM_DELETE_WINDOW", self._on_closing)
+
         if auto_connect_mock:
             self.controller.connect(use_mock=True)
+
+    def _on_closing(self) -> None:
+        """Handle window close event with safe view and hardware cleanup."""
+        try:
+            self.main_window.cleanup()
+        except Exception:
+            pass
+        self.destroy()
 
     def run(self) -> None:
         """Start GUI main event loop."""

@@ -10,6 +10,7 @@ Coordinates:
 
 from __future__ import annotations
 
+import tkinter as tk
 import customtkinter as ctk
 
 from keyboard_re.ui.controller import AppController
@@ -23,6 +24,7 @@ from keyboard_re.ui.views.remap_view import KeyRemapView
 from keyboard_re.ui.views.rgb_global_view import RGBGlobalView
 from keyboard_re.ui.views.settings_view import SettingsView
 from keyboard_re.ui.views.status_bar import StatusBarView
+from keyboard_re.ui.views.visualizer_view import VisualizerView
 
 
 class MainWindow(ctk.CTkFrame):
@@ -44,6 +46,9 @@ class MainWindow(ctk.CTkFrame):
         self._build_keyboard_section()
         self._build_tabs_section()
         self._build_status_bar()
+
+        # Bind window resize for responsive layout & keyboard scaling
+        self.bind("<Configure>", self._on_window_configure)
 
         # Subscribe to controller events
         self.controller.subscribe(self._on_controller_update)
@@ -121,65 +126,37 @@ class MainWindow(ctk.CTkFrame):
         self.keyboard_view.grid(row=1, column=0, padx=15, pady=(10, 5), sticky="ew")
 
     def _build_tabs_section(self) -> None:
-        """Build subsystem editor tabview."""
+        """Build subsystem editor tabview with responsive vertical scrolling per tab."""
         self.tabview = ctk.CTkTabview(self, corner_radius=8, command=self._on_tab_changed)
         self.tabview.grid(row=2, column=0, padx=15, pady=5, sticky="nsew")
 
-        # 1. RGB Global (Active in slice 1)
-        self.tabview.add("RGB Global")
-        self.rgb_view = RGBGlobalView(
-            self.tabview.tab("RGB Global"),
-            controller=self.controller,
-        )
-        self.rgb_view.pack(fill="both", expand=True, padx=5, pady=5)
+        self.tab_scroll_frames: dict[str, ctk.CTkScrollableFrame] = {}
 
-        # 2. Per-Key RGB (Active in slice 2)
-        self.tabview.add("Per-Key RGB")
-        self.per_key_view = PerKeyRGBView(
-            self.tabview.tab("Per-Key RGB"),
-            controller=self.controller,
-        )
-        self.per_key_view.pack(fill="both", expand=True, padx=5, pady=5)
+        def _add_scrollable_tab(tab_name: str, view_cls, attr_name: str) -> None:
+            self.tabview.add(tab_name)
+            scroll = ctk.CTkScrollableFrame(self.tabview.tab(tab_name), fg_color="transparent")
+            scroll.pack(fill="both", expand=True, padx=2, pady=2)
+            self.tab_scroll_frames[tab_name] = scroll
+            view = view_cls(scroll, controller=self.controller)
+            view.pack(fill="both", expand=True)
+            setattr(self, attr_name, view)
 
-        # 3. Key Remap (L1/L2) (Active in slice 3)
-        self.tabview.add("Key Remap (L1/L2)")
-        self.remap_view = KeyRemapView(
-            self.tabview.tab("Key Remap (L1/L2)"),
-            controller=self.controller,
-        )
-        self.remap_view.pack(fill="both", expand=True, padx=5, pady=5)
-
-        # 4. Hall Effect / Rapid Trigger (Active in slice 4)
-        self.tabview.add("Hall / Rapid Trigger")
-        self.hall_view = HallView(
-            self.tabview.tab("Hall / Rapid Trigger"),
-            controller=self.controller,
-        )
-        self.hall_view.pack(fill="both", expand=True, padx=5, pady=5)
-
-        # 5. DKS (Dynamic Keystrokes)
-        self.tabview.add("DKS")
-        self.dks_view = DKSView(
-            self.tabview.tab("DKS"),
-            controller=self.controller,
-        )
-        self.dks_view.pack(fill="both", expand=True, padx=5, pady=5)
-
-        # 6. Macros (AA 15 / AA 25)
-        self.tabview.add("Macros")
-        self.macros_view = MacrosView(
-            self.tabview.tab("Macros"),
-            controller=self.controller,
-        )
-        self.macros_view.pack(fill="both", expand=True, padx=5, pady=5)
-
-        # 7. Settings / Game Mode (AA 11 / AA 21)
-        self.tabview.add("Settings")
-        self.settings_view = SettingsView(
-            self.tabview.tab("Settings"),
-            controller=self.controller,
-        )
-        self.settings_view.pack(fill="both", expand=True, padx=5, pady=5)
+        # 1. RGB Global
+        _add_scrollable_tab("RGB Global", RGBGlobalView, "rgb_view")
+        # 2. Per-Key RGB
+        _add_scrollable_tab("Per-Key RGB", PerKeyRGBView, "per_key_view")
+        # 3. Key Remap (L1/L2)
+        _add_scrollable_tab("Key Remap (L1/L2)", KeyRemapView, "remap_view")
+        # 4. Hall Effect / Rapid Trigger
+        _add_scrollable_tab("Hall / Rapid Trigger", HallView, "hall_view")
+        # 5. DKS
+        _add_scrollable_tab("DKS", DKSView, "dks_view")
+        # 6. Macros
+        _add_scrollable_tab("Macros", MacrosView, "macros_view")
+        # 7. Settings / Game Mode
+        _add_scrollable_tab("Settings", SettingsView, "settings_view")
+        # 8. Visualizer (Phase 5)
+        _add_scrollable_tab("Visualizer", VisualizerView, "visualizer_view")
 
         self.tabview.set("RGB Global")
 
@@ -228,6 +205,8 @@ class MainWindow(ctk.CTkFrame):
         self.controller.connect(use_mock=True)
 
     def _on_disconnect(self) -> None:
+        if hasattr(self, "visualizer_view"):
+            self.visualizer_view.on_device_disconnected()
         self.controller.disconnect()
 
     def _on_apply_clicked(self) -> None:
@@ -321,6 +300,8 @@ class MainWindow(ctk.CTkFrame):
             self.macros_view.update_display()
         if hasattr(self, "settings_view"):
             self.settings_view.update_display()
+        if hasattr(self, "visualizer_view"):
+            self.visualizer_view.update_display()
         self.status_bar.update_display()
 
     def _on_tab_changed(self) -> None:
@@ -334,7 +315,9 @@ class MainWindow(ctk.CTkFrame):
             "DKS": "dks",
             "Macros": "macros",
             "Settings": "settings",
+            "Visualizer": "visualizer",
         }
+        prev_tab = self.controller.active_tab
         active_id = tab_map.get(selected_tab, "rgb_global")
         self.controller.set_active_tab(active_id)
         self.keyboard_view.update_display()
@@ -350,3 +333,42 @@ class MainWindow(ctk.CTkFrame):
             self.macros_view.update_display()
         if hasattr(self, "settings_view"):
             self.settings_view.update_display()
+        if hasattr(self, "visualizer_view"):
+            if prev_tab == "visualizer" and active_id != "visualizer":
+                self.visualizer_view.on_tab_deselected()
+            elif active_id == "visualizer":
+                self.visualizer_view.on_tab_selected()
+
+    def cleanup(self) -> None:
+        """Clean shutdown of child views (e.g. stopping visualizer and restoring baseline)."""
+        if hasattr(self, "visualizer_view"):
+            self.visualizer_view.cleanup()
+
+    def _on_window_configure(self, event: tk.Event) -> None:
+        """Handle window resize event to dynamically adapt keyboard scale."""
+        if event.widget != self:
+            return
+        w = event.width
+        h = event.height
+        if w < 100 or h < 100:
+            return
+        self._adapt_keyboard_scale(w, h)
+
+    def _adapt_keyboard_scale(self, window_width: int, window_height: int) -> None:
+        """
+        Dynamically calculate and set optimal u_size for KeyboardView
+        so it never consumes more than ~30% of vertical window space
+        and cleanly fits available width.
+        """
+        if not hasattr(self, "keyboard_view"):
+            return
+
+        # Width constraint: 16u + margins + paddings (~84px total)
+        u_from_w = (window_width - 84.0) / 16.0
+        # Height constraint: canvas height <= ~30% of window height (minus 20px canvas margins)
+        u_from_h = (max(180.0, window_height * 0.30) - 20.0) / 6.0
+
+        target_u = min(u_from_w, u_from_h)
+        clamped_u = max(26.0, min(46.0, target_u))
+
+        self.keyboard_view.set_u_size(clamped_u)
