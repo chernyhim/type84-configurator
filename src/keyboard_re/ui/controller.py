@@ -551,7 +551,7 @@ class AppController:
         """
         Get the list of available user RGB effects from RGB_EFFECT_CATALOG.
         Guaranteed:
-        - Clean user-facing names without hex IDs (e.g. 'Ripple Spread (Расходящаяся рябь)').
+        - Clean user-facing names without hex IDs (e.g. 'Ripple Spread').
         - Preserves catalog order.
         - Includes Custom Per-Key (0x80).
         - Excludes firmware runtime aliases (0x14, 0x15).

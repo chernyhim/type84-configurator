@@ -1,60 +1,60 @@
 # IO by Red Square Type 84 Magnetic Black — Toolkit & Configurator
 
-Открытый реверс-инжиниринговый инструментарий и безопасный графический конфигуратор для магнитной клавиатуры **IO by Red Square Type 84 Magnetic Black** (USB VID `0x0C45`, PID `0x80D6`).
+Open-source reverse-engineering toolkit and safe graphical configurator for the **IO by Red Square Type 84 Magnetic Black** magnetic keyboard (USB VID `0x0C45`, PID `0x80D6`).
 
-Приложение полностью заменяет проприетарное ПО, предоставляя прозрачный, безопасный и расширяемый интерфейс для настройки аналоговых датчиков Холла, подсветки, раскладки клавиш, DKS, макросов и системных параметров.
-
----
-
-## Основные возможности
-
-* **Интерактивный GUI-конфигуратор**:
-  * Графическое отображение 84 физических клавиш клавиатуры.
-  * Тёмная тема интерфейса (CustomTkinter).
-  * 7 специализированных вкладок настройки:
-    1. **RGB Global** — 26 подтверждённых эффектов подсветки, скорость, яркость, направления и палитры.
-    2. **Per-Key RGB** — индивидуальная палитра для каждого светодиода, drag-выделение, заливка групп клавиш.
-    3. **Key Remap (L1/L2)** — переназначение клавиш основного слоя (Base L1) и слоя Fn (L2) с аппаратной защитой системных клавиш (`Fn`, `F1..F12`).
-    4. **Hall / Rapid Trigger** — настройка точки срабатывания (0.10–4.00 мм) и чувствительности RT на нажатие/отпускание (0.02–2.50 мм).
-    5. **DKS (Dynamic Keystrokes)** — 4 порога хода клавиши (Make 1/2, Break 1/2) и независимые матрицы состояний (Tap / Hold).
-    6. **Macros** — визуальный редактор макросов с задержками и последовательностями нажатий/отпусканий.
-    7. **Settings** — частота опроса (до 8000 Гц), блокировка клавиши Windows (Game Mode), Stability Mode, таймер сна.
-* **Управление профилями (Profile Management)**:
-  * Сохранение конфигурации в понятный JSON-файл (`Save Profile...`).
-  * Загрузка профилей из файла (`Load Profile...`) с автоматическим вычислением отличий от состояния устройства.
-  * Кнопка **`Discard Changes`** для мгновенного сброса несохранённых правок к исходному состоянию устройства.
-* **Режим симуляции (Mock Mode)**:
-  * Полная работоспособность GUI в автономном режиме без подключённой клавиатуры (`--mock`).
-* **Аналитический CLI (`kb-re`)**:
-  * Разбор, сборка, валидация и побайтовое сравнение дампов памяти.
-  * Просмотр каталога эффектов подсветки (`kb-re rgb-catalog`).
-  * Построение плана записи без отправки в порт (`kb-re plan`).
+This application completely replaces the proprietary vendor software, providing a transparent, secure, and extensible interface for configuring analog Hall effect sensors, RGB lighting, key layouts, DKS, macros, and system settings.
 
 ---
 
-## ⚠️ Предупреждение о физических изменениях клавиатуры
+## Key Features
+
+* **Interactive GUI Configurator**:
+  * Visual representation of 84 physical keyboard keys.
+  * Sleek dark theme interface (CustomTkinter).
+  * 7 specialized configuration tabs:
+    1. **RGB Global** — 26 verified lighting effects, speed, brightness, directions, and color palettes.
+    2. **Per-Key RGB** — Per-key LED palette customization, marquee drag-selection, multi-key group coloring.
+    3. **Key Remap (L1/L2)** — Key remapping for Base Layer (L1) and Fn Layer (L2) with hardware-level protection for system keys (`Fn`, `F1..F12`).
+    4. **Hall / Rapid Trigger** — Actuation point tuning (0.10–4.00 mm) and Rapid Trigger press/release sensitivity (0.02–2.50 mm).
+    5. **DKS (Dynamic Keystrokes)** — 4 stroke threshold points (Make 1/2, Break 1/2) with independent state matrices (Tap / Hold).
+    6. **Macros** — Visual macro editor with configurable delays and press/release sequences.
+    7. **Settings** — Polling rate (up to 8000 Hz), Windows key lock (Game Mode), Stability Mode, sleep timer.
+* **Profile Management**:
+  * Save configurations to human-readable JSON files (`Save Profile...`).
+  * Load profiles from disk (`Load Profile...`) with automatic diff computation against hardware state.
+  * **`Discard Changes`** button for instant rollback of unapplied edits to the current hardware configuration.
+* **Simulation Mode (Mock Mode)**:
+  * Full GUI functionality in offline mode without hardware connected (`--mock`).
+* **Analytical CLI (`kb-re`)**:
+  * Parse, assemble, validate, and diff binary and JSON memory captures.
+  * Inspect verified lighting catalog (`kb-re rgb-catalog`).
+  * Generate dry-run write plans without touching hardware (`kb-re plan`).
+
+---
+
+## ⚠️ Hardware Safety Warning
 
 > [!WARNING]
-> При нажатии кнопки **Apply Changes** конфигуратор отправляет команды в микроконтроллер клавиатуры по протоколу USB HID Vendor.
-> * Перед любой записью всегда отображается **окно предварительного подтверждения (Dry-Run Plan)**, перечисляющее затрагиваемые подсистемы, опкоды, количество пакетов и конкретные изменения параметров.
-> * Проверяйте сводку изменений перед нажатием **Confirm & Apply**.
-> * Клавиатура защищена встроенным фильтром `SafetyFilteredTransport`: запись разрешена только в верифицированные диапазоны памяти. Защищённые клавиши (`Fn`) заблокированы от случайного стирания.
-> * После записи выполняется автоматический обратный контрольный опрос (read-back). При обнаружении неожиданных мутаций процесс останавливается.
+> Clicking **Apply Changes** sends configuration commands to the keyboard microcontroller over the USB HID Vendor protocol.
+> * Prior to any physical write, a **preflight confirmation dialog (Dry-Run Plan)** is displayed, listing affected subsystems, opcodes, packet counts, and exact byte mutations.
+> * Always verify the change summary before clicking **Confirm & Apply**.
+> * The keyboard is safeguarded by an integrated `SafetyFilteredTransport`: writes are restricted strictly to verified memory ranges. Protected keys (`Fn`) are blocked from accidental erasure.
+> * Following every write transaction, an automatic read-back audit is executed. If unexpected mutations are detected, execution halts immediately.
 
 ---
 
-## Системные требования
+## System Requirements
 
-* **ОС**: Windows 10 / 11 (для прямого доступа к USB HID через Windows HID API).
-  *(Режим Mock Mode поддерживается на любой ОС, включая Linux и macOS).*
-* **Python**: 3.9 или новее.
-* **Зависимости**: `customtkinter`, `hidapi`, `setuptools`.
+* **OS**: Windows 10 / 11 (for direct USB HID communication via the Windows HID API).
+  *(Mock Mode is supported on any operating system, including Linux and macOS).*
+* **Python**: 3.9 or newer.
+* **Dependencies**: `customtkinter`, `hidapi`, `setuptools`.
 
 ---
 
-## Установка
+## Installation
 
-Клонируйте репозиторий и установите проект в окружение Python:
+Clone the repository and install the project in editable mode:
 
 ```bash
 git clone https://github.com/your-repo/keyboard-re.git
@@ -64,83 +64,84 @@ pip install -e .
 
 ---
 
-## Запуск приложения
+## Running the Application
 
-### 1. Запуск конфигуратора (GUI)
+### 1. Launch Configurator (GUI)
 
-Запуск через консольный скрипт:
+Via console entrypoint:
 ```bash
 type84-gui
 ```
 
-Либо через CLI-команду:
+Or via CLI command:
 ```bash
 kb-re gui
 ```
 
-### 2. Запуск в безопасном Mock-режиме (без клавиатуры)
-Для изучения интерфейса, подготовки или редактирования профилей в оффлайн-режиме:
+### 2. Safe Mock Mode (No Hardware Required)
+
+For UI exploration, offline profile preparation, or development:
 ```bash
 type84-gui --mock
 ```
-или
+or
 ```bash
 kb-re gui --mock
 ```
 
 ---
 
-## Работа с профилями
+## Working with Profiles
 
-1. **Подключение**:
-   * Нажмите **`Connect USB`** для работы с физической клавиатурой или **`Connect Mock`** для работы в режиме эмулятора.
-2. **Редактирование**:
-   * Переключайтесь между вкладками и настраивайте нужные параметры.
-   * Статус-бар внизу окна сразу отображает количество изменённых параметров (`Unsaved changes`).
-3. **Сброс правок**:
-   * Нажмите кнопку **`Discard Changes`** в правом нижнем углу для возврата к исходной конфигурации клавиатуры.
-4. **Экспорт и импорт**:
-   * **`Save Profile...`** — сохраняет текущий рабочий профиль в файл `.json`.
-   * **`Load Profile...`** — открывает сохранённый JSON-профиль и применяет его настройки к рабочей копии.
-5. **Запись в память клавиатуры**:
-   * Нажмите **`Apply Changes`**. В появившемся диалоге ознакомьтесь с планом записи и подтвердите операцию.
+1. **Connection**:
+   * Click **`Connect USB`** to communicate with physical hardware, or **`Connect Mock`** for simulation mode.
+2. **Editing**:
+   * Switch between configuration tabs and customize parameters.
+   * The status bar at the bottom tracks uncommitted edits (`Unsaved changes`).
+3. **Discarding Changes**:
+   * Click **`Discard Changes`** in the bottom-right corner to revert all pending edits to the device baseline.
+4. **Export & Import**:
+   * **`Save Profile...`** — Exports current settings to a `.json` profile file.
+   * **`Load Profile...`** — Imports a saved JSON profile and stages it for review.
+5. **Applying to Hardware**:
+   * Click **`Apply Changes`**. Review the preflight dry-run plan in the confirmation modal, then confirm to commit.
 
 ---
 
-## Командная строка (`kb-re`)
+## Command-Line Interface (`kb-re`)
 
-CLI предоставляет утилиты для диагностики и инспекции:
+The CLI offers utilities for diagnostics, analysis, and verification:
 
 ```bash
-# Справка по всем командам
+# General CLI help
 kb-re --help
 
-# Запуск графического интерфейса
+# Launch graphical interface
 kb-re gui [--mock]
 
-# Просмотр подтверждённого каталога RGB-эффектов
+# View verified RGB effects catalog
 kb-re rgb-catalog
 
-# Построение dry-run плана изменения actuation point
+# Build dry-run write plan for actuation point modification
 kb-re plan --key W --actuation 1.20
 
-# Инспекция сохранённого снимка состояния
+# Inspect saved state capture
 kb-re inspect captures/experiments/read_01_initial_load.json --section all
 
-# Побайтовое сравнение двух дампов
+# Byte-level diff between two captures
 kb-re diff dump1.bin dump2.bin
 ```
 
 ---
 
-## Тестирование
+## Testing
 
-Запуск полного набора модульных тестов:
+Run the automated test suite:
 ```bash
 python -m pytest -v
 ```
 
-Запуск UI smoke-тестов:
+Run UI smoke tests:
 ```bash
 python scratch/smoke_test_remap_ui.py
 python scratch/smoke_test_hall_ui.py
@@ -150,6 +151,6 @@ python scratch/smoke_test_settings_ui.py
 
 ---
 
-## Лицензия
+## License
 
-Проект распространяется для исследовательских и пользовательских целей настройки персонального оборудования.
+This project is distributed for research and personal hardware configuration purposes.

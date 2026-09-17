@@ -1,98 +1,98 @@
-# Протокол конфигурации клавиатуры IO by Red Square Type 84 Magnetic Black
+# Configuration Protocol Specification: IO by Red Square Type 84 Magnetic Black
 
-> **Важное примечание по безопасности:**  
-> Данный документ и связанный инструментарий предназначены **исключительно для пассивного анализа** трафика официального конфигуратора.  
-> Произвольная отправка HID-пакетов или попытки записи неподтверждённых структур в устройство **не производятся**.
+> **Important Safety Note:**  
+> This document and the related tooling are intended **strictly for passive analysis** of the official configurator traffic.  
+> Arbitrary transmission of raw HID packets or speculative writes of unverified structures to the hardware is prohibited.
 
 ---
 
-## 1. Аппаратная идентификация
+## 1. Hardware Identification
 
-| Параметр | Значение | Статус | Примечание |
+| Parameter | Value | Status | Notes |
 | :--- | :--- | :--- | :--- |
-| **Vendor ID (VID)** | `0x0C45` | `CONFIRMED` | Получено из дескрипторов устройства |
-| **Product ID (PID)** | `0x80D6` | `CONFIRMED` | Получено из дескрипторов устройства |
-| **Устройство** | IO by Red Square Type 84 Magnetic Black | `CONFIRMED` | 84-клавишная клавиатура на магнитных переключателях (Hall Effect) |
-| **Количество физических клавиш** | 84 | `CONFIRMED` | Ровно 84 активных слота конфигурации обнаружено в полном дампе |
+| **Vendor ID (VID)** | `0x0C45` | `CONFIRMED` | Extracted from device descriptors (Sonix) |
+| **Product ID (PID)** | `0x80D6` | `CONFIRMED` | Extracted from device descriptors |
+| **Device** | IO by Red Square Type 84 Magnetic Black | `CONFIRMED` | 84-key magnetic Hall Effect keyboard |
+| **Physical Key Count** | 84 | `CONFIRMED` | Exactly 84 active configuration slots identified across memory dump |
 
 ---
 
-## 2. Транспортный уровень и фрейминг
+## 2. Transport Layer & Framing
 
-| Параметр | Значение | Статус | Примечание |
+| Parameter | Value | Status | Notes |
 | :--- | :--- | :--- | :--- |
-| **Канал передачи** | HID OUTPUT report | `CONFIRMED` | Перехватывается вызовом `HIDDevice.prototype.sendReport` |
-| **Report ID** | `0` | `CONFIRMED` | В вызовах WebHID `sendReport(0, ...)` |
-| **Размер репорта** | `64` байта | `CONFIRMED` | Все исходящие пакеты конфигуратора имеют фиксированную длину 64 байта |
-| **Количество пакетов в сеансе** | 18 данных + 1 терминатор (19) | `CONFIRMED` | Полный цикл передачи занимает ровно 19 репортов |
-| **Преамбула пакета данных** | `AA 27 38 <Addr_Lo> <Addr_Hi>` | `CONFIRMED` | Адрес смещения 16-битный (little-endian), шаг 56 байт (`0x38`) |
-| **Полезная нагрузка пакета** | 56 байт | `CONFIRMED` | 18 пакетов $\times$ 56 байт = 1008 байт конфигурационного образа |
-| **Терминатор сеанса** | `AA 27 10 F0 03 01 00` | `CONFIRMED` | Передаёт размер образа `0x03F0` (1008) и флаг фиксации `0x0001` |
+| **Transmission Channel** | HID OUTPUT report | `CONFIRMED` | Intercepted via `HIDDevice.prototype.sendReport` |
+| **Report ID** | `0` | `CONFIRMED` | Passed to WebHID as `sendReport(0, ...)` |
+| **Report Size** | `64` bytes | `CONFIRMED` | All outbound configuration packets are fixed at 64 bytes |
+| **Packets per Session** | 18 data + 1 terminator (19) | `CONFIRMED` | Full write cycle comprises exactly 19 reports |
+| **Data Packet Preamble** | `AA 27 38 <Addr_Lo> <Addr_Hi>` | `CONFIRMED` | 16-bit offset address (little-endian), 56-byte payload step (`0x38`) |
+| **Packet Payload** | 56 bytes | `CONFIRMED` | 18 packets $\times$ 56 bytes = 1008-byte configuration image |
+| **Session Terminator** | `AA 27 10 F0 03 01 00` | `CONFIRMED` | Encodes image length `0x03F0` (1008) and commit flag `0x0001` |
 
 ---
 
-## 3. Архитектура конфигурационного пространства (1008 байт)
+## 3. Configuration Memory Architecture (1008 Bytes)
 
-Общий объём конфигурационного образа составляет ровно **1008 байт** (адреса от `0x0000` до `0x03EF`).
+The total size of the configuration image is exactly **1008 bytes** (addresses `0x0000` through `0x03EF`).
 
-### 3.1. Структура банков (128 байт на банк)
-Образ разбит на 8 банков по 128 байт ($8 \times 128 = 1024$, последние 16 байт не используются, $1024 - 16 = 1008$ байт):
-- **Банки 0..5:** содержат конфигурацию основных 84 физических клавиш.
-- **Банк 6:** навигационный кластер справа.
-- **Банк 7:** резервная область (заполнена нулями).
+### 3.1. Bank Organization (128 Bytes per Bank)
+The image is organized into 8 banks of 128 bytes each ($8 \times 128 = 1024$; the final 16 bytes are unused: $1024 - 16 = 1008$ bytes):
+- **Banks 0..5:** Contain the configuration of the primary 84 physical keys.
+- **Bank 6:** Right-hand navigation cluster.
+- **Bank 7:** Reserved region (zero-filled).
 
-Каждый банк начинается со **служебного заголовка длиной 5 байт** (`00 00 00 00 00`).  
-Затем располагаются 8-байтные записи отдельных клавиш.
+Each bank begins with a **5-byte service header** (`00 00 00 00 00`).  
+Following the header, individual 8-byte key records are stored sequentially.
 
-### 3.2. Точная формула адресации клавиши
-Для клавиши в строке (банке) $\text{Bank}$ и столбце $\text{Column}$:
+### 3.2. Key Addressing Formula
+For a key located at bank $\text{Bank}$ and column $\text{Column}$:
 
 $$\text{Key Address} = \text{Bank} \times 128 + 5 + \text{Column} \times 8$$
 
 ---
 
-## 4. Внутренняя структура 8-байтной записи клавиши
+## 4. Internal Structure of 8-Byte Key Record
 
-Каждая клавиша описывается структурой из **четырёх 16-битных целых чисел (`uint16_le`)**:
+Each key is described by a structure composed of **four 16-bit Little-Endian integers (`uint16_le`)**:
 
 ```text
-Базовый адрес клавиши: Addr = Bank * 128 + 5 + Column * 8
+Base key address: Addr = Bank * 128 + 5 + Column * 8
 +-------------------+-------------------+-------------------+-------------------+
-|  Слово 0 (+0..+1) |  Слово 1 (+2..+3) |  Слово 2 (+4..+5) |  Слово 3 (+6..+7) |
+|  Word 0 (+0..+1)  |  Word 1 (+2..+3)  |  Word 2 (+4..+5)  |  Word 3 (+6..+7)  |
 |  Actuation Point  |   RT Press Sens   |  RT Release Sens  |   Flags / Mode    |
 |     uint16_le     |     uint16_le     |     uint16_le     |     uint16_le     |
 +-------------------+-------------------+-------------------+-------------------+
 ```
 
-### 4.1. Детализация полей записи (CONFIRMED vs UNKNOWN)
+### 4.1. Field Breakdown (CONFIRMED vs UNKNOWN)
 
-| Смещение | Тип | Параметр | Единицы / Диапазон | Статус | Подтверждение |
+| Offset | Type | Parameter | Units / Range | Status | Evidence |
 | :---: | :---: | :--- | :--- | :---: | :--- |
-| **`+0..+1`** | `uint16_le` | **Actuation Point** | $0.01\text{ мм}$ ($140 = 1.40\text{ мм}$; диапазон $10..400$) | **`CONFIRMED`** | Аппаратные записи и read-back на Key A (`0x018D..0x018E`) |
-| **`+2..+3`** | `uint16_le` | **Rapid Trigger Press Sensitivity** | $0.01\text{ мм}$ ($0 = \text{OFF}$, $20 = 0.20\text{ мм}$) | **`CONFIRMED`** | Аппаратные записи и read-back на Key A (`0x018F..0x0190`) |
-| **`+4..+5`** | `uint16_le` | **Rapid Trigger Release Sensitivity**| $0.01\text{ мм}$ ($0 = \text{OFF}$, $10 = 0.10\text{ мм}$) | **`CONFIRMED`** | Аппаратные записи и read-back на Key A (`0x0191..0x0192`) |
-| **`+6..+7`** | `uint16_le` | **Flags / Mode** | Не разобрано (сохраняется как raw uint16_le) | **`UNKNOWN`** | Семантика не исследована; сохраняется без модификации |
+| **`+0..+1`** | `uint16_le` | **Actuation Point** | $0.01\text{ mm}$ ($140 = 1.40\text{ mm}$; range $10..400$) | **`CONFIRMED`** | Physical writes & read-backs on Key A (`0x018D..0x018E`) |
+| **`+2..+3`** | `uint16_le` | **Rapid Trigger Press Sensitivity** | $0.01\text{ mm}$ ($0 = \text{OFF}$, $20 = 0.20\text{ mm}$) | **`CONFIRMED`** | Physical writes & read-backs on Key A (`0x018F..0x0190`) |
+| **`+4..+5`** | `uint16_le` | **Rapid Trigger Release Sensitivity**| $0.01\text{ mm}$ ($0 = \text{OFF}$, $10 = 0.10\text{ mm}$) | **`CONFIRMED`** | Physical writes & read-backs on Key A (`0x0191..0x0192`) |
+| **`+6..+7`** | `uint16_le` | **Flags / Mode** | Unparsed (preserved as raw uint16_le) | **`UNKNOWN`** | Semantics unverified; preserved verbatim |
 
-### 4.2. Единая формула кодирования физических величин
-Для всех трёх подтверждённых параметров (**Actuation**, **RT Press**, **RT Release**) действует идентичный масштаб: $1\text{ LSB} = 0.01\text{ мм}$:
+### 4.2. Physical Unit Encoding Formula
+All three verified parameters (**Actuation**, **RT Press**, **RT Release**) share an identical scale factor: $1\text{ LSB} = 0.01\text{ mm}$:
 
 $$\text{raw} = \text{round}(\text{value}_{\text{mm}} \times 100)$$
 $$\text{value}_{\text{mm}} = \frac{\text{raw}}{100.0}$$
 
-Кодирование осуществляется в формате **little-endian** (`<H`).
+Values are encoded in **little-endian** (`<H`).
 
-#### Эталонные контрольные точки (Benchmark Values):
-| Физическое значение | Десятичный raw | Hex (uint16) | Байты на проводе (LE) |
+#### Benchmark Reference Values:
+| Physical Value | Decimal raw | Hex (uint16) | Wire Bytes (LE) |
 | :---: | :---: | :---: | :---: |
-| **`0.00 мм` (OFF)** | `0` | `0x0000` | `00 00` |
-| **`0.10 мм`** | `10` | `0x000A` | `0A 00` |
-| **`0.20 мм`** | `20` | `0x0014` | `14 00` |
-| **`0.50 мм`** | `50` | `0x0032` | `32 00` |
-| **`1.00 мм`** | `100` | `0x0064` | `64 00` |
-| **`1.40 мм`** | `140` | `0x008C` | `8C 00` |
+| **`0.00 mm` (OFF)** | `0` | `0x0000` | `00 00` |
+| **`0.10 mm`** | `10` | `0x000A` | `0A 00` |
+| **`0.20 mm`** | `20` | `0x0014` | `14 00` |
+| **`0.50 mm`** | `50` | `0x0032` | `32 00` |
+| **`1.00 mm`** | `100` | `0x0064` | `64 00` |
+| **`1.40 mm`** | `140` | `0x008C` | `8C 00` |
 
-### 4.3. Аппаратная изоляция полей на примере клавиши `A`
-Координаты клавиши `A`: **Bank 3, Column 1** $\to$ базовый адрес `Addr = 3 * 128 + 5 + 1 * 8 = 397` (`0x018D`).
+### 4.3. Hardware Field Isolation (Case Study: Key A)
+Coordinates of Key `A`: **Bank 3, Column 1** $\to$ base address `Addr = 3 * 128 + 5 + 1 * 8 = 397` (`0x018D`).
 
 ```text
 0x018D..0x018E: Actuation Point (Word 0, CONFIRMED)
@@ -101,195 +101,196 @@ $$\text{value}_{\text{mm}} = \frac{\text{raw}}{100.0}$$
 0x0193..0x0194: Flags / Mode (Word 3, UNKNOWN)
 ```
 
-В контролируемых экспериментах на реальном устройстве с использованием `NativeHidTransport`:
-- Изменение Actuation затрагивает **строго** байты `0x018D..0x018E`.
-- Изменение RT Press затрагивает **строго** байты `0x018F..0x0190`.
-- Изменение RT Release затрагивает **строго** байты `0x0191..0x0192`.
-- Поле `Flags` (`0x0193..0x0194`) остаётся `0x0000` и **не требуется** для включения/выключения Rapid Trigger.
-- Во всех экспериментах before/after read-back diff показал: `unexpected changes == NONE`.
+In controlled physical experiments using `NativeHidTransport`:
+- Modifying Actuation strictly alters bytes `0x018D..0x018E`.
+- Modifying RT Press strictly alters bytes `0x018F..0x0190`.
+- Modifying RT Release strictly alters bytes `0x0191..0x0192`.
+- The `Flags` field (`0x0193..0x0194`) remains `0x0000` and is **not required** to toggle Rapid Trigger on/off.
+- In all experiments, before/after read-back diff demonstrated: `unexpected changes == NONE`.
 
-### 4.4. Поведение тумблера Rapid Trigger (On / Off)
-- **Включение RT:** запись ненулевых значений в Слово 1 (Press) и/или Слово 2 (Release).
-- **Выключение RT:** обнуление Слов 1 и 2 (`0x0000`).
-- Отдельный бит/байт переключателя в записи клавиши **не используется**. Состояние «RT Off» на 100% идентично базовому состоянию дампа (`baseline_140mm.json`).
+### 4.4. Rapid Trigger Toggle Semantics (On / Off)
+- **Enabling RT:** Write non-zero values into Word 1 (Press) and/or Word 2 (Release).
+- **Disabling RT:** Zero out Words 1 and 2 (`0x0000`).
+- A dedicated switch bit/byte within the key record **is not utilized**. An "RT Off" state is bit-for-bit identical to baseline dump state (`baseline_140mm.json`).
 
-## 5. Двухуровневая модель: Физическая геометрия vs Электрическая матрица
+---
 
-Архитектура конфигурации Type 84 строго разделена на два независимых слоя:
-1. **`PHYSICAL_LAYOUT` (Физическая геометрия):** видимое пользователю расположение 84 клавиш на корпусе и кейкапах согласно эталонному изображению [`docs/type84_layout.png`](file:///c:/KeyboardSoft/docs/type84_layout.png).
-2. **`ELECTRICAL_MATRIX` (Электрическая/конфигурационная матрица):** адресация ячеек памяти прошивкой контроллера в координатах `(Bank, Column)`.
+## 5. Two-Tier Model: Physical Geometry vs Electrical Matrix
+
+The Type 84 configuration architecture is strictly decoupled into two layers:
+1. **`PHYSICAL_LAYOUT` (Physical Geometry):** User-visible arrangement of 84 keys on the chassis and keycaps per reference image [`docs/type84_layout.png`](file:///c:/KeyboardSoft/docs/type84_layout.png).
+2. **`ELECTRICAL_MATRIX` (Electrical/Configuration Matrix):** Microcontroller memory addressing using `(Bank, Column)` coordinates.
 
 > [!WARNING]
-> **Критическое правило архитектуры:**  
-> **Физический ряд клавиатуры НЕ равен Банку матрицы!**  
-> Совпадение физического положения клавиши и её координат `(Bank, Column)` **не может считаться подтверждённым (`CONFIRMED`) только на основе изображения**.  
-> Перевод в статус `CONFIRMED` производится **исключительно при наличии прямого аппаратного capture-эксперимента**.
+> **Critical Architectural Rule:**  
+> **A physical keyboard row DOES NOT equal a matrix Bank!**  
+> Physical key layout matching `(Bank, Column)` coordinates cannot be declared `CONFIRMED` based solely on images.  
+> Transitioning an entry to `CONFIRMED` status requires an isolated hardware capture experiment.
 
-### 5.1. Доказательства различия физического ряда и банка матрицы
-1. **Клавиша Enter:**
-   - Физически расположена в **Ряду 3** (справа от `' "`).
-   - Электрически аппаратно подтверждена в **Банке 4, Колонке 12** (`0x0265` = 613 в `exp_05_key_enter_actuation`).
-2. **Нижний ряд модификаторов:**
-   - Физически в Ряду 5 находится **ровно 10 клавиш**: `L-Ctrl`, `L-Win`, `L-Alt`, `Space`, `R-Alt`, `Fn`, `R-Ctrl`, `Left`, `Down`, `Right`.
-   - В Банке 5 дампа активно **12 слотов** (`cols: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12]`). Два слота электрически отведены под клавиши из других физических рядов.
+### 5.1. Proofs of Divergence Between Physical Rows and Matrix Banks
+1. **Key Enter:**
+   - Physically located in **Row 3** (right of `' "`).
+   - Electrically verified in **Bank 4, Column 12** (`0x0265` = 613 in `exp_05_key_enter_actuation`).
+2. **Bottom Modifier Row:**
+   - Physically, Row 5 contains **exactly 10 keys**: `L-Ctrl`, `L-Win`, `L-Alt`, `Space`, `R-Alt`, `Fn`, `R-Ctrl`, `Left`, `Down`, `Right`.
+   - In Bank 5 of the memory dump, **12 slots** are active (`cols: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12]`). Two slots are electrically routed to keys located in other physical rows.
 
 ---
 
-### 5.2. Доказанное распределение дополнительных слотов Банка 5 и Банка 3
+### 5.2. Verified Distribution of Auxiliary Slots in Bank 5 and Bank 3
 
-На основе прямых аппаратных экспериментов со снимками `key_up_139mm.json`, `key_backslash_139mm.json` и `key_backspace_139mm.json` гипотеза смещённых краевых клавиш **полностью подтверждена**:
+Based on direct hardware experiments (`key_up_139mm.json`, `key_backslash_139mm.json`, `key_backspace_139mm.json`), the peripheral key routing hypothesis was **fully verified**:
 
-1. **`Up` (Стрелка вверх) $\to$ `Bank 5, Column 10` (`0x02D5` = 725) — `CONFIRMED` (`key_up_139mm.json`):**  
-   Расположена в Банке 5 строго между `Down` (Col 9) и `Right` (Col 11). Все 4 стрелки клавиатуры аппаратно объединены в непрерывный блок Банка 5 (`Cols 8, 9, 10, 11`).
+1. **`Up` (Up Arrow) $\to$ `Bank 5, Column 10` (`0x02D5` = 725) — `CONFIRMED` (`key_up_139mm.json`):**  
+   Located in Bank 5 strictly between `Down` (Col 9) and `Right` (Col 11). All 4 arrow keys are hardware-grouped into a continuous block in Bank 5 (`Cols 8, 9, 10, 11`).
 2. **`\|` (Backslash) $\to$ `Bank 3, Column 12` (`0x01E5` = 485) — `CONFIRMED` (`key_backslash_139mm.json`):**  
-   Клавиша `\|` занимает слот Колонки 12 Банка 3 (освобождённый вследствие переноса `Enter` в Банк 4).
+   Key `\|` occupies Column 12 of Bank 3 (freed up because `Enter` routes to Bank 4).
 3. **`Backspace` $\to$ `Bank 5, Column 12` (`0x02E5` = 741) — `CONFIRMED` (`key_backspace_139mm.json`):**  
-   Клавиша `Backspace` выведена на 12-ю колонку Банка 5 (ранее ошибочно предполагавшуюся под `Menu`).
+   Key `Backspace` is routed to Column 12 of Bank 5 (previously hypothesized as `Menu`).
 
 ---
 
-### 5.3. Статус предварительных назначений (`PAUSE`, `MENU`, `BACKSPACE`)
+### 5.3. Status of Preliminary Aliases (`PAUSE`, `MENU`, `BACKSPACE`)
 
-| Имя | Статус в модели | Анализ по физическому эталону [`type84_layout.png`](file:///c:/KeyboardSoft/docs/type84_layout.png) |
+| Key Name | Model Status | Analysis against Physical Layout [`type84_layout.png`](file:///c:/KeyboardSoft/docs/type84_layout.png) |
 | :--- | :---: | :--- |
-| **`PAUSE`** | `UNCONFIRMED_ALIAS` | На физической клавиатуре клавиша `Pause` **отсутствует**. Сохраняется в коде как устаревший псевдоним (fallback alias). |
-| **`MENU`** | `UNCONFIRMED_ALIAS` | На физической клавиатуре клавиша `Menu` **отсутствует** (в нижнем ряду только 10 клавиш). Слот `(5, 12)` аппаратно доказан как **`Backspace`**. |
-| **`BACKSPACE`** | `CONFIRMED` | Аппаратно подтверждён в **Банке 5, Колонке 12** (`0x02E5` = 741) через `key_backspace_139mm.json`. Прежнее предположение о Банке 6 Col 3 опровергнуто. |
+| **`PAUSE`** | `UNCONFIRMED_ALIAS` | `Pause` key is **not physically present** on keyboard. Preserved in codebase as a fallback alias. |
+| **`MENU`** | `UNCONFIRMED_ALIAS` | `Menu` key is **not physically present** (bottom row has only 10 keys). Slot `(5, 12)` is physically verified as **`Backspace`**. |
+| **`BACKSPACE`** | `CONFIRMED` | Hardware-confirmed at **Bank 5, Column 12** (`0x02E5` = 741) via `key_backspace_139mm.json`. Previous hypothesis of Bank 6 Col 3 refuted. |
 
 ---
 
-### 5.4. Сводная таблица всех 84 клавиш
+### 5.4. Full 84-Key Summary Table
 
-> **Обозначения статусов уверенности:**  
-> - `CONFIRMED` — подтверждено изолированным аппаратным capture-экспериментом.  
-> - `PROBABLE` — высокая степень уверенности по непрерывной топологии банка (рядом с подтверждённой клавишей).  
-> - `HYPOTHESIS` — гипотеза топологии кластера навигации (требует прямого capture).
+> **Confidence Level Legend:**  
+> - `CONFIRMED` — Verified via isolated physical hardware capture experiment.  
+> - `PROBABLE` — High confidence via continuous bank topology (adjacent to confirmed key).  
+> - `HYPOTHESIS` — Navigation cluster topology hypothesis (pending dedicated capture).
 
 | Key | Physical Row | Physical Column | Bank | Matrix Column | Address (Hex) | Address (Dec) | Evidence | Confidence |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :---: |
-| **Esc** | 0 | 0 | 0 | 0 | `0x0005` | 5 | Начало Ряда 0 | `PROBABLE` |
-| **F1** | 0 | 1 | 0 | 1 | `0x000D` | 13 | Топология Ряда 0 | `PROBABLE` |
-| **F2** | 0 | 2 | 0 | 2 | `0x0015` | 21 | Топология Ряда 0 | `PROBABLE` |
-| **F3** | 0 | 3 | 0 | 3 | `0x001D` | 29 | Топология Ряда 0 | `PROBABLE` |
-| **F4** | 0 | 4 | 0 | 4 | `0x0025` | 37 | Топология Ряда 0 | `PROBABLE` |
-| **F5** | 0 | 5 | 0 | 5 | `0x002D` | 45 | Топология Ряда 0 | `PROBABLE` |
-| **F6** | 0 | 6 | 0 | 6 | `0x0035` | 53 | Топология Ряда 0 | `PROBABLE` |
-| **F7** | 0 | 7 | 0 | 7 | `0x003D` | 61 | Топология Ряда 0 | `PROBABLE` |
-| **F8** | 0 | 8 | 0 | 8 | `0x0045` | 69 | Топология Ряда 0 | `PROBABLE` |
-| **F9** | 0 | 9 | 0 | 9 | `0x004D` | 77 | Топология Ряда 0 | `PROBABLE` |
-| **F10** | 0 | 10 | 0 | 10 | `0x0055` | 85 | Топология Ряда 0 | `PROBABLE` |
-| **F11** | 0 | 11 | 0 | 11 | `0x005D` | 93 | Топология Ряда 0 | `PROBABLE` |
-| **F12** | 0 | 12 | 0 | 12 | `0x0065` | 101 | Топология Ряда 0 | `PROBABLE` |
-| **`~ (Grave)** | 1 | 0 | 1 | 0 | `0x0085` | 133 | Начало Ряда 1 | `PROBABLE` |
-| **1** | 1 | 1 | 1 | 1 | `0x008D` | 141 | Топология Ряда 1 | `PROBABLE` |
-| **2** | 1 | 2 | 1 | 2 | `0x0095` | 149 | Топология Ряда 1 | `PROBABLE` |
-| **3** | 1 | 3 | 1 | 3 | `0x009D` | 157 | Топология Ряда 1 | `PROBABLE` |
-| **4** | 1 | 4 | 1 | 4 | `0x00A5` | 165 | Топология Ряда 1 | `PROBABLE` |
-| **5** | 1 | 5 | 1 | 5 | `0x00AD` | 173 | Топология Ряда 1 | `PROBABLE` |
-| **6** | 1 | 6 | 1 | 6 | `0x00B5` | 181 | Топология Ряда 1 | `PROBABLE` |
-| **7** | 1 | 7 | 1 | 7 | `0x00BD` | 189 | Топология Ряда 1 | `PROBABLE` |
-| **8** | 1 | 8 | 1 | 8 | `0x00C5` | 197 | Топология Ряда 1 | `PROBABLE` |
-| **9** | 1 | 9 | 1 | 9 | `0x00CD` | 205 | Топология Ряда 1 | `PROBABLE` |
-| **0** | 1 | 10 | 1 | 10 | `0x00D5` | 213 | Топология Ряда 1 | `PROBABLE` |
-| **- (Minus)** | 1 | 11 | 1 | 11 | `0x00DD` | 221 | Топология Ряда 1 | `PROBABLE` |
-| **= (Equal)** | 1 | 12 | 1 | 12 | `0x00E5` | 229 | Топология Ряда 1 | `PROBABLE` |
-| **Tab** | 2 | 0 | 2 | 0 | `0x0105` | 261 | Слева от Q | `PROBABLE` |
+| **Esc** | 0 | 0 | 0 | 0 | `0x0005` | 5 | Row 0 start | `PROBABLE` |
+| **F1** | 0 | 1 | 0 | 1 | `0x000D` | 13 | Row 0 topology | `PROBABLE` |
+| **F2** | 0 | 2 | 0 | 2 | `0x0015` | 21 | Row 0 topology | `PROBABLE` |
+| **F3** | 0 | 3 | 0 | 3 | `0x001D` | 29 | Row 0 topology | `PROBABLE` |
+| **F4** | 0 | 4 | 0 | 4 | `0x0025` | 37 | Row 0 topology | `PROBABLE` |
+| **F5** | 0 | 5 | 0 | 5 | `0x002D` | 45 | Row 0 topology | `PROBABLE` |
+| **F6** | 0 | 6 | 0 | 6 | `0x0035` | 53 | Row 0 topology | `PROBABLE` |
+| **F7** | 0 | 7 | 0 | 7 | `0x003D` | 61 | Row 0 topology | `PROBABLE` |
+| **F8** | 0 | 8 | 0 | 8 | `0x0045` | 69 | Row 0 topology | `PROBABLE` |
+| **F9** | 0 | 9 | 0 | 9 | `0x004D` | 77 | Row 0 topology | `PROBABLE` |
+| **F10** | 0 | 10 | 0 | 10 | `0x0055` | 85 | Row 0 topology | `PROBABLE` |
+| **F11** | 0 | 11 | 0 | 11 | `0x005D` | 93 | Row 0 topology | `PROBABLE` |
+| **F12** | 0 | 12 | 0 | 12 | `0x0065` | 101 | Row 0 topology | `PROBABLE` |
+| **`~ (Grave)** | 1 | 0 | 1 | 0 | `0x0085` | 133 | Row 1 start | `PROBABLE` |
+| **1** | 1 | 1 | 1 | 1 | `0x008D` | 141 | Row 1 topology | `PROBABLE` |
+| **2** | 1 | 2 | 1 | 2 | `0x0095` | 149 | Row 1 topology | `PROBABLE` |
+| **3** | 1 | 3 | 1 | 3 | `0x009D` | 157 | Row 1 topology | `PROBABLE` |
+| **4** | 1 | 4 | 1 | 4 | `0x00A5` | 165 | Row 1 topology | `PROBABLE` |
+| **5** | 1 | 5 | 1 | 5 | `0x00AD` | 173 | Row 1 topology | `PROBABLE` |
+| **6** | 1 | 6 | 1 | 6 | `0x00B5` | 181 | Row 1 topology | `PROBABLE` |
+| **7** | 1 | 7 | 1 | 7 | `0x00BD` | 189 | Row 1 topology | `PROBABLE` |
+| **8** | 1 | 8 | 1 | 8 | `0x00C5` | 197 | Row 1 topology | `PROBABLE` |
+| **9** | 1 | 9 | 1 | 9 | `0x00CD` | 205 | Row 1 topology | `PROBABLE` |
+| **0** | 1 | 10 | 1 | 10 | `0x00D5` | 213 | Row 1 topology | `PROBABLE` |
+| **- (Minus)** | 1 | 11 | 1 | 11 | `0x00DD` | 221 | Row 1 topology | `PROBABLE` |
+| **= (Equal)** | 1 | 12 | 1 | 12 | `0x00E5` | 229 | Row 1 topology | `PROBABLE` |
+| **Tab** | 2 | 0 | 2 | 0 | `0x0105` | 261 | Left of Q | `PROBABLE` |
 | **Q** | 2 | 1 | 2 | 1 | `0x010D` | 269 | `exp_03_key_q_actuation` | **`CONFIRMED`** |
-| **W** | 2 | 2 | 2 | 2 | `0x0115` | 277 | Между Q и E | `PROBABLE` |
-| **E** | 2 | 3 | 2 | 3 | `0x011D` | 285 | Топология Ряда 2 | `PROBABLE` |
-| **R** | 2 | 4 | 2 | 4 | `0x0125` | 293 | Топология Ряда 2 | `PROBABLE` |
-| **T** | 2 | 5 | 2 | 5 | `0x012D` | 301 | Топология Ряда 2 | `PROBABLE` |
-| **Y** | 2 | 6 | 2 | 6 | `0x0135` | 309 | Топология Ряда 2 | `PROBABLE` |
-| **U** | 2 | 7 | 2 | 7 | `0x013D` | 317 | Топология Ряда 2 | `PROBABLE` |
-| **I** | 2 | 8 | 2 | 8 | `0x0145` | 325 | Топология Ряда 2 | `PROBABLE` |
-| **O** | 2 | 9 | 2 | 9 | `0x014D` | 333 | Топология Ряда 2 | `PROBABLE` |
-| **P** | 2 | 10 | 2 | 10 | `0x0155` | 341 | Топология Ряда 2 | `PROBABLE` |
-| **[{** | 2 | 11 | 2 | 11 | `0x015D` | 349 | Топология Ряда 2 | `PROBABLE` |
-| **]}** | 2 | 12 | 2 | 12 | `0x0165` | 357 | Топология Ряда 2 | `PROBABLE` |
-| **Caps** | 3 | 0 | 3 | 0 | `0x0185` | 389 | Слева от A | `PROBABLE` |
+| **W** | 2 | 2 | 2 | 2 | `0x0115` | 277 | Between Q and E | `PROBABLE` |
+| **E** | 2 | 3 | 2 | 3 | `0x011D` | 285 | Row 2 topology | `PROBABLE` |
+| **R** | 2 | 4 | 2 | 4 | `0x0125` | 293 | Row 2 topology | `PROBABLE` |
+| **T** | 2 | 5 | 2 | 5 | `0x012D` | 301 | Row 2 topology | `PROBABLE` |
+| **Y** | 2 | 6 | 2 | 6 | `0x0135` | 309 | Row 2 topology | `PROBABLE` |
+| **U** | 2 | 7 | 2 | 7 | `0x013D` | 317 | Row 2 topology | `PROBABLE` |
+| **I** | 2 | 8 | 2 | 8 | `0x0145` | 325 | Row 2 topology | `PROBABLE` |
+| **O** | 2 | 9 | 2 | 9 | `0x014D` | 333 | Row 2 topology | `PROBABLE` |
+| **P** | 2 | 10 | 2 | 10 | `0x0155` | 341 | Row 2 topology | `PROBABLE` |
+| **[{** | 2 | 11 | 2 | 11 | `0x015D` | 349 | Row 2 topology | `PROBABLE` |
+| **]}** | 2 | 12 | 2 | 12 | `0x0165` | 357 | Row 2 topology | `PROBABLE` |
+| **Caps** | 3 | 0 | 3 | 0 | `0x0185` | 389 | Left of A | `PROBABLE` |
 | **A** | 3 | 1 | 3 | 1 | `0x018D` | 397 | `exp_01_key_a` | **`CONFIRMED`** |
 | **S** | 3 | 2 | 3 | 2 | `0x0195` | 405 | `exp_01`, `exp_10`, `exp_11`, `exp_12` | **`CONFIRMED`** |
 | **D** | 3 | 3 | 3 | 3 | `0x019D` | 413 | `exp_01_key_d` | **`CONFIRMED`** |
 | **F** | 3 | 4 | 3 | 4 | `0x01A5` | 421 | `exp_02_key_f_actuation` | **`CONFIRMED`** |
-| **G** | 3 | 5 | 3 | 5 | `0x01AD` | 429 | Справа от F | `PROBABLE` |
-| **H** | 3 | 6 | 3 | 6 | `0x01B5` | 437 | Топология Ряда 3 | `PROBABLE` |
-| **J** | 3 | 7 | 3 | 7 | `0x01BD` | 445 | Топология Ряда 3 | `PROBABLE` |
-| **K** | 3 | 8 | 3 | 8 | `0x01C5` | 453 | Топология Ряда 3 | `PROBABLE` |
-| **L** | 3 | 9 | 3 | 9 | `0x01CD` | 461 | Топология Ряда 3 | `PROBABLE` |
-| **;:** | 3 | 10 | 3 | 10 | `0x01D5` | 469 | Топология Ряда 3 | `PROBABLE` |
-| **'"** | 3 | 11 | 3 | 11 | `0x01DD` | 477 | Топология Ряда 3 | `PROBABLE` |
+| **G** | 3 | 5 | 3 | 5 | `0x01AD` | 429 | Right of F | `PROBABLE` |
+| **H** | 3 | 6 | 3 | 6 | `0x01B5` | 437 | Row 3 topology | `PROBABLE` |
+| **J** | 3 | 7 | 3 | 7 | `0x01BD` | 445 | Row 3 topology | `PROBABLE` |
+| **K** | 3 | 8 | 3 | 8 | `0x01C5` | 453 | Row 3 topology | `PROBABLE` |
+| **L** | 3 | 9 | 3 | 9 | `0x01CD` | 461 | Row 3 topology | `PROBABLE` |
+| **;:** | 3 | 10 | 3 | 10 | `0x01D5` | 469 | Row 3 topology | `PROBABLE` |
+| **'"** | 3 | 11 | 3 | 11 | `0x01DD` | 477 | Row 3 topology | `PROBABLE` |
 | **\| (Backslash)**| 2 | 13 | 3 | 12 | `0x01E5` | 485 | `key_backslash_139mm.json` | **`CONFIRMED`** |
-| **L-Shift** | 4 | 0 | 4 | 0 | `0x0205` | 517 | Слева от Z | `PROBABLE` |
+| **L-Shift** | 4 | 0 | 4 | 0 | `0x0205` | 517 | Left of Z | `PROBABLE` |
 | **Z** | 4 | 1 | 4 | 1 | `0x020D` | 525 | `exp_04_key_z_actuation` | **`CONFIRMED`** |
-| **X** | 4 | 2 | 4 | 2 | `0x0215` | 533 | Между Z и C | `PROBABLE` |
-| **C** | 4 | 3 | 4 | 3 | `0x021D` | 541 | Топология Ряда 4 | `PROBABLE` |
-| **V** | 4 | 4 | 4 | 4 | `0x0225` | 549 | Топология Ряда 4 | `PROBABLE` |
-| **B** | 4 | 5 | 4 | 5 | `0x022D` | 557 | Топология Ряда 4 | `PROBABLE` |
-| **N** | 4 | 6 | 4 | 6 | `0x0235` | 565 | Топология Ряда 4 | `PROBABLE` |
-| **M** | 4 | 7 | 4 | 7 | `0x023D` | 573 | Топология Ряда 4 | `PROBABLE` |
-| **,<** | 4 | 8 | 4 | 8 | `0x0245` | 581 | Топология Ряда 4 | `PROBABLE` |
-| **.>** | 4 | 9 | 4 | 9 | `0x024D` | 589 | Топология Ряда 4 | `PROBABLE` |
-| **/?** | 4 | 10 | 4 | 10 | `0x0255` | 597 | Топология Ряда 4 | `PROBABLE` |
-| **R-Shift** | 4 | 11 | 4 | 11 | `0x025D` | 605 | Слева от Up | `PROBABLE` |
+| **X** | 4 | 2 | 4 | 2 | `0x0215` | 533 | Between Z and C | `PROBABLE` |
+| **C** | 4 | 3 | 4 | 3 | `0x021D` | 541 | Row 4 topology | `PROBABLE` |
+| **V** | 4 | 4 | 4 | 4 | `0x0225` | 549 | Row 4 topology | `PROBABLE` |
+| **B** | 4 | 5 | 4 | 5 | `0x022D` | 557 | Row 4 topology | `PROBABLE` |
+| **N** | 4 | 6 | 4 | 6 | `0x0235` | 565 | Row 4 topology | `PROBABLE` |
+| **M** | 4 | 7 | 4 | 7 | `0x023D` | 573 | Row 4 topology | `PROBABLE` |
+| **,<** | 4 | 8 | 4 | 8 | `0x0245` | 581 | Row 4 topology | `PROBABLE` |
+| **.>** | 4 | 9 | 4 | 9 | `0x024D` | 589 | Row 4 topology | `PROBABLE` |
+| **/?** | 4 | 10 | 4 | 10 | `0x0255` | 597 | Row 4 topology | `PROBABLE` |
+| **R-Shift** | 4 | 11 | 4 | 11 | `0x025D` | 605 | Left of Up | `PROBABLE` |
 | **Enter** | 3 | 12 | 4 | 12 | `0x0265` | 613 | `exp_05_key_enter_actuation` | **`CONFIRMED`** |
-| **L-Ctrl** | 5 | 0 | 5 | 0 | `0x0285` | 645 | Начало Ряда 5 | `PROBABLE` |
-| **L-Win** | 5 | 1 | 5 | 1 | `0x028D` | 653 | Между Ctrl и Alt | `PROBABLE` |
-| **L-Alt** | 5 | 2 | 5 | 2 | `0x0295` | 661 | Слева от Space | `PROBABLE` |
+| **L-Ctrl** | 5 | 0 | 5 | 0 | `0x0285` | 645 | Row 5 start | `PROBABLE` |
+| **L-Win** | 5 | 1 | 5 | 1 | `0x028D` | 653 | Between Ctrl and Alt | `PROBABLE` |
+| **L-Alt** | 5 | 2 | 5 | 2 | `0x0295` | 661 | Left of Space | `PROBABLE` |
 | **Space Bar** | 5 | 3 | 5 | 3 | `0x029D` | 669 | `exp_06_key_space_actuation` | **`CONFIRMED`** |
-| **R-Alt** | 5 | 4 | 5 | 4 | `0x02A5` | 677 | Справа от Space | `PROBABLE` |
-| **Fn** | 5 | 5 | 5 | 5 | `0x02AD` | 685 | Между R-Alt и R-Ctrl | `PROBABLE` |
-| **R-Ctrl** | 5 | 6 | 5 | 7 | `0x02BD` | 701 | Слева от Left (Col 6 пропущен) | `PROBABLE` |
+| **R-Alt** | 5 | 4 | 5 | 4 | `0x02A5` | 677 | Right of Space | `PROBABLE` |
+| **Fn** | 5 | 5 | 5 | 5 | `0x02AD` | 685 | Between R-Alt and R-Ctrl | `PROBABLE` |
+| **R-Ctrl** | 5 | 6 | 5 | 7 | `0x02BD` | 701 | Left of Left (Col 6 skipped) | `PROBABLE` |
 | **Left ($\leftarrow$)**| 5 | 7 | 5 | 8 | `0x02C5` | 709 | `exp_07_key_left_actuation` | **`CONFIRMED`** |
 | **Down ($\downarrow$)**| 5 | 8 | 5 | 9 | `0x02CD` | 717 | `exp_08_key_down_actuation` | **`CONFIRMED`** |
 | **Up ($\uparrow$)** | 4 | 12 | 5 | 10 | `0x02D5` | 725 | `key_up_139mm.json` | **`CONFIRMED`** |
 | **Right ($\rightarrow$)**| 5 | 9 | 5 | 11 | `0x02DD` | 733 | `exp_09_key_right_actuation` | **`CONFIRMED`** |
 | **Backspace** | 1 | 13 | 5 | 12 | `0x02E5` | 741 | `key_backspace_139mm.json` | **`CONFIRMED`** |
-| **End** (гип. Col 3)| 0 | 15 | 6 | 3 | `0x031D` | 797 | Навигационный кластер (физически справа от Home) | `HYPOTHESIS` |
-| **Print** | 0 | 13 | 6 | 7 | `0x033D` | 829 | Навигационный кластер | `HYPOTHESIS` |
-| **Ins** | 1 | 14 | 6 | 8 | `0x0345` | 837 | Навигационный кластер | `HYPOTHESIS` |
-| **Del** | 2 | 14 | 6 | 9 | `0x034D` | 845 | Навигационный кластер | `HYPOTHESIS` |
-| **Home** | 0 | 14 | 6 | 10 | `0x0355` | 853 | Навигационный кластер | `HYPOTHESIS` |
-| **PgUp** | 1 | 15 | 6 | 11 | `0x035D` | 861 | Навигационный кластер | `HYPOTHESIS` |
-| **PgDn** | 2 | 15 | 6 | 12 | `0x0365` | 869 | Навигационный кластер | `HYPOTHESIS` |
+| **End** (hyp. Col 3)| 0 | 15 | 6 | 3 | `0x031D` | 797 | Nav cluster (physically right of Home) | `HYPOTHESIS` |
+| **Print** | 0 | 13 | 6 | 7 | `0x033D` | 829 | Nav cluster | `HYPOTHESIS` |
+| **Ins** | 1 | 14 | 6 | 8 | `0x0345` | 837 | Nav cluster | `HYPOTHESIS` |
+| **Del** | 2 | 14 | 6 | 9 | `0x034D` | 845 | Nav cluster | `HYPOTHESIS` |
+| **Home** | 0 | 14 | 6 | 10 | `0x0355` | 853 | Nav cluster | `HYPOTHESIS` |
+| **PgUp** | 1 | 15 | 6 | 11 | `0x035D` | 861 | Nav cluster | `HYPOTHESIS` |
+| **PgDn** | 2 | 15 | 6 | 12 | `0x0365` | 869 | Nav cluster | `HYPOTHESIS` |
 
 ---
 
-## 6. Протокол RGB-подсветки (Подсистема `AA 23` и `AA 24`)
+## 6. RGB Lighting Protocol (Subsystems `AA 23` and `AA 24`)
 
-Полная спецификация протокола подсветки вынесена в отдельный документ: [`docs/RGB_PROTOCOL.md`](file:///c:/KeyboardSoft/docs/RGB_PROTOCOL.md).
+Full lighting protocol documentation is detailed in [`docs/RGB_PROTOCOL.md`](file:///c:/KeyboardSoft/docs/RGB_PROTOCOL.md).
 
-### Ключевые архитектурные выводы:
-1. **Строгое разделение команд:**
-   - Аналоговая матрица магнитных свитчей: **`AA 27`** (1008 байт).
-   - Глобальная подсветка (режим, цвет, яркость, скорость): **`AA 23 10`** (24 байта полезной нагрузки).
-   - Матрица поканальной подсветки Per-Key: **`AA 24`** (512 байт = 128 слотов $\times$ 4 байта).
-2. **Линейно-физическая адресация LED:**
-   - В отличие от свитчей Холла, светодиоды адресуются строго по **физическим рядам** (сверху вниз, слева направо).
-   - Клавиша `W` аппаратно подтверждена в **Слоте #35** (`LED ID = 0x23`, смещение 140..143 в `rgb_05_per_key.json`).
-
----
-
-## 7. Протокол переназначения клавиш (Подсистема `AA 12` и `AA 22`)
-
-Полная спецификация матриц слоёв и протокола переназначения клавиш вынесена в документ: [`docs/KEYMAP_PROTOCOL.md`](file:///c:/KeyboardSoft/docs/KEYMAP_PROTOCOL.md).
-
-### Ключевые параметры WRITE-транзакции (`AA 22`):
-- **Opcode:** `AA 22` (запись Layer 1 Base mapping, 512 байт).
-- **Фрейминг:** 10 чанков (9 чанков по 56 байт + 1 хвостовой чанк по 8 байт).
-- **Терминатор:** отсутствует отдельный пакет (фиксация in-band в чанке 9 по адресу 504).
-- **Подтверждения (ACK):** 10 синхронных отчётов `55 22 <sz> <addr_lo> <addr_hi>`.
-- **Семантика:** подтверждено изолированное изменение сканкода клавиши `A` в слоте 50 (`0x00C8`, `0x04` $\to$ `0x05`).
+### Key Architectural Takeaways:
+1. **Strict Command Isolation:**
+   - Hall switch analog matrix: **`AA 27`** (1008 bytes).
+   - Global lighting (mode, color, brightness, speed): **`AA 23 10`** (24 bytes payload).
+   - Per-Key LED matrix: **`AA 24`** (512 bytes = 128 slots $\times$ 4 bytes).
+2. **Linear-Physical LED Addressing:**
+   - Unlike Hall switches, LEDs are addressed strictly by **physical rows** (top-to-bottom, left-to-right).
+   - Key `W` is hardware-confirmed at **Slot #35** (`LED ID = 0x23`, offset 140..143 in `rgb_05_per_key.json`).
 
 ---
 
-## 8. Чистый Offline-слой кодирования протокола (`keyboard_re.protocol`)
+## 7. Key Remap Protocol (Subsystems `AA 12` and `AA 22`)
 
-Для безопасного моделирования и воспроизведения HID-отчётов без физического подключения к контроллеру разработан пакет [`src/keyboard_re/protocol/`](file:///c:/KeyboardSoft/src/keyboard_re/protocol/):
-- **`packets.py`**: метаданные USB HID (Report ID 0, размер 64 байта, Usage Page `0xFF68`, Usage `0x0061`) и утилиты выравнивания.
-- **`hall.py`**: кодирование и декодирование протокола `AA 27` (`build_hall_chunk`, `build_hall_write`, `build_hall_terminator`, `parse_hall_write`). Воспроизводит все 18 блоков и терминатор байт-в-байт относительно реальных дампов (`baseline_140mm.json`).
-- **`rgb.py`**: кодирование и декодирование глобального пакета `AA 23` и поклавишного буфера `AA 24` (`build_rgb_global`, `build_led_buffer`, `build_rgb_per_key_chunks`), а также развязанная физическая карта светодиодов `PHYSICAL_LED_MAP`.
-- **`keymap.py`**: чтение и декодирование матриц слоёв (`KeymapTable`, `KeyRemapRecord`).
+Full layer matrix and key remapping documentation is detailed in [`docs/KEYMAP_PROTOCOL.md`](file:///c:/KeyboardSoft/docs/KEYMAP_PROTOCOL.md).
+
+### Key Parameters of WRITE Transaction (`AA 22`):
+- **Opcode:** `AA 22` (writes Layer 1 Base mapping, 512 bytes).
+- **Framing:** 10 chunks (9 chunks $\times$ 56 bytes + 1 tail chunk $\times$ 8 bytes).
+- **Terminator:** No dedicated commit packet (committed in-band in chunk 9 at address 504).
+- **Acknowledgments (ACK):** 10 synchronous reports `55 22 <sz> <addr_lo> <addr_hi>`.
+- **Semantics:** Confirmed isolated modification of Key `A` scancode at slot 50 (`0x00C8`, `0x04` $\to$ `0x05`).
+
+---
+
+## 8. Pure Offline Protocol Encoding Layer (`keyboard_re.protocol`)
+
+For safe modeling and packet reproduction without physical controller access, the package [`src/keyboard_re/protocol/`](file:///c:/KeyboardSoft/src/keyboard_re/protocol/) provides:
+- **`packets.py`**: USB HID metadata (Report ID 0, 64-byte length, Usage Page `0xFF68`, Usage `0x0061`) and alignment utilities.
+- **`hall.py`**: Encoding and decoding for protocol `AA 27` (`build_hall_chunk`, `build_hall_write`, `build_hall_terminator`, `parse_hall_write`). Reproduces all 18 blocks and terminator byte-for-byte against physical dumps (`baseline_140mm.json`).
+- **`rgb.py`**: Encoding and decoding of global packet `AA 23` and per-key buffer `AA 24` (`build_rgb_global`, `build_led_buffer`, `build_rgb_per_key_chunks`), along with decoupled physical LED map `PHYSICAL_LED_MAP`.
+- **`keymap.py`**: Parsing and decoding of layer matrices (`KeymapTable`, `KeyRemapRecord`).
 
 > [!CAUTION]
-> Слой кодирования полностью изолирован от системного ввода-вывода (I/O) и не содержит вызовов `sendReport`, `sendFeatureReport` или иных механизмов передачи пакетов на физическое устройство.
-
+> The encoding layer is completely isolated from system I/O and contains no calls to `sendReport`, `sendFeatureReport`, or any other physical transmission mechanisms.

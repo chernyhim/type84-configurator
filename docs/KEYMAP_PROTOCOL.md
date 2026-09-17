@@ -1,50 +1,50 @@
-# Протокол переназначения клавиш (KEYMAP PROTOCOL) Type 84
+# Key Remapping Protocol (KEYMAP PROTOCOL) Type 84
 
-> **Важное примечание по безопасности:**  
-> Данная спецификация и связанные программные модули разработаны **исключительно для пассивного анализа** дампов трафика.  
-> Прямая отправка команд записи (`AA 22`, `AA 26`, `AA 2C`) или изменения раскладки из Python **не производится**.
-
----
-
-## 1. Архитектура матричных слоёв (Layer Architecture)
-
-Веб-конфигуратор считывает три независимые таблицы переназначения клавиш, каждая из которых имеет фиксированный размер **512 байт (128 слотов по 4 байта)**:
-
-1. **Layer 1 (Base / Default mapping):** Запрос `AA 12` $\to$ Ответ `55 12` (10 чанков). Базовый рабочий слой клавиатуры в режиме Windows.
-2. **Layer 2 (Fn layer mapping):** Запрос `AA 16` $\to$ Ответ `55 16` (10 чанков). Слой комбинаций с зажатой клавишей `Fn`.
-3. **Layer 3 (Alternate / Mac mapping):** Запрос `AA 1C` $\to$ Ответ `55 1C` (10 чанков). Альтернативный профиль раскладки (Mac-режим или альтернативный Fn-слой).
-
-Каждая таблица передаётся последовательностью из 10 входящих отчётов:
-- 9 отчётов по 56 байт (`sz = 0x38`) по адресам `0x0000`, `0x0038`, `0x0070`, ..., `0x01C0`.
-- 1 хвостовой отчёт по 8 байт (`sz = 0x08`) по адресу `0x01F8` (504).
+> **Important Safety Note:**  
+> This specification and associated software modules were developed **strictly for passive analysis** of traffic captures.  
+> Direct speculative transmission of write commands (`AA 22`, `AA 26`, `AA 2C`) from scripts without verification is **strictly prohibited**.
 
 ---
 
-## 2. Разделение систем адресации (Addressing Systems)
+## 1. Layer Architecture
 
-В архитектуре клавиатуры Type 84 строго разделены **5 различных систем координат**:
+The web configurator reads three independent key remapping tables, each having a fixed size of **512 bytes (128 slots $\times$ 4 bytes)**:
+
+1. **Layer 1 (Base / Default mapping):** Request `AA 12` $\to$ Response `55 12` (10 chunks). Base working layer of the keyboard in Windows mode.
+2. **Layer 2 (Fn layer mapping):** Request `AA 16` $\to$ Response `55 16` (10 chunks). Combination layer active when holding the `Fn` key.
+3. **Layer 3 (Alternate / Mac mapping):** Request `AA 1C` $\to$ Response `55 1C` (10 chunks). Alternate layout profile (Mac mode or secondary Fn layer).
+
+Each table is transferred via a sequence of 10 incoming reports:
+- 9 reports of 56 bytes (`sz = 0x38`) at addresses `0x0000`, `0x0038`, `0x0070`, ..., `0x01C0`.
+- 1 tail report of 8 bytes (`sz = 0x08`) at address `0x01F8` (504).
+
+---
+
+## 2. Addressing Coordinate Systems
+
+In the Type 84 architecture, **5 distinct coordinate systems** are strictly separated:
 
 ```mermaid
 graph TD
-    A["1. Physical Key Layout<br/>(docs/type84_layout.png, 84 клавиши)"] --> B["2. Hall Analog Sensor Slot<br/>(KEY_MAP: Bank 0..6, Col 0..12, 8 байт/ключ)"]
-    A --> C["3. RGB LED Slot<br/>(PHYSICAL_LED_MAP: 512B буфер, 4 байта/светодиод)"]
-    A --> D["4. Key Remap Matrix Slot<br/>(KeymapTable: 8 банков x 16 колонок = 128 слотов, 4 байта/запись)"]
+    A["1. Physical Key Layout<br/>(docs/type84_layout.png, 84 keys)"] --> B["2. Hall Analog Sensor Slot<br/>(KEY_MAP: Bank 0..6, Col 0..12, 8 bytes/key)"]
+    A --> C["3. RGB LED Slot<br/>(PHYSICAL_LED_MAP: 512B buffer, 4 bytes/LED)"]
+    A --> D["4. Key Remap Matrix Slot<br/>(KeymapTable: 8 banks x 16 cols = 128 slots, 4 bytes/record)"]
     D --> E["5. USB HID Usage / Scancode<br/>(Usage Page 0x07 Keyboard / 0x0C Consumer)"]
 ```
 
-| Система адресации | Объём / Диапазон | Шаг / Размер | Назначение |
+| Addressing System | Capacity / Range | Unit / Size | Purpose |
 |:---|:---:|:---:|:---|
-| **Physical Layout** | 84 физические клавиши | Геометрические координаты | Физическое расположение клавиш на плате ANSI 75% |
-| **Hall Matrix (`KEY_MAP`)** | 1008 байт (84 активных слота) | 8 байт (`bank * 128 + 5 + col * 8`) | Аналоговые пороги срабатывания и Rapid Trigger (`AA 27`/`AA 17`) |
-| **RGB Matrix (`PHYSICAL_LED_MAP`)** | 512 байт (128 LED-слотов) | 4 байта (`slot * 4`, `[R, G, B, flags]`) | Поклавишная подсветка клавиш (`AA 24`/`AA 14`) |
-| **Remap Matrix (`KeymapTable`)** | 512 байт (128 слотов) | 4 байта (`slot * 4`, `bank * 16 + col`) | Логическая таблица сканкодов контроллера (`AA 12`/`AA 16`) |
-| **HID Usage ID** | `0x00` .. `0xE7` | 1-2 байта | Стандартные коды клавиш спецификации USB HID |
+| **Physical Layout** | 84 physical keys | Geometric coordinates | Physical key layout on ANSI 75% PCB |
+| **Hall Matrix (`KEY_MAP`)** | 1008 bytes (84 active slots) | 8 bytes (`bank * 128 + 5 + col * 8`) | Analog actuation and Rapid Trigger thresholds (`AA 27`/`AA 17`) |
+| **RGB Matrix (`PHYSICAL_LED_MAP`)** | 512 bytes (128 LED slots) | 4 bytes (`slot * 4`, `[R, G, B, flags]`) | Per-key backlighting (`AA 24`/`AA 14`) |
+| **Remap Matrix (`KeymapTable`)** | 512 bytes (128 slots) | 4 bytes (`slot * 4`, `bank * 16 + col`) | Logical scancode matrix table (`AA 12`/`AA 16`) |
+| **HID Usage ID** | `0x00` .. `0xE7` | 1-2 bytes | Standard USB HID specification keycodes |
 
 ---
 
-## 3. Формат записи клавиши (KeyRemapRecord)
+## 3. Key Record Format (KeyRemapRecord)
 
-Каждая запись таблицы занимает ровно **4 байта**:
+Each entry in the table occupies exactly **4 bytes**:
 
 ```text
 +----------+----------+----------+---------------+
@@ -53,35 +53,35 @@ graph TD
 +----------+----------+----------+---------------+
 ```
 
-### Назначение полей:
+### Field Definitions:
 1. **`Byte 0` (Prefix / Extended Modifier):**
-   - Обычно `0x00`.
-   - В расширенных записях хранит префикс или флаг модификатора (например, `0x92`, `0x56`).
+   - Typically `0x00`.
+   - In extended records, stores prefix or modifier flags (e.g., `0x92`, `0x56`).
 2. **`Byte 1` (Scancode):**
-   - Стандартный USB HID Usage ID из таблицы **Keyboard/Keypad Page `0x07`**.
-   - Примеры: `0x04` = 'A', `0x16` = 'S', `0x29` = 'Escape', `0x28` = 'Enter', `0x39` = 'CapsLock'.
-   - Фирменный сканкод клавиши Fn: **`0xAF`**.
+   - Standard USB HID Usage ID from **Keyboard/Keypad Page `0x07`**.
+   - Examples: `0x04` = 'A', `0x16` = 'S', `0x29` = 'Escape', `0x28` = 'Enter', `0x39` = 'CapsLock'.
+   - Proprietary vendor Fn key scancode: **`0xAF`**.
 3. **`Byte 2` (Special / Secondary Code):**
-   - Дополнительный код функции для аппаратных и мультимедийных комбинаций.
-   - Используется на слое `Fn` (Layer 2): например, стрелки `Left` (`0x10`), `Down` (`0x0E`), `Up` (`0x0D`), `Right` (`0x0F`) для управления подсветкой.
+   - Auxiliary function code for hardware and media shortcuts.
+   - Used on Layer 2 (`Fn`): e.g., arrow keys `Left` (`0x10`), `Down` (`0x0E`), `Up` (`0x0D`), `Right` (`0x0F`) for lighting control.
 4. **`Byte 3` (Function Type):**
-   - `0x02` = **Standard Keyboard HID Key** (обычная клавиша клавиатуры).
-   - `0x03` = **Extended System Key** (системная клавиша / кейпад, например PageDown `0x4E`, KPEnter `0x58`).
-   - `0x0D` = **Hardware / Media / RGB Shortcut** (аппаратная функция переключения эффекта/яркости/медиа).
-   - `0x00` = **Unbound / Passthrough** (не привязана / сквозное нажатие базового слоя).
+   - `0x02` = **Standard Keyboard HID Key**.
+   - `0x03` = **Extended System Key** (system key / keypad, e.g., PageDown `0x4E`, KPEnter `0x58`).
+   - `0x0D` = **Hardware / Media / RGB Shortcut** (hardware effect/brightness/media toggle).
+   - `0x00` = **Unbound / Passthrough** (no binding / passthrough to base layer).
 
 ---
 
-## 4. Карта матрицы Remap Layer 1 (`AA 12`)
+## 4. Remap Layer 1 Matrix Map (`AA 12`)
 
-Контроллер оперирует стандартной матрицей **8 банков $\times$ 16 колонок = 128 слотов**. В прошивке используется полноразмерная матричная сетка (содержащая слоты Numpad для унификации прошивки с 104-клавишными моделями).
+The controller operates on an **8 banks $\times$ 16 columns = 128 slots** matrix grid. Firmware includes Numpad matrix lines for codebase unification with 104-key models.
 
-### Зависимость между Hall Column и Remap Column:
-Для основных буквенно-цифровых блоков обнаружена строгая закономерность:
+### Relationship Between Hall Column and Remap Column:
+For alphanumeric keys, an exact formula holds:
 $$\text{Remap Column} = \text{Hall Column} + 1$$
-Колонка 0 матрицы Remap зарезервирована для Numpad / служебных линий.
+Column 0 of the Remap matrix is reserved for Numpad / service lines.
 
-### Сводная карта банков Layer 1:
+### Summary Map of Layer 1 Banks:
 * **Bank 0 (Function Row):**
   * `Col 1`: Escape (`0x29`)
   * `Col 2..13`: F1 (`0x3A`) .. F12 (`0x45`)
@@ -89,7 +89,7 @@ $$\text{Remap Column} = \text{Hall Column} + 1$$
   * `Col 1`: Grave / Tilde `` `~ `` (`0x35`)
   * `Col 2..11`: '1' (`0x1E`) .. '0' (`0x27`)
   * `Col 13`: '=+' (`0x2E`)
-  * `Col 14..15`: Матричные слоты NumLock (`0x53`), KPSlash (`0x54`)
+  * `Col 14..15`: Matrix slots NumLock (`0x53`), KPSlash (`0x54`)
 * **Bank 2 (QWERTY Row):**
   * `Col 0`: KPAsterisk (`0x55`)
   * `Col 1`: Tab (`0x2B`)
@@ -112,83 +112,82 @@ $$\text{Remap Column} = \text{Hall Column} + 1$$
   * `Col 4..6`: PrintScreen (`0x46`), ScrollLock (`0x47`), RGui (`0xE7`)
   * `Col 7..13`: Pause (`0x48`), Insert (`0x49`), Home (`0x4A`), PageUp (`0x4B`), Delete (`0x4C`), End (`0x4D`), PageDown (`0x4E`)
 * **Bank 7 (Terminator / Reserved):**
-  * `Col 0..13`: `00 00 00 00` (пустые слоты).
-  * `Col 14 (Slot 126)`: `00 01 00 00` — маркер активности таблицы (аналогично маркеру в конце RGB-буфера).
+  * `Col 0..13`: `00 00 00 00` (empty slots).
+  * `Col 14 (Slot 126)`: `00 01 00 00` — table active marker (analogous to marker at end of RGB buffer).
 
 ---
 
-## 5. Слой комбинаций Fn (Layer 2, `AA 16`)
+## 5. Fn Combination Layer (Layer 2, `AA 16`)
 
-На слое `Fn` прошивка переопределяет поведение клавиш:
-1. **Функциональный ряд F1..F12:**
-   * В таблице `AA 16` слоты F1..F12 заполнены `00 00 00 00`. Это означает, что контроллер использует базовое поведение клавиш либо системный passthrough.
-2. **Служебные переназначения:**
-   * `Fn + Backspace` (Slot 93): переопределён на **ScrollLock** (`0x47`, type `0x02`).
-   * `Fn + End` (Slot 108): переопределён на **Pause** (`0x48`, type `0x02`).
-3. **Стрелки (RGB и аппаратное управление):**
-   * `Fn + Left` (Slot 89): `special = 0x10`, `type = 0x0D` (смена направления/режима RGB).
-   * `Fn + Down` (Slot 90): `special = 0x0E`, `type = 0x0D` (уменьшение яркости).
-   * `Fn + Up` (Slot 91): `special = 0x0D`, `type = 0x0D` (увеличение яркости).
-   * `Fn + Right` (Slot 92): `special = 0x0F`, `type = 0x02` (смена скорости/цвета).
+On the `Fn` layer, firmware overrides key behaviors:
+1. **Function Row F1..F12:**
+   * In table `AA 16`, slots F1..F12 are populated with `00 00 00 00`. The controller applies base key behavior or system passthrough.
+2. **Service Shortcuts:**
+   * `Fn + Backspace` (Slot 93): Remapped to **ScrollLock** (`0x47`, type `0x02`).
+   * `Fn + End` (Slot 108): Remapped to **Pause** (`0x48`, type `0x02`).
+3. **Arrow Keys (RGB & Hardware Control):**
+   * `Fn + Left` (Slot 89): `special = 0x10`, `type = 0x0D` (RGB direction/mode toggle).
+   * `Fn + Down` (Slot 90): `special = 0x0E`, `type = 0x0D` (brightness decrease).
+   * `Fn + Up` (Slot 91): `special = 0x0D`, `type = 0x0D` (brightness increase).
+   * `Fn + Right` (Slot 92): `special = 0x0F`, `type = 0x02` (speed/color toggle).
 
 ---
 
-## 6. Аппаратно подтверждённый протокол записи Remap L1 (`AA 22`)
+## 6. Hardware-Verified Write Protocol Remap L1 (`AA 22`)
 
-В контролируемом эксперименте через официальный конфигуратор `web.io.vision` (переназначение `Key A -> B`, файл дампа [`captures/experiments/remap_write_a_to_b.json`](file:///c:/KeyboardSoft/captures/experiments/remap_write_a_to_b.json)) зафиксированы точные параметры WRITE-транзакции:
+In a controlled physical test using the official configurator `web.io.vision` (remapping `Key A -> B`, capture file [`captures/experiments/remap_write_a_to_b.json`](file:///c:/KeyboardSoft/captures/experiments/remap_write_a_to_b.json)), exact WRITE transaction parameters were established:
 
-### 6.1. Параметры фрейминга
-| Параметр | Значение | Статус | Примечание |
+### 6.1. Framing Parameters
+| Parameter | Value | Status | Notes |
 |:---|:---:|:---:|:---|
-| **WRITE Opcode** | **`AA 22`** | **`CONFIRMED`** | Префикс хоста `0xAA`, код операции `0x22` |
-| **Длина отчёта (Report Length)** | **64 байта** | **`CONFIRMED`** | Стандартный фиксированный размер USB HID OUTPUT report |
-| **Report ID** | **`0`** | **`CONFIRMED`** | В WebHID вызов `sendReport(0, ...)`, в байтах репорта ID не передаётся |
-| **Канал передачи (Interface)** | `0xFF68` / `0x0061` | **`CONFIRMED`** | Основной конфигурационный интерфейс устройства |
-| **Количество чанков** | **10 чанков** | **`CONFIRMED`** | 9 чанков по 56 байт + 1 хвостовой чанк по 8 байт = 512 байт |
-| **Порядок отправки** | Линейно возрастающий | **`CONFIRMED`** | Адреса `0, 56, 112, 168, 224, 280, 336, 392, 448, 504` |
-| **Отдельный терминатор (Commit)** | **НЕТ** | **`CONFIRMED`** | Отдельного 11-го пакета нет; фиксация in-band в чанке #9 (`00 01 00 00`) |
-| **Подтверждения (ACKs)** | **10 отчётов (`55 22`)** | **`CONFIRMED`** | На каждый чанк контроллер немедленно отвечает эхо-отчётом |
-| **Тайминги между пакетами** | ~18..20 мс (ср. 19.1 мс) | **`CONFIRMED`** | Полная транзакция записи занимает 188.9 мс |
+| **WRITE Opcode** | **`AA 22`** | **`CONFIRMED`** | Host prefix `0xAA`, operation code `0x22` |
+| **Report Length** | **64 bytes** | **`CONFIRMED`** | Standard fixed USB HID OUTPUT report size |
+| **Report ID** | **`0`** | **`CONFIRMED`** | WebHID call `sendReport(0, ...)`; no report ID in buffer |
+| **Interface** | `0xFF68` / `0x0061` | **`CONFIRMED`** | Primary configuration interface |
+| **Chunk Count** | **10 chunks** | **`CONFIRMED`** | 9 chunks $\times$ 56B + 1 tail chunk $\times$ 8B = 512 bytes |
+| **Transmission Order** | Linearly ascending | **`CONFIRMED`** | Addresses `0, 56, 112, 168, 224, 280, 336, 392, 448, 504` |
+| **Dedicated Commit Terminator** | **NONE** | **`CONFIRMED`** | No 11th packet; committed in-band at chunk #9 (`00 01 00 00`) |
+| **Acknowledgments (ACKs)** | **10 reports (`55 22`)** | **`CONFIRMED`** | Controller immediately responds with echo report for each chunk |
+| **Inter-packet timing** | ~18..20 ms (avg 19.1 ms) | **`CONFIRMED`** | Total write transaction completes in 188.9 ms |
 
-### 6.2. Структура чанка данных
+### 6.2. Data Chunk Structure
 ```text
-Байты:  0    1    2    3    4    5 .. (5 + len - 1)    (5 + len) .. 63
+Bytes:  0    1    2    3    4    5 .. (5 + len - 1)    (5 + len) .. 63
        AA   22   SZ   A_LO A_HI  [---- PAYLOAD ----]   00 00 00 ...
 ```
-- `SZ`: размер полезной нагрузки (`0x38` = 56 байт для чанков 0..8; `0x08` = 8 байт для чанка 9).
-- `A_LO`, `A_HI`: 16-битный адрес смещения в таблице в формате Little-Endian (`<H`).
-- Неиспользованные байты до конца 64-байтового репорта заполняются нулями (`0x00`).
+- `SZ`: Payload length (`0x38` = 56 bytes for chunks 0..8; `0x08` = 8 bytes for chunk 9).
+- `A_LO`, `A_HI`: 16-bit offset address in Little-Endian format (`<H`).
+- Unused tail bytes up to report length (64) are zero-filled (`0x00`).
 
-### 6.3. Формат подтверждения контроллера (ACK)
+### 6.3. Controller Acknowledgment Format (ACK)
 ```text
-Байты:  0    1    2    3    4    5 .. 63
-       55   22   SZ   A_LO A_HI  [Эхо полезной нагрузки / нули]
+Bytes:  0    1    2    3    4    5 .. 63
+       55   22   SZ   A_LO A_HI  [Payload echo / zeros]
 ```
-На каждый отправленный чанк контроллер отвечает репортом типа `inputreport` с префиксом `0x55` и опкодом `0x22`.
+For every chunk transmitted, the controller sends an `inputreport` with prefix `0x55` and opcode `0x22`.
 
-### 6.4. Верификация семантики слота клавиши A
-- Клавиша `A` расположена в **Slot 50** (Bank 3, Col 2 в Remap-матрице, смещение в буфере `0x00C8` = 200).
-- Данный слот передаётся в **Чанке #3** (адрес `0x00A8` = 168, смещение внутри чанка `+32`).
-- Базовое значение: `00 04 00 02` (USB HID Scancode `0x04` = 'A').
-- Записанное значение: `00 05 00 02` (USB HID Scancode `0x05` = 'B').
-- Байт `0x00C9` изменился с `0x04` на `0x05`. Изменение 100% подтверждено.
-- Среди 84 физических клавиш раскладки ни одна другая клавиша не изменилась.
-- После возврата `B -> A` аппаратный read-back показал нулевой diff относительно исходного состояния.
+### 6.4. Key A Slot Semantic Verification
+- Key `A` is mapped to **Slot 50** (Bank 3, Col 2 in Remap matrix, buffer offset `0x00C8` = 200).
+- This slot is transferred in **Chunk #3** (address `0x00A8` = 168, offset within chunk `+32`).
+- Baseline value: `00 04 00 02` (USB HID Scancode `0x04` = 'A').
+- Written value: `00 05 00 02` (USB HID Scancode `0x05` = 'B').
+- Byte `0x00C9` changed from `0x04` to `0x05`. Mutation is 100% verified.
+- Across all 84 physical keys, no other key was altered.
+- Reverting `B -> A` and executing hardware read-back produced a bit-for-bit identical zero-diff state.
 
 ---
 
-## 7. Классификация статусов исследования
+## 7. Research Status Classification
 
-| Элемент протокола | Статус | Основание |
+| Protocol Element | Status | Evidence Base |
 |:---|:---:|:---|
-| Формат 4-байтовой записи `[prefix, scancode, special, type]` | **`CONFIRMED`** | 100% совпадение с HID Usage Table Page 0x07 в `read_01_initial_load.json` |
-| Длина таблицы (512 байт / 128 слотов) | **`CONFIRMED`** | 10 отчётов (9 $\times$ 56Б + 8Б) в `AA 12`, `AA 16`, `AA 1C` |
-| Соответствие основных клавиш буквенно-цифрового блока | **`CONFIRMED`** | Прямая верификация всех 128 слотов, подтверждено в unit-тестах |
-| Сканкод клавиши Fn (`0xAF`) | **`CONFIRMED`** | Зафиксирован в Bank 5, Col 6 (Slot 86) |
-| Поведение стрелок на Fn-слое (type `0x0D`) | **`CONFIRMED`** | Зафиксировано в `AA 16` на слотах 89..92 |
-| **WRITE Opcode Layer 1 (`AA 22`)** | **`CONFIRMED`** | Зафиксирован в `captures/experiments/remap_write_a_to_b.json` |
-| **Фрейминг записи (10 чанков, без терминатора)** | **`CONFIRMED`** | 10 отчётов HOST $\to$ DEVICE, 10 синхронных ACK `55 22` |
-| **Слот клавиши A (Slot 50, адрес 200)** | **`CONFIRMED`** | Изменение `0x04` $\to$ `0x05` в официальном capture |
-| Назначение таблицы `AA 1C` как Layer 3 (Mac/Alt layer) | **`PROBABLE`** | Байт-в-байт идентична структуре `AA 16` (512 байт, 10 чанков) |
-| Обработка пользовательских макросов через клавиши remap | **`PROBABLE`** | Требует отдельного дампа с привязанным макросом |
-
+| 4-byte record format `[prefix, scancode, special, type]` | **`CONFIRMED`** | 100% match with HID Usage Table Page 0x07 in `read_01_initial_load.json` |
+| Table length (512 bytes / 128 slots) | **`CONFIRMED`** | 10 reports (9 $\times$ 56B + 8B) in `AA 12`, `AA 16`, `AA 1C` |
+| Alphanumeric key mapping | **`CONFIRMED`** | Direct verification across all 128 slots, verified in unit tests |
+| Fn key scancode (`0xAF`) | **`CONFIRMED`** | Verified in Bank 5, Col 6 (Slot 86) |
+| Arrow keys behavior on Fn layer (type `0x0D`) | **`CONFIRMED`** | Verified in `AA 16` across slots 89..92 |
+| **WRITE Opcode Layer 1 (`AA 22`)** | **`CONFIRMED`** | Verified in `captures/experiments/remap_write_a_to_b.json` |
+| **Write Framing (10 chunks, no terminator)** | **`CONFIRMED`** | 10 reports HOST $\to$ DEVICE, 10 synchronous ACKs `55 22` |
+| **Key A Slot (Slot 50, address 200)** | **`CONFIRMED`** | Alteration `0x04` $\to$ `0x05` in official capture |
+| Role of table `AA 1C` as Layer 3 (Mac/Alt layer) | **`PROBABLE`** | Byte-for-byte structural identity with `AA 16` (512B, 10 chunks) |
+| User macro invocation via remap keys | **`PROBABLE`** | Requires targeted capture with bound macro |

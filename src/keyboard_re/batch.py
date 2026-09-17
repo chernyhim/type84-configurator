@@ -369,8 +369,8 @@ class BatchAnalyzer:
         lines = []
 
         # Table 1: Experiments Execution Log
-        lines.append("=== 1. Журнал выполнения экспериментов (Experiment Run Log) ===")
-        lines.append(f"Всего экспериментов: {len(self.outcomes)}")
+        lines.append("=== 1. Experiment Run Log ===")
+        lines.append(f"Total experiments: {len(self.outcomes)}")
         lines.append("-" * 110)
         lines.append(f"{'ID':<18} {'Key':<6} {'Parameter':<18} {'Status':<14} {'Slot:Off':<10} {'Address':<10} {'Diff (Old->New)':<18} {'Notes'}")
         lines.append("-" * 110)
@@ -395,7 +395,7 @@ class BatchAnalyzer:
         lines.append("")
 
         # Table 2: Unified Correlation Table
-        lines.append("=== 2. Сводная таблица корреляций (Key -> Slot -> Byte Offset -> Parameter -> Confidence) ===")
+        lines.append("=== 2. Unified Correlation Table (Key -> Slot -> Byte Offset -> Parameter -> Confidence) ===")
         lines.append("-" * 105)
         lines.append(f"{'Key':<8} {'Slot':<8} {'Bank:Col':<12} {'Offset':<8} {'Address':<10} {'Parameter':<20} {'Confidence':<14} {'Supporting Experiments'}")
         lines.append("-" * 105)
@@ -414,7 +414,7 @@ class BatchAnalyzer:
         lines.append("")
 
         # Table 3: Offset Structure Confidence
-        lines.append("=== 3. Назначение смещений внутри 8-байтного слота ===")
+        lines.append("=== 3. 8-Byte Slot Offset Assignments ===")
         lines.append("-" * 90)
         lines.append(f"{'Offset':<8} {'Parameter':<22} {'Keys Tested':<20} {'Confidence':<14} {'Evidence / Notes'}")
         lines.append("-" * 90)
@@ -430,7 +430,7 @@ class BatchAnalyzer:
             else:
                 conf_str = f"[{ConfidenceLevel.UNKNOWN.value}]"
                 lines.append(
-                    f"+{off:<7} {'[UNKNOWN]':<22} {'-':<20} {conf_str:<14} Не исследовано в экспериментах"
+                    f"+{off:<7} {'[UNKNOWN]':<22} {'-':<20} {conf_str:<14} Not tested in experiments"
                 )
         lines.append("-" * 90)
 
@@ -483,14 +483,14 @@ class BatchAnalyzer:
     def generate_markdown_report(self) -> str:
         """Generate structured markdown report."""
         lines = [
-            "# Отчёт пакетного анализа экспериментов конфигурации",
+            "# Configuration Experiment Batch Analysis Report",
             "",
-            "> **Правило доверия:** Единичный эксперимент даёт статус не выше `PROBABLE`. "
-            "Статус `CONFIRMED` присваивается только при наличии $\\ge 2$ независимых повторяемых подтверждений.",
+            "> **Confidence Rule:** A single experiment yields at most `PROBABLE` status. "
+            "Status `CONFIRMED` is assigned only with $\\ge 2$ independent repeatable confirmations.",
             "",
-            "## 1. Сводная таблица корреляций",
+            "## 1. Summary Correlation Table",
             "",
-            "| Клавиша | Слот | Банк:Колонка | Смещение | Адрес | Параметр | Уверенность (Confidence) | Эксперименты |",
+            "| Key | Slot | Bank:Column | Offset | Address | Parameter | Confidence | Experiments |",
             "| :--- | :---: | :---: | :---: | :---: | :--- | :---: | :--- |",
         ]
 
@@ -503,9 +503,9 @@ class BatchAnalyzer:
 
         lines.extend([
             "",
-            "## 2. Структура 8-байтного слота",
+            "## 2. 8-Byte Slot Structure",
             "",
-            "| Смещение | Параметр | Исследованные клавиши | Статус |",
+            "| Offset | Parameter | Tested Keys | Status |",
             "| :---: | :--- | :--- | :---: |",
         ])
 
@@ -515,6 +515,6 @@ class BatchAnalyzer:
                 keys_s = ", ".join(corr.keys_tested)
                 lines.append(f"| `+{off}` | **{corr.parameter_name}** | {keys_s} | `{corr.confidence.value}` |")
             else:
-                lines.append(f"| `+{off}` | *Неизвестно* | - | `UNKNOWN` |")
+                lines.append(f"| `+{off}` | *Unknown* | - | `UNKNOWN` |")
 
         return "\n".join(lines)
