@@ -11,6 +11,7 @@ from keyboard_re.ui.views.remap_view import KeyRemapView
 from keyboard_re.ui.views.rgb_global_view import RGBGlobalView
 from keyboard_re.ui.views.settings_view import SettingsView
 from keyboard_re.ui.views.status_bar import StatusBarView
+from keyboard_re.ui.views.visualizer_view import VisualizerView
 
 __all__ = [
     "MainWindow",
@@ -21,6 +22,7 @@ __all__ = [
     "MacrosView",
     "SettingsView",
     "StatusBarView",
+    "VisualizerView",
     "ConfirmationDialog",
     "ErrorDialog",
 ]

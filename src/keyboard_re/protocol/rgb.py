@@ -598,7 +598,7 @@ def build_led_buffer(
     Build a 512-byte Per-Key LED buffer (128 slots x 4 bytes).
 
     Slot format confirmed by hardware capture:
-      slot i = [Red (uint8), Green (uint8), Blue (uint8), LED_ID = i (uint8)]
+      slot i = [LED_ID = i (uint8), Red (uint8), Green (uint8), Blue (uint8)]
     """
     buf = bytearray(LED_BUFFER_SIZE)
     color_map: Dict[int, Tuple[int, int, int]] = {}
@@ -613,7 +613,7 @@ def build_led_buffer(
     for i in range(LED_SLOT_COUNT):
         offset = i * LED_SLOT_SIZE
         r, g, b = color_map.get(i, (0, 0, 0))
-        buf[offset : offset + 4] = bytes([r & 0xFF, g & 0xFF, b & 0xFF, i & 0xFF])
+        buf[offset : offset + 4] = bytes([i & 0xFF, r & 0xFF, g & 0xFF, b & 0xFF])
 
     return bytes(buf)
 
@@ -631,7 +631,7 @@ def parse_led_buffer(buffer: bytes | bytearray) -> Dict[int, Tuple[int, int, int
     result: Dict[int, Tuple[int, int, int]] = {}
     for i in range(LED_SLOT_COUNT):
         offset = i * LED_SLOT_SIZE
-        r, g, b, led_id = buffer[offset : offset + 4]
+        led_id, r, g, b = buffer[offset : offset + 4]
         if led_id != i:
             raise ValueError(
                 f"Slot #{i}: LED_ID mismatch, expected {i} (0x{i:02X}), got {led_id} (0x{led_id:02X})"

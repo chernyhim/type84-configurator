@@ -156,7 +156,7 @@ class KeyRemapView(ctk.CTkFrame):
         self.selected_target_scancode: Optional[int] = None
         self.selected_target_name: Optional[str] = None
 
-        self.grid_columnconfigure(0, weight=0)
+        self.grid_columnconfigure(0, weight=0, minsize=320)
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
@@ -200,9 +200,8 @@ class KeyRemapView(ctk.CTkFrame):
         # ---------------------------------------------------------------------
         # Left Column: Selected Physical Key Card
         # ---------------------------------------------------------------------
-        self.left_col = ctk.CTkFrame(self, width=320, fg_color=("#e4e4e7", "#27272a"), corner_radius=6)
+        self.left_col = ctk.CTkFrame(self, fg_color=("#e4e4e7", "#27272a"), corner_radius=6)
         self.left_col.grid(row=1, column=0, padx=(15, 8), pady=6, sticky="nsew")
-        self.left_col.grid_propagate(False)
 
         card_title = ctk.CTkLabel(
             self.left_col,

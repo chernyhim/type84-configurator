@@ -169,12 +169,12 @@ class TestRGBPerKeyProtocol(unittest.TestCase):
         buf = build_led_buffer(colors)
         self.assertEqual(len(buf), 512)
 
-        # Check slot 0: [255, 0, 0, 0]
-        self.assertEqual(buf[0:4], bytes([255, 0, 0, 0]))
-        # Check slot 35: [0, 255, 0, 35]
-        self.assertEqual(buf[35 * 4 : 36 * 4], bytes([0, 255, 0, 35]))
-        # Check unconfigured slot 1: [0, 0, 0, 1]
-        self.assertEqual(buf[4:8], bytes([0, 0, 0, 1]))
+        # Check slot 0: [0, 255, 0, 0]
+        self.assertEqual(buf[0:4], bytes([0, 255, 0, 0]))
+        # Check slot 35: [35, 0, 255, 0]
+        self.assertEqual(buf[35 * 4 : 36 * 4], bytes([35, 0, 255, 0]))
+        # Check unconfigured slot 1: [1, 0, 0, 0]
+        self.assertEqual(buf[4:8], bytes([1, 0, 0, 0]))
 
         # Parse back
         parsed_colors = parse_led_buffer(buf)

@@ -253,23 +253,24 @@ class TestBug2RgbPyPerKeyOffset:
         assert pkt0[0] == 0xAA
         assert pkt0[1] == 0x24
         assert pkt0[2] == 0x38
-        # R=255 of slot 0 should be at offset 8 in the canonical wire layout.
-        # BUG-2: current implementation places it at offset 5.
-        r_at5 = pkt0[5]
-        r_at8 = pkt0[8]
-        if r_at5 == 255 and r_at8 != 255:
-            # Bug is present: payload starts at offset 5
+        # In canonical wire layout, payload starts at offset 8:
+        # Slot 0 = [LED_ID=0, R=255, G=0, B=0].
+        # BUG-2: legacy bug placed payload at offset 5.
+        slot0_at5 = pkt0[5:9]
+        slot0_at8 = pkt0[8:12]
+        expected_slot0 = bytes([0, 255, 0, 0])
+        if slot0_at5 == expected_slot0 and slot0_at8 != expected_slot0:
             pytest.fail(
-                f"BUG-2 CONFIRMED: build_rgb_per_key_chunks places slot-0 R=255 "
-                f"at offset 5 (found {r_at5}), not offset 8 (found {r_at8}). "
+                f"BUG-2 CONFIRMED: build_rgb_per_key_chunks places slot-0 "
+                f"at offset 5 (found {slot0_at5.hex()}), not offset 8 (found {slot0_at8.hex()}). "
                 "Payload must start at byte 8 in the canonical HID frame."
             )
-        elif r_at8 == 255 and r_at5 != 255:
+        elif slot0_at8 == expected_slot0:
             # Bug is fixed
             pass
         else:
             pytest.fail(
-                f"Unexpected wire layout: r@5={r_at5}, r@8={r_at8}. "
+                f"Unexpected wire layout: slot0@5={slot0_at5.hex()}, slot0@8={slot0_at8.hex()}. "
                 "Cannot determine offset position."
             )
 
