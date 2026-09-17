@@ -1,0 +1,129 @@
+{
+  "version": "1.0",
+  "description": "План серии реальных экспериментов для верификации матрицы Type 84 и структуры 8-байтного слота",
+  "experiments": [
+    {
+      "id": "exp_01_key_s_actuation",
+      "base_capture": "captures/key_s_139mm.json",
+      "experimental_capture": "captures/key_s_139mm.json",
+      "base_session": 0,
+      "exp_session": 1,
+      "key_name": "S",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша S (подтверждённый реальный capture: Bank 3, Slot 50, Offset +5)"
+    },
+    {
+      "id": "exp_02_key_f_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_f_139mm.json",
+      "key_name": "F",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша F: гипотеза Slot 52 (Bank 3, Col 4, addr 0x01A5)"
+    },
+    {
+      "id": "exp_03_key_q_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_q_139mm.json",
+      "key_name": "Q",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Q: гипотеза Slot 33 (Bank 2, Col 1, addr 0x010D)"
+    },
+    {
+      "id": "exp_04_key_z_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_z_139mm.json",
+      "key_name": "Z",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Z: гипотеза Slot 65 (Bank 4, Col 1, addr 0x020D)"
+    },
+    {
+      "id": "exp_05_key_enter_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_enter_139mm.json",
+      "key_name": "Enter",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Enter: гипотеза Slot 60 (Bank 3, Col 12, addr 0x01E5)"
+    },
+    {
+      "id": "exp_06_key_space_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_space_139mm.json",
+      "key_name": "Space",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Space: гипотеза Slot 84/85 (Bank 5, Col 4/5, addr 0x02A5/0x02AD)"
+    },
+    {
+      "id": "exp_07_key_left_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_left_139mm.json",
+      "key_name": "Left",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Left: гипотеза Slot 90 (Bank 5, Col 10, addr 0x02D5)"
+    },
+    {
+      "id": "exp_08_key_down_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_down_139mm.json",
+      "key_name": "Down",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Down: гипотеза Slot 91 (Bank 5, Col 11, addr 0x02DD)"
+    },
+    {
+      "id": "exp_09_key_right_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_right_139mm.json",
+      "key_name": "Right",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Клавиша Right: гипотеза Slot 92 (Bank 5, Col 12, addr 0x02E5)"
+    },
+    {
+      "id": "exp_10_key_s_rt_press",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/experiments/key_s_rt_press.json",
+      "key_name": "S",
+      "parameter_name": "RT Press",
+      "old_value": "0.10mm",
+      "new_value": "0.20mm",
+      "description": "Структура слота: изменение чувствительности нажатия Rapid Trigger на клавише S (Слот 50)"
+    },
+    {
+      "id": "exp_11_key_s_rt_release",
+      "base_capture": "captures/experiments/key_s_rt_press.json",
+      "experimental_capture": "captures/experiments/key_s_rt_release.json",
+      "base_session": -1,
+      "key_name": "S",
+      "parameter_name": "RT Release",
+      "old_value": "0.20mm",
+      "new_value": "0.10mm",
+      "description": "Структура слота: изменение чувствительности отпускания Rapid Trigger на клавише S"
+    },
+    {
+      "id": "exp_12_key_s_rt_toggle",
+      "base_capture": "captures/experiments/key_s_rt_release.json",
+      "experimental_capture": "captures/experiments/key_s_rt_toggle.json",
+      "key_name": "S",
+      "parameter_name": "RT Enable",
+      "old_value": "On",
+      "new_value": "Off",
+      "description": "Структура слота: переключение тумблера Rapid Trigger на клавише S (Слот 50)"
+    }
+  ]
+}

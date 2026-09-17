@@ -1,0 +1,39 @@
+{
+  "timestamp_start": 1789551086.1272268,
+  "device": "IO by Red Square Type 84 Magnetic Black (0x0C45:0x80D6)",
+  "subsystem": "remap_l2",
+  "write_opcode": "0x26",
+  "read_opcode": "0x16",
+  "slot_target": 34,
+  "steps": {},
+  "verifications": {},
+  "baseline": {
+    "l2_sha": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+    "dfn_sha": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+    "l1_sha": "4f0d062657b34f43059d579b5615a113d3958fffb1bd86e44cb23a4c1cb53b6d",
+    "slot34": "02001a00"
+  },
+  "target_write": {
+    "packets_sent": 10,
+    "acks_received": 10,
+    "target_sha": "23a718ed451102c83630eff405c237935b26cffc8375f66c6063a4bd7b5409cc"
+  },
+  "rollback_write": {
+    "packets_sent": 10,
+    "acks_received": 10
+  },
+  "final": {
+    "l2_sha": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+    "dfn_sha": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+    "l1_sha": "4f0d062657b34f43059d579b5615a113d3958fffb1bd86e44cb23a4c1cb53b6d",
+    "opcode_counts": {
+      "AA 16": 30,
+      "AA 1C": 30,
+      "AA 12": 30,
+      "AA 26": 20
+    },
+    "forbidden_attempts": 0,
+    "success": true
+  },
+  "timestamp_end": 1789551086.8692977
+}

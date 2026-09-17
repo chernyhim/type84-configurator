@@ -1,0 +1,4 @@
+[console_scripts]
+kb-re = keyboard_re.cli:main
+keyboard-re = keyboard_re.cli:main
+type84-gui = keyboard_re.ui.app:main

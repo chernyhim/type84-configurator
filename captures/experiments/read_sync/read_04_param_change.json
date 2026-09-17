@@ -1,0 +1,2660 @@
+{
+  "version": "2.0",
+  "target": "https://web.io.vision/",
+  "captured_at": "2026-09-14T12:08:57.346Z",
+  "description": "Single param change",
+  "devices_count": 3,
+  "devices": [
+    {
+      "id": "dev_0",
+      "vendor_id": "0x0C45",
+      "product_id": "0x80D6",
+      "product_name": "IO Type 84 Magnetic Black",
+      "opened": false,
+      "collections": [
+        {
+          "usage_page": "0xFF67",
+          "usage": "0x0061",
+          "type": 1,
+          "output_report_ids": [
+            0
+          ],
+          "feature_report_ids": [
+            0
+          ],
+          "input_report_ids": []
+        }
+      ]
+    },
+    {
+      "id": "dev_1",
+      "vendor_id": "0x0C45",
+      "product_id": "0x80D6",
+      "product_name": "IO Type 84 Magnetic Black",
+      "opened": false,
+      "collections": [
+        {
+          "usage_page": "0x000C",
+          "usage": "0x0001",
+          "type": 1,
+          "output_report_ids": [],
+          "feature_report_ids": [],
+          "input_report_ids": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dev_2",
+      "vendor_id": "0x0C45",
+      "product_id": "0x80D6",
+      "product_name": "IO Type 84 Magnetic Black",
+      "opened": false,
+      "collections": [
+        {
+          "usage_page": "0xFF68",
+          "usage": "0x0061",
+          "type": 1,
+          "output_report_ids": [
+            0
+          ],
+          "feature_report_ids": [],
+          "input_report_ids": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "events_count": 38,
+  "events": [
+    {
+      "index": 0,
+      "timestamp_ms": 14875.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 1,
+      "timestamp_ms": 14894.2,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 2,
+      "timestamp_ms": 14895,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738380000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c00000000000000000000000000"
+    },
+    {
+      "index": 3,
+      "timestamp_ms": 14913.4,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738380000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c00000000000000000000000000"
+    },
+    {
+      "index": 4,
+      "timestamp_ms": 14914.4,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa273870000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 5,
+      "timestamp_ms": 14932.5,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "55273870000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 6,
+      "timestamp_ms": 14933.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738a80000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 7,
+      "timestamp_ms": 14951.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738a80000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 8,
+      "timestamp_ms": 14952,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738e00000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 9,
+      "timestamp_ms": 14971.5,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738e00000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 10,
+      "timestamp_ms": 14972,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738180100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 11,
+      "timestamp_ms": 14990.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738180100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 12,
+      "timestamp_ms": 14991.2,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738500100000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000008c0000000000"
+    },
+    {
+      "index": 13,
+      "timestamp_ms": 15009.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738500100000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000008c0000000000"
+    },
+    {
+      "index": 14,
+      "timestamp_ms": 15010.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738880100000000008c000000000000008d000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 15,
+      "timestamp_ms": 15028.8,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738880100000000008c000000000000008d000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 16,
+      "timestamp_ms": 15029.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738c00100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 17,
+      "timestamp_ms": 15047.9,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738c00100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 18,
+      "timestamp_ms": 15048.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738f801000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 19,
+      "timestamp_ms": 15080,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738f801000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 20,
+      "timestamp_ms": 15080.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738300200000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 21,
+      "timestamp_ms": 15097.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738300200000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 22,
+      "timestamp_ms": 15098,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738680200000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 23,
+      "timestamp_ms": 15115.1,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738680200000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 24,
+      "timestamp_ms": 15115.7,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738a00200000000008c000000000000008c0000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 25,
+      "timestamp_ms": 15134.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738a00200000000008c000000000000008c0000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 26,
+      "timestamp_ms": 15135.4,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738d80200000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 27,
+      "timestamp_ms": 15153.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738d80200000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 28,
+      "timestamp_ms": 15154.2,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa27381003000000000000000000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 29,
+      "timestamp_ms": 15172.9,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "5527381003000000000000000000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 30,
+      "timestamp_ms": 15173.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738480300000000008c000000000000008c000000000000008c000000000000008c0000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 31,
+      "timestamp_ms": 15192.2,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738480300000000008c000000000000008c000000000000008c000000000000008c0000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 32,
+      "timestamp_ms": 15192.8,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa273880030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 33,
+      "timestamp_ms": 15211.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "55273880030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 34,
+      "timestamp_ms": 15212.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738b8030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 35,
+      "timestamp_ms": 15230.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738b8030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 36,
+      "timestamp_ms": 15231.1,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2710f0030001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 37,
+      "timestamp_ms": 15250.4,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552710f0030001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "reports_count": 38,
+  "reports": [
+    {
+      "index": 0,
+      "timestamp_ms": 14875.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 1,
+      "timestamp_ms": 14894.2,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 2,
+      "timestamp_ms": 14895,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738380000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c00000000000000000000000000"
+    },
+    {
+      "index": 3,
+      "timestamp_ms": 14913.4,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738380000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c00000000000000000000000000"
+    },
+    {
+      "index": 4,
+      "timestamp_ms": 14914.4,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa273870000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 5,
+      "timestamp_ms": 14932.5,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "55273870000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 6,
+      "timestamp_ms": 14933.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738a80000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 7,
+      "timestamp_ms": 14951.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738a80000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 8,
+      "timestamp_ms": 14952,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738e00000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 9,
+      "timestamp_ms": 14971.5,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738e00000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 10,
+      "timestamp_ms": 14972,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738180100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 11,
+      "timestamp_ms": 14990.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738180100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 12,
+      "timestamp_ms": 14991.2,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738500100000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000008c0000000000"
+    },
+    {
+      "index": 13,
+      "timestamp_ms": 15009.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738500100000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000008c0000000000"
+    },
+    {
+      "index": 14,
+      "timestamp_ms": 15010.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738880100000000008c000000000000008d000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 15,
+      "timestamp_ms": 15028.8,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738880100000000008c000000000000008d000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 16,
+      "timestamp_ms": 15029.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738c00100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 17,
+      "timestamp_ms": 15047.9,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738c00100000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 18,
+      "timestamp_ms": 15048.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738f801000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 19,
+      "timestamp_ms": 15080,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738f801000000000000000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 20,
+      "timestamp_ms": 15080.5,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738300200000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 21,
+      "timestamp_ms": 15097.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738300200000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 22,
+      "timestamp_ms": 15098,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738680200000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 23,
+      "timestamp_ms": 15115.1,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738680200000000000000000000000000000000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 24,
+      "timestamp_ms": 15115.7,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738a00200000000008c000000000000008c0000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 25,
+      "timestamp_ms": 15134.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738a00200000000008c000000000000008c0000000000000000000000000000008c000000000000008c000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 26,
+      "timestamp_ms": 15135.4,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738d80200000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 27,
+      "timestamp_ms": 15153.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738d80200000000008c000000000000008c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 28,
+      "timestamp_ms": 15154.2,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa27381003000000000000000000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 29,
+      "timestamp_ms": 15172.9,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "5527381003000000000000000000000000008c000000000000000000000000000000000000000000000000000000000000008c000000000000008c0000000000"
+    },
+    {
+      "index": 30,
+      "timestamp_ms": 15173.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738480300000000008c000000000000008c000000000000008c000000000000008c0000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 31,
+      "timestamp_ms": 15192.2,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738480300000000008c000000000000008c000000000000008c000000000000008c0000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 32,
+      "timestamp_ms": 15192.8,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa273880030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 33,
+      "timestamp_ms": 15211.7,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "55273880030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 34,
+      "timestamp_ms": 15212.3,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2738b8030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 35,
+      "timestamp_ms": 15230.6,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552738b8030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 36,
+      "timestamp_ms": 15231.1,
+      "direction": "HOST -> DEVICE",
+      "event_type": "sendReport",
+      "report_type": "output",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "aa2710f0030001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 37,
+      "timestamp_ms": 15250.4,
+      "direction": "DEVICE -> HOST",
+      "event_type": "inputreport",
+      "report_type": "input",
+      "device_id": "dev_2",
+      "device": {
+        "id": "dev_2",
+        "vendor_id": "0x0C45",
+        "product_id": "0x80D6",
+        "product_name": "IO Type 84 Magnetic Black",
+        "opened": false,
+        "collections": [
+          {
+            "usage_page": "0xFF68",
+            "usage": "0x0061",
+            "type": 1,
+            "output_report_ids": [
+              0
+            ],
+            "feature_report_ids": [],
+            "input_report_ids": [
+              0
+            ]
+          }
+        ]
+      },
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "report_id": 0,
+      "length": 64,
+      "data_hex": "552710f0030001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

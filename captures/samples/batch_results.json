@@ -1,0 +1,131 @@
+{
+  "total_experiments": 3,
+  "outcomes": [
+    {
+      "id": "exp_key_a_actuation",
+      "key_name": "A",
+      "parameter": "Actuation Point",
+      "status": "ISOLATED_OK",
+      "detected_slot": 49,
+      "detected_offset": 5,
+      "detected_address": "0x018D",
+      "old_byte": "0x8C",
+      "new_byte": "0x8B",
+      "delta": -1,
+      "error": null
+    },
+    {
+      "id": "exp_key_s_actuation",
+      "key_name": "S",
+      "parameter": "Actuation Point",
+      "status": "ISOLATED_OK",
+      "detected_slot": 50,
+      "detected_offset": 5,
+      "detected_address": "0x0195",
+      "old_byte": "0x8C",
+      "new_byte": "0x8B",
+      "delta": -1,
+      "error": null
+    },
+    {
+      "id": "exp_key_d_actuation",
+      "key_name": "D",
+      "parameter": "Actuation Point",
+      "status": "ISOLATED_OK",
+      "detected_slot": 51,
+      "detected_offset": 5,
+      "detected_address": "0x019D",
+      "old_byte": "0x8C",
+      "new_byte": "0x8B",
+      "delta": -1,
+      "error": null
+    }
+  ],
+  "correlations": [
+    {
+      "key": "A",
+      "slot_index": 49,
+      "bank_index": 3,
+      "column_index": 1,
+      "byte_offset": 5,
+      "absolute_address": "0x018D",
+      "parameter": "Actuation Point",
+      "confidence": "PROBABLE",
+      "experiments": [
+        "exp_key_a_actuation"
+      ]
+    },
+    {
+      "key": "S",
+      "slot_index": 50,
+      "bank_index": 3,
+      "column_index": 2,
+      "byte_offset": 5,
+      "absolute_address": "0x0195",
+      "parameter": "Actuation Point",
+      "confidence": "PROBABLE",
+      "experiments": [
+        "exp_key_s_actuation"
+      ]
+    },
+    {
+      "key": "D",
+      "slot_index": 51,
+      "bank_index": 3,
+      "column_index": 3,
+      "byte_offset": 5,
+      "absolute_address": "0x019D",
+      "parameter": "Actuation Point",
+      "confidence": "PROBABLE",
+      "experiments": [
+        "exp_key_d_actuation"
+      ]
+    }
+  ],
+  "slot_offsets": {
+    "+0": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+1": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+2": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+3": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+4": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+5": {
+      "parameter": "Actuation Point",
+      "confidence": "CONFIRMED",
+      "keys_tested": [
+        "A",
+        "D",
+        "S"
+      ]
+    },
+    "+6": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    },
+    "+7": {
+      "parameter": null,
+      "confidence": "UNKNOWN",
+      "keys_tested": []
+    }
+  }
+}

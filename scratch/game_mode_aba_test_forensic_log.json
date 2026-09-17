@@ -1,0 +1,36 @@
+{
+  "test_name": "Game Mode Physical ABA Test (AA 21)",
+  "start_time": 1789561559.0784705,
+  "target_mutation": "stability_mode: 1 -> 0 -> 1",
+  "baseline": {
+    "game_mode_sha256": "fa06bd4037a3be8576bc3e1bf58a1bd95011e5e9bf8f2c896e4d2bf8aa60b1d1",
+    "remap_l1_sha256": "8c0173ff74e3ca10109fd0c61c194b33dd5faf0171a174dd38c399bf72270d01",
+    "remap_l2_sha256": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+    "dks_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+    "stability_mode": 1
+  },
+  "target_write": {
+    "target_sha256": "7a262f9930de3c03d26edd2db7201a78b01f6e7e390a1b2e217553f8fec5ca2b",
+    "diff_offsets": [
+      11
+    ],
+    "ack_prefix": "55 21 38 00 00 00 01 00"
+  },
+  "rollback_write": {
+    "restore_ack_prefix": "55 21 38 00 00 00 01 00"
+  },
+  "final_readback": {
+    "final_sha256": "fa06bd4037a3be8576bc3e1bf58a1bd95011e5e9bf8f2c896e4d2bf8aa60b1d1",
+    "matches_baseline": true
+  },
+  "opcode_counts": {
+    "AA 11": 3,
+    "AA 12": 30,
+    "AA 16": 30,
+    "AA 18": 57,
+    "AA 21": 2
+  },
+  "forbidden_attempts": 0,
+  "status": "PASSED",
+  "end_time": 1789561559.628194
+}

@@ -1,0 +1,23 @@
+{
+  "final_global_sha256": "42e0806e81f61393adaa926af2c66ed44e5f1de81d65e6120beb071f8308a30d",
+  "final_matrix_sha256": "b78deb596d84aa22d84d53a3fce1e39c064f6a2d6a21e874f3ab9297d4cac36e",
+  "expected_global_sha256": "42e0806e81f61393adaa926af2c66ed44e5f1de81d65e6120beb071f8308a30d",
+  "expected_matrix_sha256": "b78deb596d84aa22d84d53a3fce1e39c064f6a2d6a21e874f3ab9297d4cac36e",
+  "global_match": true,
+  "matrix_match": true,
+  "global_diff_bytes": 0,
+  "matrix_diff_bytes": 0,
+  "final_effect": 15,
+  "final_primary": [
+    255,
+    255,
+    255
+  ],
+  "final_color_mode": 1,
+  "final_slot_35_rgb": [
+    0,
+    0,
+    0
+  ],
+  "final_slot_35_lid": 35
+}

@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-09-16 00:11:22",
+  "phases": {
+    "phase_0_baseline": {
+      "global_sha256": "42e0806e81f61393adaa926af2c66ed44e5f1de81d65e6120beb071f8308a30d",
+      "matrix_sha256": "b78deb596d84aa22d84d53a3fce1e39c064f6a2d6a21e874f3ab9297d4cac36e",
+      "global_raw_hex": "55131000000001000fffffff00000000010505000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "effect": 15,
+      "effect_name": "Ripple Spread",
+      "primary": [
+        255,
+        255,
+        255
+      ],
+      "color_mode": 1,
+      "brightness": 5,
+      "speed": 5,
+      "slot_35_initial": {
+        "rgb": [
+          0,
+          0,
+          0
+        ],
+        "led_id": 35
+      }
+    },
+    "phase_1_prep": {
+      "matrix_diff": {
+        "35": [
+          [
+            255,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "plan_packets": 11,
+      "global_diff_summary": "4 parameter(s) modified",
+      "matrix_diff_summary": "1 LED color(s) modified"
+    }
+  },
+  "summary": {}
+}

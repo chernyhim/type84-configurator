@@ -1,0 +1,590 @@
+[
+  {
+    "className": "",
+    "value": 0,
+    "name": "Esc",
+    "keyCode": 41,
+    "key": "Escape"
+  },
+  {
+    "className": "ml-auto",
+    "value": 1,
+    "name": "F1",
+    "keyCode": 58,
+    "key": "F1"
+  },
+  {
+    "className": "",
+    "value": 2,
+    "name": "F2",
+    "keyCode": 59,
+    "key": "F2"
+  },
+  {
+    "className": "",
+    "value": 3,
+    "name": "F3",
+    "keyCode": 60,
+    "key": "F3"
+  },
+  {
+    "className": "",
+    "value": 4,
+    "name": "F4",
+    "keyCode": 61,
+    "key": "F4"
+  },
+  {
+    "className": "ml-auto",
+    "value": 5,
+    "name": "F5",
+    "keyCode": 62,
+    "key": "F5"
+  },
+  {
+    "className": "",
+    "value": 6,
+    "name": "F6",
+    "keyCode": 63,
+    "key": "F6"
+  },
+  {
+    "className": "",
+    "value": 7,
+    "name": "F7",
+    "keyCode": 64,
+    "key": "F7"
+  },
+  {
+    "className": "",
+    "value": 8,
+    "name": "F8",
+    "keyCode": 65,
+    "key": "F8"
+  },
+  {
+    "className": "ml-auto",
+    "value": 9,
+    "name": "F9",
+    "keyCode": 66,
+    "key": "F9"
+  },
+  {
+    "className": "",
+    "value": 10,
+    "name": "F10",
+    "keyCode": 67,
+    "key": "F10"
+  },
+  {
+    "className": "",
+    "value": 11,
+    "name": "F11",
+    "keyCode": 68,
+    "key": "F11"
+  },
+  {
+    "className": "",
+    "value": 12,
+    "name": "F12",
+    "keyCode": 69,
+    "key": "F12"
+  },
+  {
+    "className": "ml-auto",
+    "value": 99,
+    "name": "Print",
+    "keyCode": 70,
+    "key": "PrintScreen"
+  },
+  {
+    "className": "ml-5",
+    "value": 104,
+    "name": "Home",
+    "keyCode": 74,
+    "key": "Home"
+  },
+  {
+    "className": "",
+    "value": 107,
+    "name": "End",
+    "keyCode": 77,
+    "key": "End"
+  },
+  {
+    "className": "",
+    "value": 16,
+    "name": "` ~",
+    "keyCode": 53,
+    "key": "Backquote"
+  },
+  {
+    "className": "",
+    "value": 17,
+    "name": "1 !",
+    "keyCode": 30,
+    "key": "Digit1"
+  },
+  {
+    "className": "",
+    "value": 18,
+    "name": "2 @",
+    "keyCode": 31,
+    "key": "Digit2"
+  },
+  {
+    "className": "",
+    "value": 19,
+    "name": "3 #",
+    "keyCode": 32,
+    "key": "Digit3"
+  },
+  {
+    "className": "",
+    "value": 20,
+    "name": "4 $",
+    "keyCode": 33,
+    "key": "Digit4"
+  },
+  {
+    "className": "",
+    "value": 21,
+    "name": "5 %",
+    "keyCode": 34,
+    "key": "Digit5"
+  },
+  {
+    "className": "",
+    "value": 22,
+    "name": "6 ^",
+    "keyCode": 35,
+    "key": "Digit6"
+  },
+  {
+    "className": "",
+    "value": 23,
+    "name": "7 &",
+    "keyCode": 36,
+    "key": "Digit7"
+  },
+  {
+    "className": "",
+    "value": 24,
+    "name": "8 *",
+    "keyCode": 37,
+    "key": "Digit8"
+  },
+  {
+    "className": "",
+    "value": 25,
+    "name": "9 (",
+    "keyCode": 38,
+    "key": "Digit9"
+  },
+  {
+    "className": "",
+    "value": 26,
+    "name": "0 )",
+    "keyCode": 39,
+    "key": "Digit0"
+  },
+  {
+    "className": "",
+    "value": 27,
+    "name": "ˉ -",
+    "keyCode": 45,
+    "key": "Minus"
+  },
+  {
+    "className": "",
+    "value": 28,
+    "name": "= +",
+    "keyCode": 46,
+    "key": "Equal"
+  },
+  {
+    "className": "flex-1",
+    "value": 92,
+    "name": "Back",
+    "keyCode": 42,
+    "key": "Backspace"
+  },
+  {
+    "className": "ml-5",
+    "value": 103,
+    "name": "Ins",
+    "keyCode": 73,
+    "key": "Insert"
+  },
+  {
+    "className": "",
+    "value": 105,
+    "name": "PgUp",
+    "keyCode": 75,
+    "key": "PageUp"
+  },
+  {
+    "className": "w-22",
+    "value": 32,
+    "name": "Tab",
+    "keyCode": 43,
+    "key": "Tab"
+  },
+  {
+    "className": "",
+    "value": 33,
+    "name": "Q",
+    "keyCode": 20,
+    "key": "KeyQ"
+  },
+  {
+    "className": "",
+    "value": 34,
+    "name": "W",
+    "keyCode": 26,
+    "key": "KeyW"
+  },
+  {
+    "className": "",
+    "value": 35,
+    "name": "E",
+    "keyCode": 8,
+    "key": "KeyE"
+  },
+  {
+    "className": "",
+    "value": 36,
+    "name": "R",
+    "keyCode": 21,
+    "key": "KeyR"
+  },
+  {
+    "className": "",
+    "value": 37,
+    "name": "T",
+    "keyCode": 23,
+    "key": "KeyT"
+  },
+  {
+    "className": "",
+    "value": 38,
+    "name": "Y",
+    "keyCode": 28,
+    "key": "KeyY"
+  },
+  {
+    "className": "",
+    "value": 39,
+    "name": "U",
+    "keyCode": 24,
+    "key": "KeyU"
+  },
+  {
+    "className": "",
+    "value": 40,
+    "name": "I",
+    "keyCode": 12,
+    "key": "KeyI"
+  },
+  {
+    "className": "",
+    "value": 41,
+    "name": "O",
+    "keyCode": 18,
+    "key": "KeyO"
+  },
+  {
+    "className": "",
+    "value": 42,
+    "name": "P",
+    "keyCode": 19,
+    "key": "KeyP"
+  },
+  {
+    "className": "",
+    "value": 43,
+    "name": "[ {",
+    "keyCode": 47,
+    "key": "BracketLeft"
+  },
+  {
+    "className": "",
+    "value": 44,
+    "name": "] }",
+    "keyCode": 48,
+    "key": "BracketRight"
+  },
+  {
+    "className": "w-23",
+    "value": 60,
+    "name": "\\ | ",
+    "keyCode": 49,
+    "key": "Backslash"
+  },
+  {
+    "className": "ml-5",
+    "value": 106,
+    "name": "Del",
+    "keyCode": 76,
+    "key": "Delete"
+  },
+  {
+    "className": "",
+    "value": 108,
+    "name": "PgDn",
+    "keyCode": 78,
+    "key": "PageDown"
+  },
+  {
+    "className": "w-27",
+    "value": 48,
+    "name": "Caps",
+    "keyCode": 57,
+    "key": "CapsLock"
+  },
+  {
+    "className": "",
+    "value": 49,
+    "name": "A",
+    "keyCode": 4,
+    "key": "KeyA"
+  },
+  {
+    "className": "",
+    "value": 50,
+    "name": "S",
+    "keyCode": 22,
+    "key": "KeyS"
+  },
+  {
+    "className": "",
+    "value": 51,
+    "name": "D",
+    "keyCode": 7,
+    "key": "KeyD"
+  },
+  {
+    "className": "",
+    "value": 52,
+    "name": "F",
+    "keyCode": 9,
+    "key": "KeyF"
+  },
+  {
+    "className": "",
+    "value": 53,
+    "name": "G",
+    "keyCode": 10,
+    "key": "KeyG"
+  },
+  {
+    "className": "",
+    "value": 54,
+    "name": "H",
+    "keyCode": 11,
+    "key": "KeyH"
+  },
+  {
+    "className": "",
+    "value": 55,
+    "name": "J",
+    "keyCode": 13,
+    "key": "KeyJ"
+  },
+  {
+    "className": "",
+    "value": 56,
+    "name": "K",
+    "keyCode": 14,
+    "key": "KeyK"
+  },
+  {
+    "className": "",
+    "value": 57,
+    "name": "L",
+    "keyCode": 15,
+    "key": "KeyL"
+  },
+  {
+    "className": "",
+    "value": 58,
+    "name": "; :",
+    "keyCode": 51,
+    "key": "Semicolon"
+  },
+  {
+    "className": "",
+    "value": 59,
+    "name": "' \"",
+    "keyCode": 52,
+    "key": "Quote"
+  },
+  {
+    "className": "w-33 mr-auto",
+    "value": 76,
+    "name": "Enter",
+    "keyCode": 40,
+    "key": "Enter"
+  },
+  {
+    "className": "w-34",
+    "value": 64,
+    "name": "L-Shift",
+    "keyCode": 225,
+    "key": "ShiftLeft"
+  },
+  {
+    "className": "",
+    "value": 65,
+    "name": "Z",
+    "keyCode": 29,
+    "key": "KeyZ"
+  },
+  {
+    "className": "",
+    "value": 66,
+    "name": "X",
+    "keyCode": 27,
+    "key": "KeyX"
+  },
+  {
+    "className": "",
+    "value": 67,
+    "name": "C",
+    "keyCode": 6,
+    "key": "KeyC"
+  },
+  {
+    "className": "",
+    "value": 68,
+    "name": "V",
+    "keyCode": 25,
+    "key": "KeyV"
+  },
+  {
+    "className": "",
+    "value": 69,
+    "name": "B",
+    "keyCode": 5,
+    "key": "KeyB"
+  },
+  {
+    "className": "",
+    "value": 70,
+    "name": "N",
+    "keyCode": 17,
+    "key": "KeyN"
+  },
+  {
+    "className": "",
+    "value": 71,
+    "name": "M",
+    "keyCode": 16,
+    "key": "KeyM"
+  },
+  {
+    "className": "",
+    "value": 72,
+    "name": ", <",
+    "keyCode": 54,
+    "key": "Comma"
+  },
+  {
+    "className": "",
+    "value": 73,
+    "name": ". >",
+    "keyCode": 55,
+    "key": "Period"
+  },
+  {
+    "className": "",
+    "value": 74,
+    "name": "/ ?",
+    "keyCode": 56,
+    "key": "Slash"
+  },
+  {
+    "className": "flex-1",
+    "value": 75,
+    "name": "R-Shift",
+    "keyCode": 229,
+    "key": "ShiftRight"
+  },
+  {
+    "className": "mr-15 ml-4",
+    "value": 90,
+    "name": "↑",
+    "keyCode": 82,
+    "key": "ArrowUp"
+  },
+  {
+    "className": "w-18",
+    "value": 80,
+    "name": "L-Ctrl",
+    "keyCode": 224,
+    "key": "ControlLeft"
+  },
+  {
+    "className": "w-18",
+    "value": 81,
+    "name": "L-Win",
+    "keyCode": 227,
+    "key": "MetaLeft"
+  },
+  {
+    "className": "w-18",
+    "value": 82,
+    "name": "L-Alt",
+    "keyCode": 226,
+    "key": "AltLeft"
+  },
+  {
+    "className": "flex-1",
+    "value": 83,
+    "name": "Spacebar",
+    "keyCode": 44,
+    "key": "Space"
+  },
+  {
+    "className": "",
+    "value": 84,
+    "name": "R-Alt",
+    "keyCode": 230,
+    "key": "AltRight"
+  },
+  {
+    "className": "",
+    "value": 85,
+    "name": "Fn",
+    "keyCode": 175,
+    "key": "-1"
+  },
+  {
+    "className": "",
+    "value": 87,
+    "name": "R-Ctrl",
+    "keyCode": 228,
+    "key": "ControlRight"
+  },
+  {
+    "className": "ml-5",
+    "value": 88,
+    "name": "←",
+    "keyCode": 80,
+    "key": "ArrowLeft"
+  },
+  {
+    "className": "",
+    "value": 89,
+    "name": "↓",
+    "keyCode": 81,
+    "key": "ArrowDown"
+  },
+  {
+    "className": "",
+    "value": 91,
+    "name": "→",
+    "keyCode": 79,
+    "key": "ArrowRight"
+  }
+]

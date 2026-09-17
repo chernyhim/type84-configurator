@@ -1,0 +1,57 @@
+{
+  "test": "Physical Hall/RT ABA (RT OFF -> RT ON -> RT OFF)",
+  "timestamp": "2026-09-16T19:18:21",
+  "steps": [
+    {
+      "step": 1,
+      "name": "baseline_verification",
+      "hall_sha256": "4a7f0fd152910ed6a13afe17576d75a8041e6b9b1bd486ff9518fd719a541d09",
+      "key_s_raw": "00 00 78 00 00 00 00 00",
+      "key_s_vendor_js": {
+        "axisType": 0,
+        "flags": 0,
+        "isWholeFast": false,
+        "isRampageMode": false,
+        "triggerKeyStroke_mm": 1.2,
+        "pressRT_mm": 0.0,
+        "releaseRT_mm": 0.0
+      }
+    },
+    {
+      "step": 2,
+      "name": "write_rt_on_verified",
+      "readback_sha256": "ab492de0e3d54fe46e70449d7c32bf33b82f9d602a80ca9818bf428d8dd9d098",
+      "key_s_raw": "00 01 78 00 14 00 14 00",
+      "vendor_js_decode": {
+        "axisType": 0,
+        "flags": 1,
+        "isWholeFast": true,
+        "isRampageMode": false,
+        "triggerKeyStroke_mm": 1.2,
+        "pressRT_mm": 0.2,
+        "releaseRT_mm": 0.2
+      },
+      "diff_indices": [
+        401,
+        404,
+        406
+      ]
+    },
+    {
+      "step": 3,
+      "name": "restore_verified",
+      "final_sha256": "4a7f0fd152910ed6a13afe17576d75a8041e6b9b1bd486ff9518fd719a541d09",
+      "non_interference_all_passed": true,
+      "forbidden_attempts": 0,
+      "opcode_counts": {
+        "AA 17": 57,
+        "AA 27": 38,
+        "AA 11": 2,
+        "AA 12": 20,
+        "AA 16": 20,
+        "AA 18": 38
+      }
+    }
+  ],
+  "success": true
+}

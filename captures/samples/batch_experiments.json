@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "description": "Batch analysis for Type 84 actuation point calibration across Keys A, S, D",
+  "experiments": [
+    {
+      "id": "exp_key_a_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/samples/key_a_139mm.json",
+      "key_name": "A",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Key A actuation change (1.40mm -> 1.39mm)"
+    },
+    {
+      "id": "exp_key_s_actuation",
+      "base_capture": "captures/key_s_139mm.json",
+      "experimental_capture": "captures/key_s_139mm.json",
+      "base_session": 0,
+      "exp_session": 1,
+      "key_name": "S",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Key S actuation change from real WebHID capture (Session 1 -> Session 2)"
+    },
+    {
+      "id": "exp_key_d_actuation",
+      "base_capture": "captures/samples/baseline_140mm.json",
+      "experimental_capture": "captures/samples/key_d_139mm.json",
+      "key_name": "D",
+      "parameter_name": "Actuation Point",
+      "old_value": "1.40mm",
+      "new_value": "1.39mm",
+      "description": "Key D actuation change (1.40mm -> 1.39mm)"
+    }
+  ]
+}

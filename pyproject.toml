@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keyboard-re"
+version = "1.0.0-rc1"
+description = "Reverse engineering and protocol analysis tools for IO by Red Square Type 84 Magnetic Black"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Reverse Engineering Team" }
+]
+
+[project.scripts]
+kb-re = "keyboard_re.cli:main"
+keyboard-re = "keyboard_re.cli:main"
+type84-gui = "keyboard_re.ui.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

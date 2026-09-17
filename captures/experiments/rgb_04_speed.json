@@ -1,0 +1,37 @@
+{
+  "version": "1.1",
+  "device": {
+    "vendor_id": "0x0C45",
+    "product_id": "0x80D6",
+    "product_name": "IO Type 84 Magnetic Black",
+    "collections": [
+      {
+        "usage_page": "0xFF68",
+        "usage": "0x0061",
+        "type": 1,
+        "output_report_ids": [
+          0
+        ],
+        "feature_report_ids": [],
+        "input_report_ids": [
+          0
+        ]
+      }
+    ]
+  },
+  "captured_at": "2026-09-14T11:44:18.428Z",
+  "description": "Speed min to max",
+  "reports_count": 1,
+  "reports": [
+    {
+      "index": 0,
+      "timestamp_ms": 116284.7,
+      "report_type": "output",
+      "report_id": 0,
+      "length": 64,
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "data_hex": "aa2310000000010007ff0000ff000000000305000000aa5500000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

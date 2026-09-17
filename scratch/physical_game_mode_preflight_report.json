@@ -1,0 +1,27 @@
+{
+  "timestamp": 1789552005.429894,
+  "target_device": "IO Type 84 (0x0C45:0x80D6)",
+  "game_mode_sha256": "fa06bd4037a3be8576bc3e1bf58a1bd95011e5e9bf8f2c896e4d2bf8aa60b1d1",
+  "remap_l1_sha256": "4f0d062657b34f43059d579b5615a113d3958fffb1bd86e44cb23a4c1cb53b6d",
+  "remap_l2_sha256": "3b9b2717200424ba04ed1526b2acf0754ffacf4f7415a5d507e8c9b7f84fea23",
+  "dks_sha256": "1db1309ef023cd3ba0956cc422f4625b82a897851846e69b4364d276126b91e1",
+  "game_mode_fields": {
+    "sleep_time": 1,
+    "report_rate": 6,
+    "report_rate_hz": 8000,
+    "stability_mode": 1,
+    "auto_calibration": 1,
+    "game_mode": 0,
+    "fn_switch": 0,
+    "key_delay": 0,
+    "system_mode": 0,
+    "top_deadzone": 0.0,
+    "bottom_deadzone": 0.0
+  },
+  "opcode_counts": {
+    "AA 11": 1,
+    "AA 12": 10,
+    "AA 16": 10,
+    "AA 18": 19
+  }
+}

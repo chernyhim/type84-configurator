@@ -1,0 +1,247 @@
+=== sendReport context ===
+ dynamic import: "+s+(s.split("/").length!==t?". Note that variables only represent file names one level deep.":""))))})},Ca=()=>{const e=ka();return{sendReport:async(n,o,...r)=>{var l,c;try{o||(o=e.currentDeviceId);const i=e.devices.get(o),m=((c=(l=e.currentDevice)==null?void 0:l.keyboardConfig)==null?void 0:c.protocol)||"default",p=await rt(Object.assign({"../config/protocols/default/index.ts":()=>ue(()=>
+
+=== sendReport context ===
+ts`,5),h=[i==null?void 0:i.device,i==null?void 0:i.keyboardConfig,...r];return await p[n](...h)}catch(i){return console.error(`发送${n}报告失败：`,i),null}},sendReportFromDevice:async(n,o,r="default",...l)=>{try{const c=await rt(Object.assign({"../config/protocols/default/index.ts":()=>ue(()=>Promise.resolve().then(()=>ys),void 0)}),`../config/protocols/${r}/index.ts`,5),i=[o,...l];return await c[n](...i)}catch(c)
+
+=== sendReport context ===
+(),r=o.lat,l=o.lon,c=await Pc(r,l);_t.value=c,Ts.value=!0}catch(o){console.error("获取天气失败:",o)}}async function s(){if(!lt.value){lt.value=!0;try{const{sendReport:o}=Ca(),r=await wo();Ts.value||await e();const l=Math.floor((r==null?void 0:r.cpuTemp)||0),c=Math.floor((r==null?void 0:r.cpuUsage)||0),i=Math.floor((r==null?void 0:r.gpuTemp)||0),m=Math.floor((r==null?void 0:r.gpuUsage)||0);await o("setTftScreenInf
+
+=== sendReport context ===
+2.4G.ts":Rc}),ka=yn("webHID",()=>{const e=Os(),s=cs(new Map),t=F(""),n=ve(()=>s.get(t.value)),o=F(!1),r=F(!!navigator.hid),l=fa("historyConnect",{}),{sendReport:c,sendReportFromDevice:i}=Ca(),{startGetTftInfo:m,stopGetTftInfo:p}=Vc(),h=F(!1),g=F(!1),v=F(!1),k=F(!1),y=F(null),u=F(null),f=F(null),C=F(null),b=F(null),w=["1452:591:2.4G Dongle","1452:592:2.4G Dongle","1452:591:2.4G Wireless Receiver","3141:65278
+
+=== sendReport context ===
+,ka=yn("webHID",()=>{const e=Os(),s=cs(new Map),t=F(""),n=ve(()=>s.get(t.value)),o=F(!1),r=F(!!navigator.hid),l=fa("historyConnect",{}),{sendReport:c,sendReportFromDevice:i}=Ca(),{startGetTftInfo:m,stopGetTftInfo:p}=Vc(),h=F(!1),g=F(!1),v=F(!1),k=F(!1),y=F(null),u=F(null),f=F(null),C=F(null),b=F(null),w=["1452:591:2.4G Dongle","1452:592:2.4G Dongle","1452:591:2.4G Wireless Receiver","3141:65278:2.4G Dongle"
+
+=== sendReport context ===
+B);let G=0,Z=null;for(;G<=c&&!Z;){if(v!=null&&v.aborted)throw new Error("操作已中断");try{const Y=Nn(h,{command:g,timeout:l,addr:y?R:void 0},V=>V);await e.sendReport(su,I),Z=await Y}catch(Y){if(c===0)return[];if(G++,G<=c)console.warn(`数据包0x${t.toString(16)}响应超时，正在进行第${G}次重发`);else{if(console.error(`数据包0x${t.toString(16)}响应超时，已重发${c}次仍无响应: ${Y}`),t===nu)return Promise.reject([]);{const{useWebHIDStore:V}=await ue(
+
+=== sendReport context ===
+==null?void 0:c.items)==null?void 0:i[0])==null?void 0:m.reportCount)||32);try{const p=Nn(e,{command:Ve.SET_CALIBRATION_ON,timeout:1e3},g=>g);await e.sendReport(ws,n),await p;const h=Uo(t,"校准数据");return e.addEventListener("inputreport",h),!0}catch(p){return console.error("开启校准失败:",p),!1}},fu=async(e,s)=>{var t,n,o,r,l,c;try{const i=Zt(Ve.SET_CALIBRATION_OFF,0,0,void 0,((c=(l=(r=(o=(n=(t=e==null?void 0:e.col
+
+=== sendReport context ===
+oid 0:t[0])==null?void 0:n.outputReports)==null?void 0:o[0])==null?void 0:r.items)==null?void 0:l[0])==null?void 0:c.reportCount)||32);return await e.sendReport(ws,i),!0}catch(i){return console.error("结束校准失败:",i),!1}},gu=async(e,s)=>{try{const t=new Uint8Array(8).fill(0);return t[0]=170,t[1]=Ve.SET_CALIBRATION_ON_V2,await ta(e,{cmd:Ve.SET_CALIBRATION_ON_V2,contentSize:24,headerCount:t.length,customHeader:t,
+
+=== sendReport context ===
+ll?void 0:c.items)==null?void 0:i[0])==null?void 0:m.reportCount)||32);try{const p=Nn(e,{command:Ve.SET_SIMULATION_TEST_ON,timeout:1e3},g=>g);await e.sendReport(ws,n),await p;const h=Uo(t,"模拟测试数据");return e.addEventListener("inputreport",h),!0}catch(p){return console.error("开启模拟测试失败:",p),!1}},Cu=async(e,s)=>{var t,n,o,r,l,c;try{const i=Zt(Ve.SET_SIMULATION_TEST_OFF,0,0,void 0,((c=(l=(r=(o=(n=(t=e==null?void
+
+=== sendReport context ===
+oid 0:t[0])==null?void 0:n.outputReports)==null?void 0:o[0])==null?void 0:r.items)==null?void 0:l[0])==null?void 0:c.reportCount)||32);return await e.sendReport(ws,i),!0}catch(i){return console.error("结束模拟测试失败:",i),!1}},Ln=async(e,s,...t)=>{var o,r,l,c,i,m;const n=t[0]||255;try{const p=Zt(Ve.SET_FACTORY_RESET,n,0,void 0,((m=(i=(c=(l=(r=(o=e==null?void 0:e.collections)==null?void 0:o[0])==null?void 0:r.outpu
+
+=== sendReport context ===
+oid 0:o[0])==null?void 0:r.outputReports)==null?void 0:l[0])==null?void 0:c.items)==null?void 0:i[0])==null?void 0:m.reportCount)||32);return await e.sendReport(ws,p),await new Promise(h=>St(h,100)),!0}catch(p){return console.error("恢复出厂设置失败:",p),!1}},_u=async(e,s)=>Ln(e,s,Sn.CLEAR_CALIBRATION),wu=async(e,s)=>Ln(e,s,Sn.RESET_ALL),Bo=async(e,s)=>{var g,v;const t=(g=We.deviceStorage.deviceInfo)==null?void 0:g
+
+=== sendReport context ===
+T_MUSIC_DATA,y[2]=0,y[3]=n&255,y[4]=o&255,y[5]=r&255;for(let f=0;f<21;f++)y[6+f]=k[f];let u=0;for(let f=0;f<31;f++)u+=y[f];return y[31]=u&255,await e.sendReport(0,y),!0}catch(k){return console.error("发送音乐数据失败:",k),!1}},Eu=async(e,s,t)=>{var g;const l=new Uint8Array(512);for(let v=0;v<128;v++){const k=v*4;l[k]=v,l[k+1]=0,l[k+2]=0,l[k+3]=0}const c=(g=We.deviceStorage.deviceInfo)==null?void 0:g.frameVersion,i=
+
+=== sendReport context ===
+[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 Profile 失败:",t),!1}},cn=async(e,s,t)=>{try{const{sendReport:n}=Ca();let o=t;if(!o){const c=await za(e);if(!c||s<0||s>=c.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;o=c.profileList[s]}if(!await sl(e,s))return console.error("切换 Profile 失败"),!1;o.keyList&&(o.wheelKeys?await n("setKeyData"
+
+=== sendReport context ===
+ceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"Module"}));function ld(e,s){const{currentDeviceId:t}=ka(),{sendReport:n}=Ca(),{wheelKeys:o}=ba(),r=F(!1),l=F({row:-1,col:-1});let c=null;const i=F([]),m=F(),p=F(!1),h=F({x:0,y:0}),g=F({x:0,y:0}),v=F(null),k=F(!1),y=F(!1),u=[{label:D("reset"),key:"reset",icon:b(mo)}],f=[{label:D("macro_mask_title"),key:"macro",icon:b(O
+
+=== sendReport context ===
+]of s)t[n]=o;return t};function rd(e,s){const{currentDeviceId:t}=ka(),{keyList:n,basicList:o,extendList:r,specialList:l,wheelKeys:c}=ba(),i=fa(t,{}),{sendReport:m}=Ca(),p=x=>{s("select-advanced",x)},h=x=>{s("edit-bind-key",x)},g=x=>{var R,K,B,j,S;let E=null;["RS","SOCD"].includes(((R=x.userKey)==null?void 0:R.page)||"")&&(E=[(K=x.userKey)==null?void 0:K.param2,(B=x.userKey)==null?void 0:B.param3]),((j=x.use
+
+=== sendReport context ===
+e).minus(f);k=Math.max(Number(N),y)}k!==v&&(s.value=k,m==null||m(k,v))},{passive:!1})}function cd(e,s){var N,_,P,M;const{keyList:t,wheelKeys:n}=ba(),{sendReport:o}=Ca(),{currentDevice:r,currentDeviceId:l}=ka(),c=r==null?void 0:r.keyboardConfig,i=fa(l,{}),m=F(!1),p=F(((N=c.performanceConfig)==null?void 0:N.triggerTripValue)??1.2),h=F(((_=c.performanceConfig)==null?void 0:_.minTriggerTrip)??.1),g=F(((P=c.perf
+
+=== sendReport context ===
+3:t.value[E.row][E.col].keyCode},await o("setKeyData",void 0,t.value,n.value),k()}}}function ud(e,s){var V,L,A,H,q;const{keyList:t,wheelKeys:n}=ba(),{sendReport:o}=Ca(),{currentDevice:r,currentDeviceId:l}=ka(),c=r==null?void 0:r.keyboardConfig,i=fa(l,{}),m=F(!1),p=F(((V=c.performanceConfig)==null?void 0:V.triggerTripValue)??1.2),h=F(((L=c.performanceConfig)==null?void 0:L.minTriggerTrip)??.1),g=F(((A=c.perf
+
+=== sendReport context ===
+}=ba(),l=ve(()=>t.value.filter(O=>O.value!==175)),{currentDevice:c,currentDeviceId:i}=ka(),m=c==null?void 0:c.keyboardConfig,p=fa(i,{},localStorage),{sendReport:h}=Ca(),g=F(((X=m.performanceConfig)==null?void 0:X.maxTriggerTrip)??3.3),v=F(!1),k=F(!1),y=F(0),u=F(zn("images/key_switch.png")),f=F(zn("images/key_switch.png","default")),C=F([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]),b=F(null),w=ve(()=>_.value.ac
+
+=== sendReport context ===
+.value.actions=Ce,y.value=te}catch(fe){console.error("解析拖拽数据失败:",fe)}}}}}function md(e,s){const{basicList:t,extendList:n,keyList:o,wheelKeys:r}=ba(),{sendReport:l}=Ca(),c=ve(()=>t.value.filter(_=>_.value!==175)),i=ve(()=>e.keyboardConfig),m=F(!1),p=F(1),h=F([{},{}]);Je([()=>e.isContinue,()=>e.selectKeys],([_,P])=>{var E,R;const M=P==null?void 0:P[0],x=(E=o.value[M==null?void 0:M.row])==null?void 0:E[M==null
+
+=== sendReport context ===
+n/json");if(M){const x=JSON.parse(M),E=[...h.value];E[P]=x,h.value=E}}}}}function yd(e,s){const{basicList:t,extendList:n,keyList:o,wheelKeys:r}=ba(),{sendReport:l}=Ca(),c=ve(()=>t.value.filter(w=>w.value!==175)),i=ve(()=>e.keyboardConfig),m=F(!1),p=F(null);Je([()=>e.isContinue,()=>e.selectKeys],([w,N])=>{var M,x;const _=N==null?void 0:N[0],P=(M=o.value[_==null?void 0:_.row])==null?void 0:M[_==null?void 0:_.
+
+=== sendReport context ===
+er.getData("application/json");if(N){const _=JSON.parse(N);p.value=_}}}}}function vd(e,s){const{basicList:t,extendList:n,keyList:o,wheelKeys:r}=ba(),{sendReport:l}=Ca(),c=ve(()=>t.value.filter(R=>R.value!==175)),i=ve(()=>e.keyboardConfig),m=F(!1),p=F(0),h=ca("charactersRef"),g=ve(()=>n.value.filter(R=>["L-Ctrl","R-Ctrl","L-Shift","R-Shift","L-Alt","R-Alt","L-Win"].includes(R.name))),v=ve(()=>{if(p.value<2)r
+
+=== sendReport context ===
+arKey"&&(g.value.some(G=>G.value===S.value)||(u.value.regularKey=S))}}}}}function fd(e,s){const{basicList:t,extendList:n,keyList:o,wheelKeys:r}=ba(),{sendReport:l}=Ca(),c=ve(()=>t.value.filter(N=>N.value!==175)),i=ve(()=>e.keyboardConfig),m=F(!1),p=F(1),h=F([{},{}]);Je([()=>e.isContinue,()=>e.selectKeys],([N,_])=>{var x,E;const P=_==null?void 0:_[0],M=(x=o.value[P==null?void 0:P.row])==null?void 0:x[P==null
+
+=== sendReport context ===
+t,extendList:n,keyList:o,wheelKeys:r}=ba(),l=ve(()=>t.value.filter(S=>S.value!==175)),{currentDeviceId:c}=ka(),i=ve(()=>e.keyboardConfig),m=fa(c,{}),{sendReport:p}=Ca(),h=F(!1),g=F(0),v=ve(()=>{var I;const S=e.selectKeys[0];return S?(I=o.value[S.row])==null?void 0:I[S.col]:void 0}),k=ve(()=>{var I,G,Z,Y,V,L,A;const S=(I=v.value)==null?void 0:I.value;if(S!=null){const H=(Z=(G=m.value)==null?void 0:G.magnetic
+
+=== sendReport context ===
+er){const G=S.dataTransfer.getData("application/json");if(G){const Z=JSON.parse(G),Y=[...f.value];Y[I]=Z,f.value=Y,g.value=I}}}}}function kd(e){const{sendReport:s}=Ca(),{keyList:t}=ba(),{currentDevice:n,currentDeviceId:o}=ka(),r=ca("keyboardRef"),l=n==null?void 0:n.keyboardConfig,c=fa(o,{},localStorage),i=ve(()=>t.value.map(K=>K.map(B=>{var Z,Y,V;const j=["RS","SOCD","DKS","MT","TGL","CB","END","MPT"].inclu
+
+=== sendReport context ===
+d(v)}catch(g){console.error("下载固件失败:",g)}};return{hasUpdate:e,showOtaUpdateDialog:r}}function Tn(){const e=Os(),s=Vr(),t=ka(),n=Cn(),{theme:o}=vn(n),{sendReport:r}=Ca(),{checkDeviceUpdate:l,checkAllDevicesUpdates:c,showUpdateDialog:i,deviceUpdateMap:m}=gl(),{showOtaUpdateDialog:p}=kl(),h=F(!1),g=fa("historyConnect",{}),v=ve(()=>{const G="",Y=o.value&&G?G:"https://config.driveall.cn/logo/io/logo.png";return 
+
+=== sendReport context ===
+on Pm(e,s,t){if(!(!e||e.type)){if(In(e.ledId)){if(!t)return;hl(e.ledId)?t.handleBeforeApply():t.onApply();return}s(e)}}function Um(e,s){const t=Vs(),{sendReport:n}=Ca(),{currentDeviceId:o}=ka(),r=ca("r5c63LedTimeRef"),l=ca("r5c63NetworkSpeedRef"),c=ca("r5c63CPURef"),i=ca("r5c63GPURef"),m=ca("r5c63TipsRef"),p=ca("r5c63MusicRef"),h=ca("r5c51MusicRef"),g=F(0),v=F([]),k=F(null),y=F(!1),u=F(null),f=F(!1),C=()=>{
+
+=== sendReport context ===
+ok:!1,error:"frame_limit_exceeded",maxFrames:n,frameCount:l}:{ok:!0,item:{name:o.name.trim(),data:o.data,speed:o.speed}}}function ey(e){const s=Vs(),{sendReport:t}=Ca(),n=Us(),o=F([]),r=F(!1),l=F(0),c=F(!1),i=F(null),m=F(!1),p=Ks("markdown/AI_LED_GUIDE.md"),h=ve(()=>D("ai_led_prompt",[e.ledConfig.rows,e.ledConfig.cols,e.deviceInfo.ledMaxFrames])),g=F(""),v=F(!1),k=F(""),y=ve(()=>o.value.filter(z=>z.type)),u
+
+=== sendReport context ===
+th;re++)q[A.length+re]=H[re];const ie=new Blob([q],{type:"application/octet-stream"});It(ie,`${n.value||"gif"}.bin`)}}}function ty(e,s){const t=Us(),{sendReport:n}=Ca(),{keyList:o}=ba(),r=F(!1),l=F(!1),c=F(0),i=F(""),m=F([]),p=F([]),h=F(),g=ve(()=>{let S="";return e.keyboardConfig.keyList.forEach(I=>{S+=S?`_${I.length}`:I.length}),S});(async()=>{var I,G;const S=((G=(I=e.keyboardConfig)==null?void 0:I.lighti
+
+=== sendReport context ===
+UploadGifLighting:x,mergeEditorSaveToCustomList:w,closeGifEditor:N}}function sy(e,s){var j,S,I,G,Z,Y,V;const{currentDevice:t,currentDeviceId:n}=ka(),{sendReport:o}=Ca(),{lightBoxList:r}=ba(),l=F(((j=e.lightBoxData)==null?void 0:j.mode)||1),c=F({red:((S=e.lightBoxData)==null?void 0:S.red)||255,green:((I=e.lightBoxData)==null?void 0:I.green)||255,blue:((G=e.lightBoxData)==null?void 0:G.blue)||255}),i=F(((Z=e.
+
+=== sendReport context ===
+pe:"error",onClick:k},{default:W(()=>[pe(T(y.$t("reset")),1)]),_:1})):we("",!0)])}}});function oy(e,s){const{currentDevice:t,currentDeviceId:n}=ka(),{sendReport:o}=Ca(),{lightingList:r,customLedData:l,CUSTOM_LIGHTING_MODE:c}=ba(),i=ve(()=>e.isOpenLight),m=ve(()=>{var O;return e.isCustomMode?c.value:((O=e.ledEffect)==null?void 0:O.mode)||1}),p=F({red:0,green:0,blue:0}),h=F({red:0,green:0,blue:0}),g=ve(()=>C.
+
+=== sendReport context ===
+mplitudeChange:k,bgList:g,backmode:m,backmodebrightness:p,handleBackmodeChange:u,handleBrightnessChange:f,setKeyboardLayout:_}}function ry(e,s){const{sendReport:t}=Ca(),{keyList:n}=ba(),o=F(!1),r=()=>{Cs("https://config.driveall.cn/music/v2/Music.exe")},l=ve(()=>{var he,Re;return((he=e.keyboardConfig.routesName)==null?void 0:he.includes("led"))&&((Re=e.keyboardConfig.ledConfig)==null?void 0:Re.isShowVoiceMo
+
+=== sendReport context ===
+ebrightness:f,handleBrightnessChange:G,startWorker:J,isTestMode:Ha}}function iy(e,s){var j,S,I,G,Z,Y,V;const{currentDevice:t,currentDeviceId:n}=ka(),{sendReport:o}=Ca(),{sideLightList:r}=ba(),l=F(((j=e.sideLightData)==null?void 0:j.mode)||1),c=F({red:((S=e.sideLightData)==null?void 0:S.red)||255,green:((I=e.sideLightData)==null?void 0:I.green)||255,blue:((G=e.sideLightData)==null?void 0:G.blue)||255}),i=F((
+
+=== sendReport context ===
+lick:C,clearSelection:b,selectAll:w,isAllSelected:N,onDragOver:_,onDragLeave:P,onDrop:M}}function uy(){const{currentDevice:e,currentDeviceId:s}=ka(),{sendReport:t}=Ca(),n=e==null?void 0:e.keyboardConfig,o=fa(s,{}),r=F("normal"),{keyList:l,fnKeyList:c,wheelKeys:i,basicList:m,extendList:p,specialList:h,funcList:g,funcV2List:v,defaultFnFuncIds:k,isShowChars:y}=ba(),u=ve(()=>r.value==="normal"?l.value:c.value.m
+
+=== sendReport context ===
+rrentLayout:t}=vn(s),n=[{label:"新版 (tech)",value:"tech"},{label:"旧版 (classic)",value:"classic"}],{currentDevice:o,currentDeviceId:r}=ka(),l=fa(r,{}),{sendReport:c}=Ca(),i=o==null?void 0:o.keyboardConfig,{checkDeviceUpdate:m,showUpdateDialog:p,hasUpdate:h}=gl(),{showOtaUpdateDialog:g}=kl(),v=ve(()=>[{name:D("settingView"),tab:0},{name:D("keyNameSey"),tab:1},{name:D("updateName"),tab:2,badge:h.value?1:void 0}
+
+=== sendReport context ===
+stedCount:c,keyboardStatItems:m,keyColorClass:g,resetKeyboard:y,mouseStatItems:w,mouseLogs:f,mouseStats:u,ripples:C,resetMouse:Y}}function ky(){const{sendReport:e}=Ca(),{currentDevice:s,currentDeviceId:t}=ka(),n=fa(t,{}),o=s==null?void 0:s.keyboardConfig,r=ve(()=>{var j,S;let B=[];return(j=o.ledConfig)!=null&&j.isShowCharMode&&B.push({name:"charMode",text:"gif_tft_text1"}),B.push({name:"patternMode",text:"g
+
+=== sendReport context ===
+v.offsetX)}let i=t+c;const m=(h=o==null?void 0:o.keyOffset)==null?void 0:h.find(g=>g.value===l.value);return m&&(i+=m.offsetX),i}function Wy(e){const{sendReport:s}=Ca(),{keyList:t}=ba();let n=0,o=!1,r=null;function l(){const g=e.getCanvas(),v=e.getKeyboardCanvas();if(!g||!v)return null;const k=g.getContext("2d",{willReadFrequently:!0});if(!k)return null;const y=v.getKeyElements();if(!y.length)return null;co
+
+=== sendReport context ===
+)])}}});function wv(e){const s=(e==null?void 0:e.enableGifKeyboardRelay)??!1,{selectedPreset:t}=Sl(),n=Vs(),{currentDevice:o,currentDeviceId:r}=ka(),{sendReport:l}=Ca(),c=fa(r,{}),i=o==null?void 0:o.keyboardConfig,m=ve(()=>{const Ee=i.nameSuffix??"";return`${i.name}${Ee}`}),p=ve(()=>Ha),h=ve(()=>{var sa,ra,_a;const Ee=[{name:"color",label:D("color_name")}];return(sa=i.lightingConfig)!=null&&sa.isShowLightBo
+
+=== sendReport context ===
+torActive:M,onGifEditingChange:Fe,gifKeyboardSelectable:x}:{}}}function bv(){const{allKeyChars:e,keyList:s,fnKeyList:t,macroList:n,wheelKeys:o}=ba(),{sendReport:r}=Ca(),l=ka(),{currentDevice:c}=ka(),i=c==null?void 0:c.keyboardConfig,m=fa(l.currentDeviceId,{}),p=F("normal"),h=ve(()=>p.value==="normal"?s.value:t.value.map(ne=>ne.map(de=>{var be,Oe;return{...de,disabled:(Oe=(be=i.customKeysConfig)==null?void 0
+
+=== sendReport context ===
+Ue,De,He;const e=Us(),{currentDevice:s,currentDeviceId:t}=ka(),n=s==null?void 0:s.keyboardConfig,o=fa(t,{}),{keyList:r}=ba(),{toggleKeyGroup:l}=_l(),{sendReport:c}=Ca(),i=ve(()=>{var ye;return Sv((ye=n.performanceConfig)==null?void 0:ye.modeList)}),m=ca("keyboardRef"),p=F([]),h=ye=>{var Ie,Ke,Le,Ae,ne,de,be,Oe,Me,Ye,Ze;if(p.value=ye,g.value=ye.length===r.value.flat().length,R.value=ye.length>0,ye.length===0
+
+=== sendReport context ===
+or=()=>{n(new Error("无法读取视频信息"))},o.src=URL.createObjectURL(s)})}}const ro=new Iv;function Dv(){var ge;const{currentDevice:e,currentDeviceId:s}=ka(),{sendReport:t}=Ca(),n=fa(s,{}),o=Cn(),r=Us(),l=e==null?void 0:e.keyboardConfig,c=l==null?void 0:l.tftConfig,i=F({}),m=!1,p=F(c);Je(n,se=>{se!=null&&se.deviceInfo&&(i.value=se.deviceInfo)},{immediate:!0}),Je(()=>{var se;return(se=i.value)==null?void 0:se.tftDire
+
+
+
+=== PROFILE OCCURRENCES ===
+[profile] css","assets/performance-PCYySoF3.js","assets/performance-ByvLX_Hb.css","assets/profiles-DRc7-3Ol.js","assets/useProfiles-CdvILL1K.js","assets/settings-BW2zk578.js","assets/settings-MPySak0K.css","assets/tft
+[Profile] .js","assets/performance-ByvLX_Hb.css","assets/profiles-DRc7-3Ol.js","assets/useProfiles-CdvILL1K.js","assets/settings-BW2zk578.js","assets/settings-MPySak0K.css","assets/tft-C9LvWGiR.js","assets/tft-BB7N4-R
+[Profile] eyboardConfig)!=null&&ae.routesName.includes("performance")){const{updateCurrentProfile:X}=await ue(async()=>{const{updateCurrentProfile:te}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:t
+[Profile] formance")){const{updateCurrentProfile:X}=await ue(async()=>{const{updateCurrentProfile:te}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:te}},void 0),O=fa(Q,{});O.value.magneticAxisRTConf
+[Profile] dateCurrentProfile:te}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:te}},void 0),O=fa(Q,{});O.value.magneticAxisRTConfig&&(O.value.magneticAxisRTConfig=void 0,await X(Q))}location.reload(
+[Profile] void 0),{setProtocolDataFromDeviceInit:fe}=me();await fe(te);const{updateCurrentProfile:Ce}=await ue(async()=>{const{updateCurrentProfile:ge}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:
+[Profile] ait fe(te);const{updateCurrentProfile:Ce}=await ue(async()=>{const{updateCurrentProfile:ge}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:ge}},void 0);await Ce(t.value)}(X=(ae=(z=n.value)=
+[Profile] dateCurrentProfile:ge}=await Promise.resolve().then(()=>Wn);return{updateCurrentProfile:ge}},void 0);await Ce(t.value)}(X=(ae=(z=n.value)==null?void 0:z.keyboardConfig)==null?void 0:ae.tftConfig)!=null&&X.is
+[profile] },Symbol.toStringTag,{value:"Module"})),Wc=["/","/key-test"],Hc=hn()==="tech"?["profiles"]:[];function Yc(e){e.beforeEach(async(s,t,n)=>{var i;const o=ka();if(t.name||await o.initialize(),Wc.includes(s.path)
+[profile] munity",layout:"sider"},{path:"settings",name:"settings",layout:"sider"},{path:"profiles",name:"profiles",layout:"sider"},{path:"key-test",name:"keyTest",layout:"empty"}];let Ft={};switch(Dt){case"tech":Ft=O
+[profile] sider"},{path:"settings",name:"settings",layout:"sider"},{path:"profiles",name:"profiles",layout:"sider"},{path:"key-test",name:"keyTest",layout:"empty"}];let Ft={};switch(Dt){case"tech":Ft=Object.assign({"/
+[profile] ance-PCYySoF3.js"),__vite__mapDeps([72,0,1,2,4,5,9,11,58,73])),"/src/views/tech/profiles.vue":()=>ue(()=>import("./profiles-DRc7-3Ol.js"),__vite__mapDeps([74,0,1,2,75])),"/src/views/tech/settings.vue":()=>ue
+[profile] [72,0,1,2,4,5,9,11,58,73])),"/src/views/tech/profiles.vue":()=>ue(()=>import("./profiles-DRc7-3Ol.js"),__vite__mapDeps([74,0,1,2,75])),"/src/views/tech/settings.vue":()=>ue(()=>import("./settings-BW2zk578.js
+[profile] ance-PCYySoF3.js"),__vite__mapDeps([72,0,1,2,4,5,9,11,58,73])),"/src/views/tech/profiles.vue":()=>ue(()=>import("./profiles-DRc7-3Ol.js"),__vite__mapDeps([74,0,1,2,75])),"/src/views/tech/settings.vue":()=>ue
+[profile] [72,0,1,2,4,5,9,11,58,73])),"/src/views/tech/profiles.vue":()=>ue(()=>import("./profiles-DRc7-3Ol.js"),__vite__mapDeps([74,0,1,2,75])),"/src/views/tech/settings.vue":()=>ue(()=>import("./settings-BW2zk578.js
+[profile] ",page:"FUNC"},{name:"灯光效果切换4",value:199,text:"fun_text167",page:"FUNC"},{name:"profile1切换",value:200,text:"fun_text168",page:"FUNC"},{name:"profile2切换",value:201,text:"fun_text169",page:"FUNC"},{name:"profi
+[profile] age:"FUNC"},{name:"profile1切换",value:200,text:"fun_text168",page:"FUNC"},{name:"profile2切换",value:201,text:"fun_text169",page:"FUNC"},{name:"profile3切换",value:202,text:"fun_text170",page:"FUNC"},{name:"profi
+[profile] age:"FUNC"},{name:"profile2切换",value:201,text:"fun_text169",page:"FUNC"},{name:"profile3切换",value:202,text:"fun_text170",page:"FUNC"},{name:"profile4切换",value:203,text:"fun_text171",page:"FUNC"},{name:"打字显示"
+[profile] age:"FUNC"},{name:"profile3切换",value:202,text:"fun_text170",page:"FUNC"},{name:"profile4切换",value:203,text:"fun_text171",page:"FUNC"},{name:"打字显示",value:204,text:"fun_text172",page:"FUNC"},{name:"退出测试模式",val
+[Profile] duct:l[14]|l[15]<<8,workMode:l[16],batteryLevel:l[17],chargeStatus:l[18],currentProfile:l[19],axisInfo:l[20]|l[21]<<8,tftMaxFrames:l[22]|l[23]<<8,gifMaxFrames:l[24]|l[25]<<8,ledMaxFrames:l[26]|l[27]<<8,tftDi
+[profile] ty({__proto__:null,useProtocol:ba},Symbol.toStringTag,{value:"Module"})),bs=$r("profile-switch"),za=async e=>{try{const s=await qe.getItem(`${e}-profile`);if(s)return s;{const t=fa(e,{}),n={profileList:[{pro
+[profile] ule"})),bs=$r("profile-switch"),za=async e=>{try{const s=await qe.getItem(`${e}-profile`);if(s)return s;{const t=fa(e,{}),n={profileList:[{profileName:"profile",...Ba(t.value)}],currentProfileIndex:0};return
+[profile] try{const s=await qe.getItem(`${e}-profile`);if(s)return s;{const t=fa(e,{}),n={profileList:[{profileName:"profile",...Ba(t.value)}],currentProfileIndex:0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}ca
+[profile] ait qe.getItem(`${e}-profile`);if(s)return s;{const t=fa(e,{}),n={profileList:[{profileName:"profile",...Ba(t.value)}],currentProfileIndex:0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}catch(s){console
+[profile] m(`${e}-profile`);if(s)return s;{const t=fa(e,{}),n={profileList:[{profileName:"profile",...Ba(t.value)}],currentProfileIndex:0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}catch(s){console.error("初始化 P
+[Profile] const t=fa(e,{}),n={profileList:[{profileName:"profile",...Ba(t.value)}],currentProfileIndex:0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}catch(s){console.error("初始化 Profile 配置失败:",s)}},tt=async(e,s)=
+[profile] "profile",...Ba(t.value)}],currentProfileIndex:0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}catch(s){console.error("初始化 Profile 配置失败:",s)}},tt=async(e,s)=>{try{return await qe.setItem(`${e}-profile`,B
+[Profile] 0};return await qe.setItem(`${e}-profile`,Ba(n)),n}}catch(s){console.error("初始化 Profile 配置失败:",s)}},tt=async(e,s)=>{try{return await qe.setItem(`${e}-profile`,Ba(s)),!0}catch(t){return console.error("保存 Prof
+[profile] rror("初始化 Profile 配置失败:",s)}},tt=async(e,s)=>{try{return await qe.setItem(`${e}-profile`,Ba(s)),!0}catch(t){return console.error("保存 Profile 配置失败:",t),!1}},Qu=async(e,s,t="profile")=>{try{const n=await za(e)
+[Profile] urn await qe.setItem(`${e}-profile`,Ba(s)),!0}catch(t){return console.error("保存 Profile 配置失败:",t),!1}},Qu=async(e,s,t="profile")=>{try{const n=await za(e);if(!n)return!1;const o={profileName:t,...s};return n
+[profile] s)),!0}catch(t){return console.error("保存 Profile 配置失败:",t),!1}},Qu=async(e,s,t="profile")=>{try{const n=await za(e);if(!n)return!1;const o={profileName:t,...s};return n.profileList.length===0?(n.profileList=
+[profile] 1}},Qu=async(e,s,t="profile")=>{try{const n=await za(e);if(!n)return!1;const o={profileName:t,...s};return n.profileList.length===0?(n.profileList=[o],n.currentProfileIndex=0):n.profileList.push(o),await tt(
+[profile] =>{try{const n=await za(e);if(!n)return!1;const o={profileName:t,...s};return n.profileList.length===0?(n.profileList=[o],n.currentProfileIndex=0):n.profileList.push(o),await tt(e,n),o}catch(n){return consol
+[profile] ;if(!n)return!1;const o={profileName:t,...s};return n.profileList.length===0?(n.profileList=[o],n.currentProfileIndex=0):n.profileList.push(o),await tt(e,n),o}catch(n){return console.error("创建 Profile 失败:",n
+[Profile] profileName:t,...s};return n.profileList.length===0?(n.profileList=[o],n.currentProfileIndex=0):n.profileList.push(o),await tt(e,n),o}catch(n){return console.error("创建 Profile 失败:",n),!1}},tl=(e,s)=>{const t
+[profile] };return n.profileList.length===0?(n.profileList=[o],n.currentProfileIndex=0):n.profileList.push(o),await tt(e,n),o}catch(n){return console.error("创建 Profile 失败:",n),!1}},tl=(e,s)=>{const t=fa(e,{}),n=JSON.p
+[Profile] ndex=0):n.profileList.push(o),await tt(e,n),o}catch(n){return console.error("创建 Profile 失败:",n),!1}},tl=(e,s)=>{const t=fa(e,{}),n=JSON.parse(JSON.stringify(s)),{profileName:o,...r}=n,{deviceInfo:l,sn:c}=t.v
+[profile] ofile 失败:",n),!1}},tl=(e,s)=>{const t=fa(e,{}),n=JSON.parse(JSON.stringify(s)),{profileName:o,...r}=n,{deviceInfo:l,sn:c}=t.value;t.value={...r,deviceInfo:l??r.deviceInfo,sn:c??r.sn}},ed=async(e,s,t)=>{try{c
+[profile] iceInfo,sn:c??r.sn}},ed=async(e,s,t)=>{try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return!1;const o=n.profileList[s],r={...JSON.parse(JSON.stringify(o)),profileName:t||`${o.profileName} Copy`
+[profile] {try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return!1;const o=n.profileList[s],r={...JSON.parse(JSON.stringify(o)),profileName:t||`${o.profileName} Copy`};return n.profileList.push(r),await t
+[profile] st.length)return!1;const o=n.profileList[s],r={...JSON.parse(JSON.stringify(o)),profileName:t||`${o.profileName} Copy`};return n.profileList.push(r),await tt(e,n),!0}catch(n){return console.error("复制 Profile
+[profile] onst o=n.profileList[s],r={...JSON.parse(JSON.stringify(o)),profileName:t||`${o.profileName} Copy`};return n.profileList.push(r),await tt(e,n),!0}catch(n){return console.error("复制 Profile 失败:",n),!1}},ad=asy
+[profile] .JSON.parse(JSON.stringify(o)),profileName:t||`${o.profileName} Copy`};return n.profileList.push(r),await tt(e,n),!0}catch(n){return console.error("复制 Profile 失败:",n),!1}},ad=async(e,s)=>{try{const t=await z
+[Profile] return n.profileList.push(r),await tt(e,n),!0}catch(n){return console.error("复制 Profile 失败:",n),!1}},ad=async(e,s)=>{try{const t=await za(e);return!t||s<0||s>=t.profileList.length||t.profileList.length<=1||s
+[profile] rofile 失败:",n),!1}},ad=async(e,s)=>{try{const t=await za(e);return!t||s<0||s>=t.profileList.length||t.profileList.length<=1||s===t.currentProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t
+[profile] =async(e,s)=>{try{const t=await za(e);return!t||s<0||s>=t.profileList.length||t.profileList.length<=1||s===t.currentProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t.currentProfileIndex--
+[Profile] );return!t||s<0||s>=t.profileList.length||t.profileList.length<=1||s===t.currentProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t.currentProfileIndex--,await tt(e,t),!0)}catch(t){return c
+[profile] =t.profileList.length||t.profileList.length<=1||s===t.currentProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t.currentProfileIndex--,await tt(e,t),!0)}catch(t){return console.error("删除 Pr
+[Profile] t.length<=1||s===t.currentProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t.currentProfileIndex--,await tt(e,t),!0)}catch(t){return console.error("删除 Profile 失败:",t),!1}},td=async(e,s,t)=
+[Profile] entProfileIndex?!1:(t.profileList.splice(s,1),s<t.currentProfileIndex&&t.currentProfileIndex--,await tt(e,t),!0)}catch(t){return console.error("删除 Profile 失败:",t),!1}},td=async(e,s,t)=>{try{const n=await za(
+[Profile] ex&&t.currentProfileIndex--,await tt(e,t),!0)}catch(t){return console.error("删除 Profile 失败:",t),!1}},td=async(e,s,t)=>{try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return!1;const o=t.trim();re
+[profile] Profile 失败:",t),!1}},td=async(e,s,t)=>{try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return!1;const o=t.trim();return n.profileList[s].profileName=o||"profile",await tt(e,n),!0}catch(n){return 
+[profile] it za(e);if(!n||s<0||s>=n.profileList.length)return!1;const o=t.trim();return n.profileList[s].profileName=o||"profile",await tt(e,n),!0}catch(n){return console.error("重命名 Profile 失败:",n),!1}},sl=async(e,s)=
+[profile] |s<0||s>=n.profileList.length)return!1;const o=t.trim();return n.profileList[s].profileName=o||"profile",await tt(e,n),!0}catch(n){return console.error("重命名 Profile 失败:",n),!1}},sl=async(e,s)=>{try{const t=a
+[profile] leList.length)return!1;const o=t.trim();return n.profileList[s].profileName=o||"profile",await tt(e,n),!0}catch(n){return console.error("重命名 Profile 失败:",n),!1}},sl=async(e,s)=>{try{const t=await za(e);retur
+[Profile] s].profileName=o||"profile",await tt(e,n),!0}catch(n){return console.error("重命名 Profile 失败:",n),!1}},sl=async(e,s)=>{try{const t=await za(e);return t&&s>=0&&s<t.profileList.length?(t.currentProfileIndex=s,aw
+[profile] rofile 失败:",n),!1}},sl=async(e,s)=>{try{const t=await za(e);return t&&s>=0&&s<t.profileList.length?(t.currentProfileIndex=s,await tt(e,t),!0):!1}catch(t){return console.error("切换 Profile 失败:",t),!1}},nl=asyn
+[Profile] e,s)=>{try{const t=await za(e);return t&&s>=0&&s<t.profileList.length?(t.currentProfileIndex=s,await tt(e,t),!0):!1}catch(t){return console.error("切换 Profile 失败:",t),!1}},nl=async(e,s,t)=>{try{const n=await 
+[Profile] (t.currentProfileIndex=s,await tt(e,t),!0):!1}catch(t){return console.error("切换 Profile 失败:",t),!1}},nl=async(e,s,t)=>{try{const n=await za(e);return!n||s<0||s>=n.profileList.length?!1:(Object.assign(n.profi
+[profile] file 失败:",t),!1}},nl=async(e,s,t)=>{try{const n=await za(e);return!n||s<0||s>=n.profileList.length?!1:(Object.assign(n.profileList[s],t),await tt(e,n),!0)}catch(n){return console.error("更新 Profile 失败:",n),!1
+[profile] {const n=await za(e);return!n||s<0||s>=n.profileList.length?!1:(Object.assign(n.profileList[s],t),await tt(e,n),!0)}catch(n){return console.error("更新 Profile 失败:",n),!1}},ol=async e=>{try{const s=await za(e)
+[Profile] .assign(n.profileList[s],t),await tt(e,n),!0)}catch(n){return console.error("更新 Profile 失败:",n),!1}},ol=async e=>{try{const s=await za(e);if(!s)return!1;const t=s.currentProfileIndex,n=fa(e,{}),o={...Ba(n.va
+[Profile] :",n),!1}},ol=async e=>{try{const s=await za(e);if(!s)return!1;const t=s.currentProfileIndex,n=fa(e,{}),o={...Ba(n.value),profileName:s.profileList[t].profileName};return await nl(e,t,Ba(o))}catch(s){return 
+[profile] za(e);if(!s)return!1;const t=s.currentProfileIndex,n=fa(e,{}),o={...Ba(n.value),profileName:s.profileList[t].profileName};return await nl(e,t,Ba(o))}catch(s){return console.error("更新当前 Profile 失败:",s),!1}},s
+[profile] turn!1;const t=s.currentProfileIndex,n=fa(e,{}),o={...Ba(n.value),profileName:s.profileList[t].profileName};return await nl(e,t,Ba(o))}catch(s){return console.error("更新当前 Profile 失败:",s),!1}},sd=async(e,s)=>
+[profile] s.currentProfileIndex,n=fa(e,{}),o={...Ba(n.value),profileName:s.profileList[t].profileName};return await nl(e,t,Ba(o))}catch(s){return console.error("更新当前 Profile 失败:",s),!1}},sd=async(e,s)=>{try{const t=aw
+[Profile] [t].profileName};return await nl(e,t,Ba(o))}catch(s){return console.error("更新当前 Profile 失败:",s),!1}},sd=async(e,s)=>{try{const t=await za(e);if(!t)return console.error("未找到 profile 配置"),!1;const n=t.currentP
+[profile] s),!1}},sd=async(e,s)=>{try{const t=await za(e);if(!t)return console.error("未找到 profile 配置"),!1;const n=t.currentProfileIndex;if(n<0||n>=t.profileList.length)return console.error("无效的 profile 索引:",n),!1;cons
+[Profile]  t=await za(e);if(!t)return console.error("未找到 profile 配置"),!1;const n=t.currentProfileIndex;if(n<0||n>=t.profileList.length)return console.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profi
+[profile] n console.error("未找到 profile 配置"),!1;const n=t.currentProfileIndex;if(n<0||n>=t.profileList.length)return console.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};ret
+[profile] t.currentProfileIndex;if(n<0||n>=t.profileList.length)return console.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch
+[profile] ofileList.length)return console.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 P
+[profile] th)return console.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 Profile 失败:",t)
+[profile] le.error("无效的 profile 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 Profile 失败:",t),!1}},cn=async(
+[profile] 索引:",n),!1;const o={...Ba(s),profileName:t.profileList[n].profileName};return t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 Profile 失败:",t),!1}},cn=async(e,s,t)=>{try{const{sen
+[Profile] rn t.profileList[n]=o,await tt(e,t),!0}catch(t){return console.error("❌ 同步设备存储到 Profile 失败:",t),!1}},cn=async(e,s,t)=>{try{const{sendReport:n}=Ca();let o=t;if(!o){const c=await za(e);if(!c||s<0||s>=c.profile
+[profile] ry{const{sendReport:n}=Ca();let o=t;if(!o){const c=await za(e);if(!c||s<0||s>=c.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;o=c.profileList[s]}if(!await sl(e,s))return console.error("切
+[profile] nst c=await za(e);if(!c||s<0||s>=c.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;o=c.profileList[s]}if(!await sl(e,s))return console.error("切换 Profile 失败"),!1;o.keyList&&(o.wheelKeys?awa
+[profile] <0||s>=c.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;o=c.profileList[s]}if(!await sl(e,s))return console.error("切换 Profile 失败"),!1;o.keyList&&(o.wheelKeys?await n("setKeyData",e,o.keyL
+[Profile] ile 索引或配置不存在"),!1;o=c.profileList[s]}if(!await sl(e,s))return console.error("切换 Profile 失败"),!1;o.keyList&&(o.wheelKeys?await n("setKeyData",e,o.keyList,o.wheelKeys):await n("setKeyData",e,o.keyList)),o.fnKe
+[Profile] LedData,macroDataList:o.macroDataList}),!0}catch(n){return console.error("切换并应用 Profile 失败:",n),!1}},nd=async(e,s,t)=>{try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return console.error("无效的 pr
+[profile] Profile 失败:",n),!1}},nd=async(e,s,t)=>{try{const n=await za(e);if(!n||s<0||s>=n.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;const o=n.profileList[s],r={deviceId:e,profile:Ba(o)},l=`${o
+[profile] nst n=await za(e);if(!n||s<0||s>=n.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;const o=n.profileList[s],r={deviceId:e,profile:Ba(o)},l=`${o.profileName}.json`,c=t||l,i=new Blob([JSON.s
+[profile] =n.profileList.length)return console.error("无效的 profile 索引或配置不存在"),!1;const o=n.profileList[s],r={deviceId:e,profile:Ba(o)},l=`${o.profileName}.json`,c=t||l,i=new Blob([JSON.stringify(r,null,2)],{type:"appli
+[profile] console.error("无效的 profile 索引或配置不存在"),!1;const o=n.profileList[s],r={deviceId:e,profile:Ba(o)},l=`${o.profileName}.json`,c=t||l,i=new Blob([JSON.stringify(r,null,2)],{type:"application/json"});return It(i,c)
+[profile] file 索引或配置不存在"),!1;const o=n.profileList[s],r={deviceId:e,profile:Ba(o)},l=`${o.profileName}.json`,c=t||l,i=new Blob([JSON.stringify(r,null,2)],{type:"application/json"});return It(i,c),!0}catch(n){return co
+[Profile] ,{type:"application/json"});return It(i,c),!0}catch(n){return console.error("导出 Profile 失败:",n),!1}},od=async(e,s,t={})=>{try{const{overwrite:n=!1,applyAfterImport:o=!1}=t,r=await new Promise((p,h)=>{const g
+[profile] :k.result)},g.onerror=h,g.readAsText(s)}),l=JSON.parse(r);if(l.deviceId!==e||!l.profile)throw new Error(D("invalid_profile_file_format"));const c=await za(e);if(!c)throw new Error(D("unable_profile_file_form
+[profile] t(s)}),l=JSON.parse(r);if(l.deviceId!==e||!l.profile)throw new Error(D("invalid_profile_file_format"));const c=await za(e);if(!c)throw new Error(D("unable_profile_file_format"));const i=JSON.parse(JSON.strin
+[profile] alid_profile_file_format"));const c=await za(e);if(!c)throw new Error(D("unable_profile_file_format"));const i=JSON.parse(JSON.stringify(l.profile)),m=c.profileList.findIndex(p=>p.profileName===i.profileName
+[profile]  new Error(D("unable_profile_file_format"));const i=JSON.parse(JSON.stringify(l.profile)),m=c.profileList.findIndex(p=>p.profileName===i.profileName);if(m>=0){if(n)return c.profileList[m]=i,await tt(e,c),o&&
+[profile] unable_profile_file_format"));const i=JSON.parse(JSON.stringify(l.profile)),m=c.profileList.findIndex(p=>p.profileName===i.profileName);if(m>=0){if(n)return c.profileList[m]=i,await tt(e,c),o&&await cn(e,m,i
+[profile] ));const i=JSON.parse(JSON.stringify(l.profile)),m=c.profileList.findIndex(p=>p.profileName===i.profileName);if(m>=0){if(n)return c.profileList[m]=i,await tt(e,c),o&&await cn(e,m,i),{success:!0,profileIndex:
+[profile] parse(JSON.stringify(l.profile)),m=c.profileList.findIndex(p=>p.profileName===i.profileName);if(m>=0){if(n)return c.profileList[m]=i,await tt(e,c),o&&await cn(e,m,i),{success:!0,profileIndex:m,isOverwrite:!0
+[profile] .profileList.findIndex(p=>p.profileName===i.profileName);if(m>=0){if(n)return c.profileList[m]=i,await tt(e,c),o&&await cn(e,m,i),{success:!0,profileIndex:m,isOverwrite:!0};{let p=1,h=`${i.profileName} (${p}
+[profile] =0){if(n)return c.profileList[m]=i,await tt(e,c),o&&await cn(e,m,i),{success:!0,profileIndex:m,isOverwrite:!0};{let p=1,h=`${i.profileName} (${p})`;for(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.p
+[profile] ),o&&await cn(e,m,i),{success:!0,profileIndex:m,isOverwrite:!0};{let p=1,h=`${i.profileName} (${p})`;for(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n
+[profile] s:!0,profileIndex:m,isOverwrite:!0};{let p=1,h=`${i.profileName} (${p})`;for(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),awai
+[profile] Overwrite:!0};{let p=1,h=`${i.profileName} (${p})`;for(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),await tt(e,c);const p=c.pr
+[profile] .profileName} (${p})`;for(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),await tt(e,c);const p=c.profileList.length-1;return o&&
+[profile] or(;c.profileList.some(g=>g.profileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),await tt(e,c);const p=c.profileList.length-1;return o&&await cn(e,p,i),{succes
+[profile] rofileName===h);)p++,h=`${i.profileName} (${p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),await tt(e,c);const p=c.profileList.length-1;return o&&await cn(e,p,i),{success:!0,profileIndex:p,isOverwri
+[profile] p})`;i.profileName=h}}if(m<0||!n){c.profileList.push(i),await tt(e,c);const p=c.profileList.length-1;return o&&await cn(e,p,i),{success:!0,profileIndex:p,isOverwrite:!1}}return{success:!0,profileIndex:m,isOv
+[profile] it tt(e,c);const p=c.profileList.length-1;return o&&await cn(e,p,i),{success:!0,profileIndex:p,isOverwrite:!1}}return{success:!0,profileIndex:m,isOverwrite:n}}catch(n){return console.error("导入 Profile 失败:",n
+[profile] o&&await cn(e,p,i),{success:!0,profileIndex:p,isOverwrite:!1}}return{success:!0,profileIndex:m,isOverwrite:n}}catch(n){return console.error("导入 Profile 失败:",n),{success:!1,error:n instanceof Error?n.message:
+[Profile] turn{success:!0,profileIndex:m,isOverwrite:n}}catch(n){return console.error("导入 Profile 失败:",n),{success:!1,error:n instanceof Error?n.message:"unknown"}}},Wn=Object.freeze(Object.defineProperty({__proto__:n
+[Profile] essage:"unknown"}}},Wn=Object.freeze(Object.defineProperty({__proto__:null,applyProfileToDeviceStorage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:o
+[Profile] freeze(Object.defineProperty({__proto__:null,applyProfileToDeviceStorage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renamePr
+[Profile] ineProperty({__proto__:null,applyProfileToDeviceStorage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProf
+[Profile] oto__:null,applyProfileToDeviceStorage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,swit
+[Profile] rofileToDeviceStorage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile
+[Profile] Storage:tl,copyProfile:ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProf
+[Profile] ed,createProfile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorag
+[profile] ofile:Qu,deleteProfile:ad,exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:
+[Profile] exportProfile:nd,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol
+[Profile] d,getProfileConfig:za,importProfile:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:
+[Profile] file:od,profileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"
+[switchProfile] fileSwitchBus:bs,renameProfile:td,saveProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"Module"}));functi
+[Profile] veProfileConfig:tt,switchAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"Module"}));function ld(e,s){const{currentDevice
+[Profile] hAndApplyProfile:cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"Module"}));function ld(e,s){const{currentDeviceId:t}=ka(),{sendReport:n
+[Profile] cn,switchProfile:sl,syncDeviceStorageToProfile:sd,updateCurrentProfile:ol,updateProfile:nl},Symbol.toStringTag,{value:"Module"}));function ld(e,s){const{currentDeviceId:t}=ka(),{sendReport:n}=Ca(),{wheelKeys
+[profile] entDeviceId:o}=ka(),r=n==null?void 0:n.keyboardConfig,l=ve(()=>{const G=[{name:"profile",text:"profile",value:0},{name:"tft",text:D("icon_9"),value:3},{name:"gif",text:D("gif_text2"),value:4},{name:"led",tex
+[profile] ka(),r=n==null?void 0:n.keyboardConfig,l=ve(()=>{const G=[{name:"profile",text:"profile",value:0},{name:"tft",text:D("icon_9"),value:3},{name:"gif",text:D("gif_text2"),value:4},{name:"led",text:D("icon_8"),v
+[profile] ingify(re))),$message.success(D("macro_success"));break;default:console.log("下载 profile"),i.value[G].download_count++,$message.success(D("download_success"));break}}catch(H){console.error(H),$message.error(D

@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "device": {
+    "vendor_id": "0x0C45",
+    "product_id": "0x80D6",
+    "product_name": "IO Type 84 Magnetic Black",
+    "collections": [
+      {
+        "usage_page": "0xFF68",
+        "usage": "0x0061",
+        "type": 1,
+        "output_report_ids": [
+          0
+        ],
+        "feature_report_ids": [],
+        "input_report_ids": [
+          0
+        ]
+      }
+    ]
+  },
+  "captured_at": "2026-09-14T11:43:26.540Z",
+  "description": "Brightness 50%",
+  "reports_count": 2,
+  "reports": [
+    {
+      "index": 0,
+      "timestamp_ms": 58469,
+      "report_type": "output",
+      "report_id": 0,
+      "length": 64,
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "data_hex": "aa2310000000010001ff0000ff000000000503000000aa5500000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "index": 1,
+      "timestamp_ms": 66520.2,
+      "report_type": "output",
+      "report_id": 0,
+      "length": 64,
+      "usage_page": "0xFF68",
+      "usage": "0x0061",
+      "data_hex": "aa2310000000010001ff0000ff000000000303000000aa5500000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}
