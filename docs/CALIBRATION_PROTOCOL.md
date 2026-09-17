@@ -1,57 +1,57 @@
-# Исследование калибровки и протокола `AA 1C` (CALIBRATION / LAYER 3 PROTOCOL) Type 84
+# Investigation of Calibration & `AA 1C` Protocol (CALIBRATION / LAYER 3 PROTOCOL) Type 84
 
-> **Важное примечание по безопасности:**  
-> Любые модификации калибровочных данных сенсоров Холла несут риск повреждения чувствительности клавиатуры.  
-> В рамках проекта **категорически запрещены** любые тестовые перезаписи калибровочных констант или отсылки пакетов на устройство.
+> **Important Safety Note:**  
+> Any modification of Hall sensor calibration parameters carries the risk of degrading keyboard sensitivity.  
+> Within this project, all speculative write modifications of calibration constants or uncontrolled packet transmissions are **strictly prohibited**.
 
 ---
 
-## 1. Аппаратное опровержение гипотезы "16 байт калибровки"
+## 1. Hardware Refutation of the "16-Byte Calibration" Hypothesis
 
-В ранней предварительной документации предполагалось, что команда `AA 1C` выполняет синхронизацию 16 байт пределов калибровки магнитных датчиков.
+In early preliminary notes, it was hypothesized that the `AA 1C` command performed synchronization of a 16-byte magnetic sensor calibration limit table.
 
-**Прямой побайтовый анализ реального дампа `read_01_initial_load.json` (Events #45 – #64) полностью опроверг эту гипотезу:**
-1. Команда `AA 1C` состоит не из одного репорта, а из последовательности **ровно 10 пакетов** (Events #45..64).
-2. Размеры чанков и адресация:
-   - 9 чанков по 56 байт (`sz = 0x38`) по адресам `0x0000`, `0x0038`, `0x0070`, ..., `0x01C0`.
-   - 1 чанк по 8 байт (`sz = 0x08`) по адресу `0x01F8`.
-3. Суммарный объём буфера составляет ровно **512 байт**.
-4. **Идентичность данных:** Содержимое 512-байтного буфера `55 1C` **байт-в-байт совпадает с буфером `55 16` (Layer 2 / Fn Layer)**:
+**Direct byte-level analysis of the physical capture `read_01_initial_load.json` (Events #45 – #64) completely disproved this hypothesis:**
+1. The `AA 1C` command does not consist of a single report, but rather a sequence of **exactly 10 packets** (Events #45..64).
+2. Chunk sizes and addressing:
+   - 9 chunks of 56 bytes (`sz = 0x38`) at addresses `0x0000`, `0x0038`, `0x0070`, ..., `0x01C0`.
+   - 1 chunk of 8 bytes (`sz = 0x08`) at address `0x01F8`.
+3. The total buffer size is exactly **512 bytes**.
+4. **Data Identity:** The content of the 512-byte buffer `55 1C` **matches the buffer `55 16` (Layer 2 / Fn Layer) byte-for-byte**:
    ```python
    buf_16 == buf_1c  # True
    ```
 
 ---
 
-## 2. Назначение буфера `AA 1C` $\leftrightarrow$ `55 1C`
+## 2. Purpose of the `AA 1C` $\leftrightarrow$ `55 1C` Buffer
 
-Поскольку структура, адресация и размер буфера `55 1C` (512 байт, 128 четырехбайтовых записей) на 100% повторяют таблицы `AA 12` (Layer 1) и `AA 16` (Layer 2 / Fn Layer), команда **`AA 1C` представляет собой Layer 3 (Alternate / Mac Layout)**:
+Because the structure, addressing, and size of the `55 1C` buffer (512 bytes, 128 four-byte records) 100% mirrors the tables of `AA 12` (Layer 1) and `AA 16` (Layer 2 / Fn Layer), the command **`AA 1C` represents Layer 3 (Alternate / Mac Layout)**:
 
-* **Layer 1 (`AA 12`):** Базовая раскладка Windows (Base Layer).
-* **Layer 2 (`AA 16`):** Слой Fn-модификатора (Fn Layer).
-* **Layer 3 (`AA 1C`):** Альтернативный слой (Mac Mode или вспомогательный слой Fn для альтернативного профиля).
+* **Layer 1 (`AA 12`):** Base Windows layout (Base Layer).
+* **Layer 2 (`AA 16`):** Fn modifier layer (Fn Layer).
+* **Layer 3 (`AA 1C`):** Alternate layout layer (Mac Mode or auxiliary Fn layer for alternative profile).
 
-На стандартной заводской прошивке под Windows слой Layer 3 предварительно инициализирован копией слоя Fn (`buf_16`).
-
----
-
-## 3. Где находится калибровка сенсоров Холла?
-
-На основе анализа всех подсистем протокола:
-1. **Калибровка нижнего и верхнего пределов хода (ADC Min / Max):**
-   - Либо заложена в 1008-байтном конфигурационном образе свитчей (`AA 17` / `AA 18`), где на каждую клавишу выделено 8 байт (actuation, rt_press, rt_release, flags);
-   - Либо автоматически замеряется микроконтроллером при включении питания (динамическая автокалибровка базовой линии покоя магнитных сенсоров).
-2. **Официальный конфигуратор:**
-   - Не выполняет отдельных коротких запросов калибровки при штатном открытии страницы. Все принимаемые от устройства данные исчерпывающе покрываются каталогом команд `10`, `11`, `12`, `16`, `1C`, `13`, `14`, `15`, `17`, `18`.
+On standard factory firmware under Windows, Layer 3 is pre-initialized as an identical copy of the Fn layer (`buf_16`).
 
 ---
 
-## 4. Классификация статусов исследования
+## 3. Where is Hall Sensor Calibration Located?
 
-| Элемент | Статус | Доказательная база |
+Based on comprehensive analysis of all protocol subsystems:
+1. **Calibration of stroke travel limits (ADC Min / Max):**
+   - Either embedded within the 1008-byte switch configuration image (`AA 17` / `AA 18`), where 8 bytes are allocated per key (actuation, rt_press, rt_release, flags);
+   - Or measured automatically by the microcontroller upon power-up (dynamic baseline resting auto-calibration of magnetic sensors).
+2. **Official Configurator Behavior:**
+   - Does not issue separate short calibration requests during standard page loading. All data received from the device is exhaustively accounted for by the command catalog: `10`, `11`, `12`, `16`, `1C`, `13`, `14`, `15`, `17`, `18`.
+
+---
+
+## 4. Research Status Classification
+
+| Element | Status | Evidence Base |
 |:---|:---:|:---|
-| Формат обмена `AA 1C` / `55 1C` (512 байт в 10 чанках) | **`CONFIRMED`** | 10 пар запрос-ответ в `read_01_initial_load.json` |
-| Побайтовое совпадение `buf_1c == buf_16` в baseline | **`CONFIRMED`** | Прямое бинарное сравнение буферов из дампа |
-| Назначение `AA 1C` как Layer 3 (Mac/Alt layer) | **`PROBABLE`** | Полная идентичность структуре `AA 12` и `AA 16` |
-| Отдельные 16 байт калибровки в `AA 1C` | **`REFUTED`** | Опровергнуто прямым анализом трафика (реальный размер 512Б) |
-| Внутренняя автокалибровка сенсоров контроллером | **`PROBABLE`** | Архитектура магнитных клавиатур на контроллерах Sonix |
+| Exchange format `AA 1C` / `55 1C` (512 bytes in 10 chunks) | **`CONFIRMED`** | 10 request-response pairs in `read_01_initial_load.json` |
+| Byte-level match `buf_1c == buf_16` in baseline | **`CONFIRMED`** | Direct binary comparison of capture buffers |
+| Designation of `AA 1C` as Layer 3 (Mac/Alt layer) | **`PROBABLE`** | Structural identity with `AA 12` and `AA 16` |
+| Discrete 16 bytes of calibration in `AA 1C` | **`REFUTED`** | Disproven by direct traffic analysis (actual size 512B) |
+| Internal sensor auto-calibration by controller | **`PROBABLE`** | Architecture of Sonix-based magnetic keyboards |

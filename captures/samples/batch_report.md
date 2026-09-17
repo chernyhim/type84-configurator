@@ -1,24 +1,24 @@
-# Отчёт пакетного анализа экспериментов конфигурации
+# Configuration Experiment Batch Analysis Report
 
-> **Правило доверия:** Единичный эксперимент даёт статус не выше `PROBABLE`. Статус `CONFIRMED` присваивается только при наличии $\ge 2$ независимых повторяемых подтверждений.
+> **Confidence Rule:** A single experiment yields at most `PROBABLE` status. Status `CONFIRMED` is assigned only with $\ge 2$ independent repeatable confirmations.
 
-## 1. Сводная таблица корреляций
+## 1. Summary Correlation Table
 
-| Клавиша | Слот | Банк:Колонка | Смещение | Адрес | Параметр | Уверенность (Confidence) | Эксперименты |
+| Key | Slot | Bank:Column | Offset | Address | Parameter | Confidence | Experiments |
 | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :--- |
 | **A** | `S049` | B3:C01 | `+5` | `0x018D` | Actuation Point | `PROBABLE` | exp_key_a_actuation |
 | **S** | `S050` | B3:C02 | `+5` | `0x0195` | Actuation Point | `PROBABLE` | exp_key_s_actuation |
 | **D** | `S051` | B3:C03 | `+5` | `0x019D` | Actuation Point | `PROBABLE` | exp_key_d_actuation |
 
-## 2. Структура 8-байтного слота
+## 2. 8-Byte Slot Structure
 
-| Смещение | Параметр | Исследованные клавиши | Статус |
+| Offset | Parameter | Tested Keys | Status |
 | :---: | :--- | :--- | :---: |
-| `+0` | *Неизвестно* | - | `UNKNOWN` |
-| `+1` | *Неизвестно* | - | `UNKNOWN` |
-| `+2` | *Неизвестно* | - | `UNKNOWN` |
-| `+3` | *Неизвестно* | - | `UNKNOWN` |
-| `+4` | *Неизвестно* | - | `UNKNOWN` |
+| `+0` | *Unknown* | - | `UNKNOWN` |
+| `+1` | *Unknown* | - | `UNKNOWN` |
+| `+2` | *Unknown* | - | `UNKNOWN` |
+| `+3` | *Unknown* | - | `UNKNOWN` |
+| `+4` | *Unknown* | - | `UNKNOWN` |
 | `+5` | **Actuation Point** | A, D, S | `CONFIRMED` |
-| `+6` | *Неизвестно* | - | `UNKNOWN` |
-| `+7` | *Неизвестно* | - | `UNKNOWN` |
+| `+6` | *Unknown* | - | `UNKNOWN` |
+| `+7` | *Unknown* | - | `UNKNOWN` |

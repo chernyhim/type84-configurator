@@ -169,11 +169,11 @@ def run_remap_physical_test(
 
         # Operator message
         print("-" * 76)
-        print("ОПЕРАТОРУ:")
-        print("Будет выполнена запись Remap L1 A -> B.")
-        print("Изменение: offset 0x00C9, 0x04 -> 0x05.")
-        print("После записи будет выполнен полный read-back.")
-        print("После проверки B клавиша будет автоматически восстановлена в A.")
+        print("OPERATOR NOTICE:")
+        print("Writing Remap L1 A -> B will be performed.")
+        print("Change: offset 0x00C9, 0x04 -> 0x05.")
+        print("Full read-back will be performed after writing.")
+        print("After verifying B, the key will automatically be restored to A.")
         print("-" * 76)
 
         if dry_run_only or not confirmed:

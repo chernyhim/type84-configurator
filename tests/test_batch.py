@@ -47,7 +47,7 @@ class TestBatchAnalyzer(unittest.TestCase):
 
     def test_single_experiment_never_auto_confirms(self):
         """
-        Rule: "Не делать выводов о назначении неизвестных байтов автоматически только на основании одного эксперимента."
+        Rule: "Do not automatically draw conclusions about unknown bytes based on a single experiment alone."
         A single experiment must result in PROBABLE, never CONFIRMED.
         """
         analyzer = BatchAnalyzer()

@@ -1,56 +1,56 @@
-# Протокол статуса и состояния (STATUS PROTOCOL) Type 84
+# Type 84 Status & Device State Protocol (STATUS PROTOCOL)
 
-> **Важное примечание по безопасности:**  
-> Данный документ и модуль [`src/keyboard_re/protocol/read.py`](file:///c:/KeyboardSoft/src/keyboard_re/protocol/read.py) предназначены **исключительно для пассивного анализа**.
-
----
-
-## 1. Назначение пакета статуса (`AA 11` $\leftrightarrow$ `55 11`)
-
-Команда `AA 11` запрашивает у клавиатуры текущее динамическое состояние:
-- активный профиль настроек;
-- состояние индикаторов блокировок (Caps Lock, Scroll Lock, Win Lock);
-- режим операционной системы (Windows vs Mac);
-- режим подключения (проводной USB vs беспроводной).
-
-Обмен состоит из ровно **одной пары сообщений**:
-- Запрос хоста: `AA 11 38 00 00 00 01 00 [00 ... 00]` (64 байта)
-- Ответ устройства: `55 11 38 00 00 00 01 00 ...` (64 байта)
+> **Important Safety Note:**  
+> This document and the module [`src/keyboard_re/protocol/read.py`](file:///c:/KeyboardSoft/src/keyboard_re/protocol/read.py) are intended **strictly for passive analysis**.
 
 ---
 
-## 2. Разбор структуры 16-байтового блока состояния (Offsets 8..23)
+## 1. Status Packet Purpose (`AA 11` $\leftrightarrow$ `55 11`)
 
-Реальный дамп из `read_01_initial_load.json` (Event #4):
+The `AA 11` command queries dynamic runtime keyboard state:
+- Active configuration profile index;
+- Lock indicator status (Caps Lock, Scroll Lock, Win Lock);
+- Operating system mode (Windows vs Mac);
+- Connection mode (USB wired vs wireless).
+
+The exchange consists of exactly **one message pair**:
+- Host Request: `AA 11 38 00 00 00 01 00 [00 ... 00]` (64 bytes)
+- Device Response: `55 11 38 00 00 00 01 00 ...` (64 bytes)
+
+---
+
+## 2. Structure of the 16-Byte State Block (Offsets 8..23)
+
+Real dump from `read_01_initial_load.json` (Event #4):
 ```text
 Offset 00: 55 11 38 00 00 00 01 00 00 00 00 01 00 06 00 00 00 00 00 01 00 00 01 00 [00 ... 00]
 ```
 
-### Побайтовая карта:
+### Byte-Level Map:
 
-| Смещение | Байт hex | Тип | Назначение | Значение в дампе |
+| Offset | Hex Byte | Type | Purpose | Dump Value |
 |:---:|:---:|:---:|:---|:---|
-| **`0..2`** | `55 11 38` | Header | Префикс ответа (команда `0x11`, размер `0x38`) | Фиксированный |
-| **`3..4`** | `00 00` | uint16_le | Начальный адрес (0) | `0` |
-| **`5..7`** | `00 01 00` | Subheader | Подзаголовок пакета | Фиксированный |
-| **`8..10`**| `00 00 00` | Reserved | Зарезервировано | `0x00` |
-| **`11`** | **`0x01`** | uint8 | **Active Profile Index** | **`1` (Profile 1 активен)** |
-| **`12`** | `0x00` | Reserved | Зарезервировано | `0x00` |
-| **`13`** | **`0x06`** | uint8 (bitmask) | **Lock Flags** (Caps / Scroll / WinLock) | **`0x06`** (биты 1 и 2: WinLock / CapsLock) |
-| **`14..18`** | `00 00 00 00 00` | Reserved | Зарезервировано | `0x00` |
+| **`0..2`** | `55 11 38` | Header | Response prefix (command `0x11`, length `0x38`) | Fixed |
+| **`3..4`** | `00 00` | uint16_le | Base address (0) | `0` |
+| **`5..7`** | `00 01 00` | Subheader | Packet subheader | Fixed |
+| **`8..10`**| `00 00 00` | Reserved | Reserved | `0x00` |
+| **`11`** | **`0x01`** | uint8 | **Active Profile Index** | **`1` (Profile 1 active)** |
+| **`12`** | `0x00` | Reserved | Reserved | `0x00` |
+| **`13`** | **`0x06`** | uint8 (bitmask) | **Lock Flags** (Caps / Scroll / WinLock) | **`0x06`** (bits 1 & 2: WinLock / CapsLock) |
+| **`14..18`** | `00 00 00 00 00` | Reserved | Reserved | `0x00` |
 | **`19`** | **`0x01`** | uint8 | **OS Mode Flag** | **`1` (Windows Mode)** |
-| **`20..21`** | `00 00` | Reserved | Зарезервировано | `0x00` |
+| **`20..21`** | `00 00` | Reserved | Reserved | `0x00` |
 | **`22`** | **`0x01`** | uint8 | **Connection State** | **`1` (USB Wired Active)** |
-| **`23..63`** | `00 ... 00` | Padding | Нулевое дополнение до 64 байт | `0x00` |
+| **`23..63`** | `00 ... 00` | Padding | Zero padding to 64 bytes | `0x00` |
 
 ---
 
-## 3. Классификация статусов исследования
+## 3. Research Status Classification
 
-| Параметр | Статус | Доказательная база |
+| Parameter | Status | Evidence Base |
 |:---|:---:|:---|
-| Опкод статуса `AA 11` / `55 11` | **`CONFIRMED`** | Зафиксирован в дампе initial load и reconnect |
-| Индекс активного профиля в байте 11 | **`CONFIRMED`** | Чтение `0x01`, совпадает с профилем Profile 1 |
-| Позиция флагов блокировок (байт 13) | **`PROBABLE`** | Ненулевое значение `0x06` в дефолтном состоянии |
-| Флаг режима Windows/Mac (байт 19) | **`PROBABLE`** | Битовый флаг `0x01` |
-| Флаг проводного подключения (байт 22) | **`PROBABLE`** | Битовый флаг `0x01` при подключении по USB |
+| Status Opcode `AA 11` / `55 11` | **`CONFIRMED`** | Verified in initial load and reconnect dumps |
+| Active profile index at byte 11 | **`CONFIRMED`** | Read `0x01`, matches active Profile 1 |
+| Lock flags position (byte 13) | **`PROBABLE`** | Non-zero value `0x06` in default state |
+| Windows/Mac mode flag (byte 19) | **`PROBABLE`** | Bit flag `0x01` |
+| Wired connection flag (byte 22) | **`PROBABLE`** | Bit flag `0x01` on USB connection |

@@ -64,6 +64,18 @@ src/keyboard_re/ui/views/remap_view.py
 src/keyboard_re/ui/views/rgb_global_view.py
 src/keyboard_re/ui/views/settings_view.py
 src/keyboard_re/ui/views/status_bar.py
+src/keyboard_re/ui/views/visualizer_view.py
+src/keyboard_re/visualizer/__init__.py
+src/keyboard_re/visualizer/canvas.py
+src/keyboard_re/visualizer/decoder.py
+src/keyboard_re/visualizer/diagnose_fps.py
+src/keyboard_re/visualizer/frame.py
+src/keyboard_re/visualizer/output.py
+src/keyboard_re/visualizer/player.py
+src/keyboard_re/visualizer/preview.py
+src/keyboard_re/visualizer/processor.py
+src/keyboard_re/visualizer/smoke_test.py
+src/keyboard_re/visualizer/telemetry.py
 tests/test_analyzer.py
 tests/test_assembler.py
 tests/test_batch.py
@@ -72,6 +84,7 @@ tests/test_diff.py
 tests/test_differ.py
 tests/test_hall_flags_research.py
 tests/test_hall_verified_fields.py
+tests/test_hid_offset_regression.py
 tests/test_key_config.py
 tests/test_keymap_protocol.py
 tests/test_macro_protocol.py

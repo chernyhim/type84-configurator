@@ -1,66 +1,66 @@
 {
   "version": "1.0",
-  "title": "План экспериментов по пассивному исследованию RGB-протокола Type 84",
+  "title": "Type 84 RGB Protocol Passive Research Experiment Plan",
   "experiments": [
     {
       "id": "exp_rgb_01_color",
       "action": "color",
       "capture_file": "captures/experiments/rgb_01_color.json",
-      "name": "Смена цвета подсветки",
-      "procedure": "В конфигураторе переключить цвет (например, с базового на чистый красный #FF0000 или синий #0000FF), нажать Apply, вызвать kbSaveRGB('color', 'Color change to #FF0000').",
+      "name": "Change lighting color",
+      "procedure": "In configurator, switch color (e.g., from base to pure red #FF0000 or blue #0000FF), click Apply, call kbSaveRGB('color', 'Color change to #FF0000').",
       "questions_to_answer": [
         "HID interface / usage page / usage",
-        "Report ID и длина",
-        "Префикс/опкод (отличен ли от AA 27)",
-        "Смещение байтов R, G, B и их кодирование (RGB888, BGR, палитра)"
+        "Report ID and length",
+        "Prefix/opcode (whether distinct from AA 27)",
+        "Byte offset of R, G, B and their encoding (RGB888, BGR, palette)"
       ]
     },
     {
       "id": "exp_rgb_02_brightness",
       "action": "brightness",
       "capture_file": "captures/experiments/rgb_02_brightness.json",
-      "name": "Смена яркости подсветки",
-      "procedure": "Изменить ползунок яркости (например, со 100% на 50% или 0%), нажать Apply, вызвать kbSaveRGB('brightness', 'Brightness 100% -> 50%').",
+      "name": "Change lighting brightness",
+      "procedure": "Adjust brightness slider (e.g., from 100% to 50% or 0%), click Apply, call kbSaveRGB('brightness', 'Brightness 100% -> 50%').",
       "questions_to_answer": [
-        "Байтовое смещение уровня яркости",
-        "Шкала яркости (0..100, 0..255, дискретные шаги 0..4)",
-        "Наличие контрольной суммы (checksum) или бита подтверждения"
+        "Byte offset of brightness level",
+        "Brightness scale (0..100, 0..255, discrete steps 0..4)",
+        "Presence of checksum or confirmation bit"
       ]
     },
     {
       "id": "exp_rgb_03_effect",
       "action": "effect",
       "capture_file": "captures/experiments/rgb_03_effect.json",
-      "name": "Смена режима (Static -> другой эффект)",
-      "procedure": "Переключить режим анимации (например, Static -> Breathing / Wave / Ripple), нажать Apply, вызвать kbSaveRGB('effect', 'Static -> Breathing').",
+      "name": "Change mode (Static -> other effect)",
+      "procedure": "Switch animation mode (e.g., Static -> Breathing / Wave / Ripple), click Apply, call kbSaveRGB('effect', 'Static -> Breathing').",
       "questions_to_answer": [
-        "Байтовое смещение индекса эффекта",
-        "Нумерация эффектов (0, 1, 2...)",
-        "Меняется ли структура пакета при смене режима"
+        "Byte offset of effect index",
+        "Effect numbering (0, 1, 2...)",
+        "Whether packet structure changes across modes"
       ]
     },
     {
       "id": "exp_rgb_04_speed",
       "action": "speed",
       "capture_file": "captures/experiments/rgb_04_speed.json",
-      "name": "Изменение скорости эффекта",
-      "procedure": "В динамическом режиме изменить скорость анимации (например, с минимальной на максимальную), нажать Apply, вызвать kbSaveRGB('speed', 'Speed min -> max').",
+      "name": "Change effect speed",
+      "procedure": "In dynamic mode, change animation speed (e.g., from min to max), click Apply, call kbSaveRGB('speed', 'Speed min -> max').",
       "questions_to_answer": [
-        "Байтовое смещение скорости",
-        "Диапазон значений скорости",
-        "Сохраняются ли остальные параметры (эффект, яркость, цвет)"
+        "Byte offset of speed",
+        "Range of speed values",
+        "Whether other parameters (effect, brightness, color) are preserved"
       ]
     },
     {
       "id": "exp_rgb_05_per_key",
       "action": "per_key",
       "capture_file": "captures/experiments/rgb_05_per_key.json",
-      "name": "Индивидуальный цвет отдельной клавиши (если доступно)",
-      "procedure": "В режиме индивидуальной подсветки (Custom / Per-Key) окрасить одну клавишу (например, W в зелёный #00FF00), нажать Apply, вызвать kbSaveRGB('per_key', 'Per-key W to green').",
+      "name": "Individual key color (if supported)",
+      "procedure": "In per-key lighting mode (Custom / Per-Key), color a single key (e.g., W to green #00FF00), click Apply, call kbSaveRGB('per_key', 'Per-key W to green').",
       "questions_to_answer": [
-        "Формат адресации светодиодов (индекс 0..83 или по рядам/колонкам)",
-        "Корреляция индекса LED с физической геометрией или электрической матрицей",
-        "Передаётся ли вся матрица подсветки или точечный пакет"
+        "LED addressing format (index 0..83 or row/column based)",
+        "Correlation of LED index with physical geometry or electrical matrix",
+        "Whether the entire lighting matrix is transmitted or a single-key packet"
       ]
     }
   ]
